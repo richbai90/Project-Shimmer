@@ -5,10 +5,14 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@material-ui/core": "latest",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "jss": "latest",
+    "lusca": "^1.6.0",
     "next": "latest",
     "next-redux-saga": "^3.0.0-beta.1",
     "next-redux-wrapper": "^2.0.0",
+    "next-routes": "^1.4.2",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -19,7 +23,7 @@
     "redux-saga": "^0.16.0"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -27,6 +31,7 @@
     "babel-eslint": "^8.2.6",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0"

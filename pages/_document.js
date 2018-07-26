@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Document, { Head, Main, NextScript } from 'next/document';
 import flush from 'styled-jsx/server';
+import Error from 'next/error';
 
 class MyDocument extends Document {
   render() {
-    const { pageContext } = this.props;
-
+    const { pageContext, nonce, statusCode } = this.props;
+    if (statusCode > 200) return <Error statusCode={this.props.statusCode} />;
     return (
       <html lang="en" dir="ltr">
         <Head>
@@ -22,6 +23,7 @@ class MyDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
+          <meta property="csp-nonce" content={nonce} />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
@@ -29,7 +31,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript />
+          <NextScript nonce={nonce} />
         </body>
       </html>
     );
@@ -73,14 +75,18 @@ MyDocument.getInitialProps = ctx => {
 
     return WrappedComponent;
   });
+  const { nonce } = ctx.res.locals;
+  const { statusCode } = ctx.res;
 
   return {
+    statusCode,
     ...page,
     pageContext,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: (
       <React.Fragment>
         <style
+          nonce={nonce}
           id="jss-server-side"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
@@ -88,6 +94,7 @@ MyDocument.getInitialProps = ctx => {
         {flush() || null}
       </React.Fragment>
     ),
+    nonce,
   };
 };
 
