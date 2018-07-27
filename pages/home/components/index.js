@@ -6,13 +6,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 
-import { Link } from '@root/routes';
-
 export default ({
   classes,
   open,
   handleClose,
   handleOpen,
+  linker: Link,
 }) => (
   <div className={classes.root}>
         <Dialog open={open} onClose={handleClose}>

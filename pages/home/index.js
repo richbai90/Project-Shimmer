@@ -7,8 +7,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
-import { open as openPassword, close as closePassword } from './page-components/home/redux/actions/password';
-import Home from './page-components/home';
+import { Link } from '@root/routes';
+import { open as openPassword, close as closePassword } from './redux/actions/password';
+import Home from './components';
 
 const styles = theme => ({
   root: {
@@ -42,6 +43,7 @@ class Index extends React.Component {
         open={open}
         handleOpen={ handleOpen }
         handleClose={ handleClose }
+        linker={ Link }
       />
     );
   }
@@ -50,6 +52,8 @@ class Index extends React.Component {
 Index.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default compose(
