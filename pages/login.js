@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
 import { bindActionCreators } from 'redux';
-import { updateUsername } from './page-components/login/redux/actions/login';
+import Router from 'next/router';
+import { updateUsername, updatePassword } from './page-components/login/redux/actions/login';
 import Login from './page-components/login/index';
 
 
@@ -13,6 +14,10 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: '100%',
+  },
+  backgroundColor: {
+    background: 'linear-gradient(to bottom, lightBlue, violet)',
+    height: '100vh',
   },
   card: {
     height: 'fit-content',
@@ -48,34 +53,32 @@ const styles = theme => ({
 });
 
 const mapStateToProps = ({ login }) => {
-  // console.log(state);
-  const { username } = login.loginInfo;
-  return { username };
+  const { username, password } = login.loginInfo;
+  return { username, password };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   handleChange: updateUsername,
+  handlePasswordChange: updatePassword,
 }, dispatch);
 
+const submitLogin = () => {
+  Router.push('/');
+};
+
 class LoginPage extends React.Component {
-  state = {
-    username: '',
-    password: '',
-  };
-
-  // handleChange = (e) => {
-  //   this.setState({e.target.id: e.target.value})
-  // }
-
   render() {
     const {
-      classes, username, updateUsername,
+      classes, username, handleChange, password, handlePasswordChange,
     } = this.props;
     return (
       <Login
+        submitLogin={submitLogin}
         classes={classes}
         username={username}
-        updateUsername={updateUsername}
+        password={password}
+        updatePassword={handlePasswordChange}
+        updateUsername={handleChange}
       />
     );
   }

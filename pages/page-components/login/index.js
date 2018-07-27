@@ -5,34 +5,49 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
-export default ({ classes, username, updateUsername }) => (
-  <div >
-    <Grid container className={classes.root}>
-      <Card className={classes.card} >
-        <Typography className={classes.header} variant="headline">
-          Login
-        </Typography>
+const handleChange = changeHandler => (
+  (e) => {
+    changeHandler(e.target.value);
+  }
+);
+
+export default ({
+  classes, username, updateUsername, password, updatePassword, submitLogin,
+}) => (
+  <div className={classes.backgroundColor}>
+  <Grid container className={classes.root}>
+    <Card className={classes.card} >
+      <Typography className={classes.header} variant="headline">
+        Login
+      </Typography>
       <div className={classes.container}>
-          <TextField
-            value = {username}
-            id= {username}
-            label = "Name"
-            className = {classes.textField}
-            onChange = {updateUsername}
-          />
-          <TextField
-            id="password"
-            label = "Password"
-            type='password'
-            className = {classes.textField}
-          />
-        <Link href="/">
-          <Button className={classes.button} variant="contained">
-            Submit
-          </Button>
-        </Link>
+        <TextField
+          value = {username}
+          id= "username"
+          label = "Name"
+          className = {classes.textField}
+          onChange = { handleChange(updateUsername) }
+        />
+        <TextField
+          id="password"
+          value={password}
+          label = "Password"
+          type='password'
+          className = {classes.textField}
+          onChange = { handleChange(updatePassword)}
+        />
+        <Typography color="primary">
+          Trouble loggin in?
+        </Typography>
+        <Button
+          value= 'submit'
+          className={classes.button}
+          variant="contained"
+          onClick= {submitLogin}
+        > Submit
+        </Button>
       </div>
-      </Card>
-    </Grid>
+    </Card>
+  </Grid>
   </div>
 );

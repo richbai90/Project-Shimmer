@@ -21,7 +21,7 @@ function configureStore(initialState) {
    */
 
   store.runSagaTask = () => {
-    store.sagaTask = sagaMiddleware.run(rootSaga)
+    store.sagaTask = sagaMiddleware.run(rootSaga);
   };
 
   // run the rootSaga initially

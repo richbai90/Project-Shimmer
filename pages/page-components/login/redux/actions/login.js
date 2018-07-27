@@ -1,4 +1,4 @@
-import { UPDATE_USERNAME } from '../types/login';
+import { UPDATE_USERNAME, UPDATE_PASSWORD } from '../types/login';
 
 
 export const updateUsername = username => ({
@@ -6,5 +6,7 @@ export const updateUsername = username => ({
   payload: username,
 });
 
-
-// export const updatePassword
+export const updatePassword = password => ({
+  type: UPDATE_PASSWORD,
+  payload: password,
+});
