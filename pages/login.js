@@ -63,9 +63,9 @@ class LoginPage extends React.Component {
     password: '',
   };
 
-  handleChange = (e) => {
-    this.setState({e.target.id: e.target.value})
-  }
+  // handleChange = (e) => {
+  //   this.setState({e.target.id: e.target.value})
+  // }
 
   render() {
     const {

@@ -9,7 +9,6 @@ import compose from 'recompose/compose';
 
 import { open as openPassword, close as closePassword } from './page-components/home/redux/actions/password';
 import Home from './page-components/home';
-import Login from './page-components/login/index.js'
 
 const styles = theme => ({
   root: {
