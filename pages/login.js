@@ -16,14 +16,14 @@ const styles = theme => ({
     height: '100%',
   },
   backgroundColor: {
-    background: 'linear-gradient(to bottom, lightBlue, violet)',
+    background: 'linear-gradient(to bottom, lightBlue, white)',
     height: '100vh',
   },
   card: {
     height: 'fit-content',
     width: 'fit-content',
     margin: 'auto',
-    marginTop: '30%',
+    marginTop: '33vh',
     flexDirection: 'row',
   },
   container: {
