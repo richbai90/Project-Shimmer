@@ -16,15 +16,15 @@ const handler = routes.getRequestHandler(app);
 const configureApp = (server) => {
   const whiteList = [
     /^\/_next\/webpack-hmr$/,
-    /^\/_next\/webpack\/[a-z0-9]{20}\.{1}hot-update\.{1}(json|js)$/,
+    /^\/_next\/webpack\/(\d\.)?[a-z0-9]{20}\.{1}hot-update\.{1}(json|js)$/,
     /^\/_next\/static\/commons\/(main|manifest)\.{1}js(\.map)?$/,
-    /^\/_next\/-\/page\/_(app|document|error)\.{1}js(\.map)?$/,
+    /^\/_next\/-\/page\/(_(app|document|error)|index)\.{1}js(\.map)?$/,
   ];
 
   for (let i = 0; i < routes.routes.length; i++) {
     const route = routes.routes[i];
     whiteList.push(new RegExp(`^\\/_next\\/-\\/page\\${route.page}\\.{1}js(\\.map)?$`));
-    whiteList.push(new RegExp(`^\\/_next/on-demand-entries-ping?page=\\${route.page}$`));
+    whiteList.push(new RegExp(`^\\/_next\\/on-demand-entries-ping\\?page=\\${route.page}$`));
     whiteList.push(route.regex);
   }
 
