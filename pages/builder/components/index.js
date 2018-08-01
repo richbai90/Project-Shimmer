@@ -11,15 +11,29 @@ import PropsBar from './propsBar';
 
 export default ({
   classes,
+  cursor,
   componentMap,
   componentTree,
   templates,
   loadingTemplates,
 }) => (
-  <div>
-    <AcitonMenu/>
-    <LeftBar/>
-    <Canvas/>
-    <PropsBar/>
-  </div>
+  <Grid container >
+      <Grid item container>
+          <ActionMenu className={classes.appbar} classes={classes} />
+      </Grid >
+      <Grid container className={classes.index}>
+
+        <Grid item className={classes.leftbar}>
+          <LeftBar classes={classes}/>
+        </Grid>
+        <Grid item className={classes.takespace}>
+          <Canvas classes={classes}/>
+        </Grid>
+        <Grid item className={classes.rightbar}>
+          <PropsBar classes={classes}/>
+        </Grid>
+
+      </Grid>
+    {/* <Templates/> */}
+  </Grid>
 );
