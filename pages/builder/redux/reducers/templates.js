@@ -1,5 +1,5 @@
 import { LOADING_TEMPLATE } from '../types/templates';
-import { startLoadingTemplate } from '../actions/templates';
+// import { startLoadingTemplate } from '../actions/templates';
 
 const actionMap = {
   [LOADING_TEMPLATE]: (state, loading) => ({ ...state, loading }),

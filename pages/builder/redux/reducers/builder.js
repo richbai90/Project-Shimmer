@@ -1,6 +1,6 @@
 import ReactJsonSchema from 'react-json-schema';
 
-import { UPDATE_COMPONENTS } from '../types/component-state';
+import { UPDATE_COMPONENTS } from '../types/componentState';
 
 const defaultState = {
   componentMap: {},

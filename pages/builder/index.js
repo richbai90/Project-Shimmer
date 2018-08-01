@@ -10,58 +10,19 @@ import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
 
-
-
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-  index: {
-    marginTop: '60px', // this is a bad solution for appbar overlapping page
-    height: '200vh',
-  },
-  appbar: {
-    width: '100vw',
-    position: 'fixed',
-    overflow: 'hidden',
-    height: '50px',
-  },
-  actionMenuRoot: {
-    flexGrow: 1,
-    flexDirection: 'column',
-    height: 'fitContent',
-  },
-  leftbar: {
-    height: '100vh',
-    width: theme.spacing.unit * 7,
-    // position: 'fixed',
+    display: 'flex',
+    flex: '1 1 auto',
   },
   canvas: {
-    margin: theme.spacing.unit * 2,
+    ...theme.vh100,
+    width: '100%',
+    background: theme.palette.grey['300'],
   },
-  drawingSurface: {
-    height: '80%',
-    width: '80%',
+  grow: {
+    flex: '1 1 auto',
   },
-  rightbar: {
-    height: '100vh',
-    width: 'fit-content',
-    backgroundColor: 'green',
-  },
-  takespace: {
-    backgroundColor: 'lightgrey',
-    height: '100vh',
-    flexGrow: 1,
-  },
-  spaceBetween: {
-    justifyContent: 'space-between',
-  },
-  red: {
-    overflow: 'hidden',
-
-  },
-
 });
 
 const mapStateToProps = ({ builder }) => {
@@ -83,6 +44,33 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class BuilderPage extends React.Component {
+
+  static getInitialProps() {
+    const buttons = [
+      {
+        text: 'Save',
+      },
+      {
+        text: 'Copy',
+      },
+      {
+        text: 'Delete',
+      },
+      {
+        text: 'Undo',
+      },
+      {
+        text: 'Redo',
+      },
+    ];
+    return {
+      appBar: {
+        buttons,
+        label: 'Page Builder',
+      },
+    };
+  }
+
   render() {
     const {
       classes,

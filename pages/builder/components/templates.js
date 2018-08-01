@@ -1,4 +1,6 @@
-export default ({
+import propTypes from 'prop-types';
+
+const Templates = ({
   templates,
   loadTemplate,
 }) => (
@@ -9,4 +11,16 @@ export default ({
       ))
     }
   </Card>
-)
+);
+
+Templates.propTypes = {
+  templates: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string,
+      import: propTypes.string,
+    }),
+  ),
+  loadTemplate: propTypes.func,
+};
+
+export default Templates;

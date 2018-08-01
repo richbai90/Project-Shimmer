@@ -5,7 +5,10 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { Provider as ReduxProvider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
+import { Fragment } from 'react';
 
+import Spacer from '../components/Spacer';
+import AppBar from '../components/AppBar';
 import getPageContext from '../src/getPageContext';
 import configureStore from '../redux';
 
@@ -55,7 +58,12 @@ class Webclient extends App {
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server side. */}
             <ReduxProvider store={store}>
-              <Component pageContext={this.pageContext} {...pageProps} />
+              <Fragment>
+                <AppBar {...pageProps.appBar} />
+                <Spacer appBar={!pageProps.appBar.hidden}>
+                  <Component pageContext={this.pageContext} {...pageProps} />
+                </Spacer>
+              </Fragment>
             </ReduxProvider>
           </MuiThemeProvider>
         </JssProvider>

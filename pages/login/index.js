@@ -67,6 +67,12 @@ const submitLogin = () => {
 };
 
 class LoginPage extends React.Component {
+  static getInitialProps() {
+    return {
+      appBar: { hidden: true },
+    }
+  }
+
   render() {
     const {
       classes, username, handleChange, password, handlePasswordChange,
