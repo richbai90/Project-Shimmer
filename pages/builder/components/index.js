@@ -1,8 +1,9 @@
 // import Link from 'next/link';
 import propTypes from 'prop-types';
-
 import LeftBar from './leftBar';
 import Canvas from './canvas';
+import PropsBar from './propsBar';
+
 
 const Builder = ({
   classes,
@@ -15,6 +16,7 @@ const Builder = ({
   <div className={classes.root}>
         <LeftBar classes={classes}/>
         <Canvas classes={classes}/>
+        <PropsBar classes={classes}/>
     {/* <Templates/> */}
   </div>
 );

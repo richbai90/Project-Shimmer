@@ -9,16 +9,26 @@ import propTypes from 'prop-types';
 
 const leftBar = ({
   classes,
+  // cursorSelect,
+  // handleMenuItemDrag,
+  // draggingItem,
 }) => (
   <MenuList>
     <MenuItem>
       <ListItemIcon className={classes.icon}>
-        <CreateIcon />
+        <CropSquareIcon
+          // name={square}
+          // value={newSquare}
+          // onClick={handleMenuItemClick}
+        />
       </ListItemIcon>
     </MenuItem>
     <MenuItem>
       <ListItemIcon className={classes.icon}>
-        <CropSquareIcon />
+        <CreateIcon
+          // value={cursorSelect}
+          // onDrag={handleMenuItemDrag(draggingItem)}
+        />
       </ListItemIcon>
     </MenuItem>
   </MenuList>

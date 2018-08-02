@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
 
@@ -15,14 +14,25 @@ const styles = theme => ({
     display: 'flex',
     flex: '1 1 auto',
   },
-  canvas: {
+  canvasBackground: {
     ...theme.vh100,
     width: '100%',
     background: theme.palette.grey['300'],
+    padding: theme.spacing.unit * 2,
+  },
+  canvas: {
+    width: '100%',
+    height: '100%',
   },
   grow: {
     flex: '1 1 auto',
   },
+  rightBar: {
+    width: '250px',
+    fontSize: '.75em',
+    margin: theme.spacing.unit,
+  },
+
 });
 
 const mapStateToProps = ({ builder }) => {
@@ -49,6 +59,7 @@ class BuilderPage extends React.Component {
     const buttons = [
       {
         text: 'Save',
+        click: () => console.log('hello'),
       },
       {
         text: 'Copy',
@@ -98,6 +109,7 @@ BuilderPage.propTypes = {
   // open: PropTypes.bool.isRequired,
   // handleOpen: PropTypes.func.isRequired,
   // handleClose: PropTypes.func.isRequired,
+  handleMenuItemDrag: PropTypes.func.isRequired,
 };
 
 export default compose(

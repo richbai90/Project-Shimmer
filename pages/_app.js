@@ -40,6 +40,8 @@ class Webclient extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
+    let { appBar } = pageProps;
+    appBar = appBar || {};
     return (
       <Container>
         {/* Wrap every page in Jss and Theme providers */}
@@ -59,8 +61,8 @@ class Webclient extends App {
                 to render collected styles on server side. */}
             <ReduxProvider store={store}>
               <Fragment>
-                <AppBar {...pageProps.appBar} />
-                <Spacer appBar={!pageProps.appBar.hidden}>
+                <AppBar {...appBar} />
+                <Spacer appBar={!appBar.hidden}>
                   <Component pageContext={this.pageContext} {...pageProps} />
                 </Spacer>
               </Fragment>

@@ -12,7 +12,12 @@ const handleChange = changeHandler => (
 );
 
 export default ({
-  classes, username, updateUsername, password, updatePassword, submitLogin,
+  classes,
+  username,
+  updateUsername,
+  password,
+  updatePassword,
+  submitLogin,
 }) => (
   <div className={classes.backgroundColor}>
     <Grid container className={classes.root}>
