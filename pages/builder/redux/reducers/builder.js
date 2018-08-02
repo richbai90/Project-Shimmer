@@ -5,6 +5,7 @@ import { UPDATE_COMPONENTS } from '../types/componentState';
 const defaultState = {
   componentMap: {},
   componentTree: null,
+  dragging: false,
 };
 
 const updateComponents = (state, action) => ({
