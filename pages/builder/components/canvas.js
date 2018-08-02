@@ -11,7 +11,6 @@ const Canvas = ({
     <Paper elevation={6} className={classes.canvas}>
       <canvas id='canvas'>
         <Grid container />
-        "You can see this text if your browser doesn't support HTML5"
       </canvas>
     </Paper>
   </div>
