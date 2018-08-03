@@ -16,7 +16,7 @@ const handler = routes.getRequestHandler(app);
 const configureApp = (server) => {
   const whiteList = [
     /^\/_next\/webpack-hmr$/,
-    /^\/_next\/webpack\/(\d\.)?[a-z0-9]{20}\.{1}hot-update\.{1}(json|js)$/,
+    /^\/_next\/webpack\/(\d*\.)?[a-z0-9]{20}\.{1}hot-update\.{1}(json|js|js\.map)$/,
     /^\/_next\/static\/commons\/(main|manifest)\.{1}js(\.map)?$/,
     /^\/_next\/-\/page\/(_(app|document|error)|index)\.{1}js(\.map)?$/,
   ];
@@ -65,7 +65,7 @@ const configureApp = (server) => {
       n();
     } else {
       console.log(url);
-      res.status(406).send('Not Acceptable');
+      res.status(404).send('Not Found');
     }
   });
 
