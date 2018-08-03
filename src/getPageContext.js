@@ -4,12 +4,11 @@ import { SheetsRegistry, create } from 'jss';
 import { createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
-import JssProvider from 'react-jss/lib/JssProvider';
 import expand from 'jss-expand';
 import extend from 'jss-extend';
 
 // Configure JSS
-const jss = create({ plugins: [...jssPreset().plugins, expand(), extend()] });
+const jss = create({ plugins: [extend(), ...jssPreset().plugins, expand()] });
 
 // A theme with custom primary and secondary color.
 // It's optional.
