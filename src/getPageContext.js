@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SheetsRegistry } from 'jss';
+import { SheetsRegistry, jss } from 'jss';
 import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import helpers from './jssHelpers';
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -14,12 +15,7 @@ const theme = createMuiTheme({
       main: '#ffab00',
     },
   },
-  vh100: {
-    height: '100vh',
-  },
-  vw100: {
-    width: '100vw',
-  },
+  helpers,
 });
 
 function createPageContext() {
@@ -31,6 +27,8 @@ function createPageContext() {
     sheetsRegistry: new SheetsRegistry(),
     // The standard class name generator.
     generateClassName: createGenerateClassName(),
+    // custom instance of jss
+    jss,
   };
 }
 

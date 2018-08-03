@@ -48,6 +48,7 @@ class Webclient extends App {
         <JssProvider
           registry={this.pageContext.sheetsRegistry}
           generateClassName={this.pageContext.generateClassName}
+          jss={this.pageContext.jss}
         >
           {/* MuiThemeProvider makes the theme available down the React
               tree thanks to React context. */}

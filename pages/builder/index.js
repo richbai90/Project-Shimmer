@@ -12,10 +12,10 @@ import Builder from './components';
 const styles = theme => ({
   root: {
     display: 'flex',
-    flex: '1 1 auto',
+    extend: 'grow',
   },
   canvasBackground: {
-    ...theme.vh100,
+    ...theme.helpers.vh100,
     width: '100%',
     background: theme.palette.grey['300'],
     padding: theme.spacing.unit * 2,
@@ -24,14 +24,13 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
   },
-  grow: {
-    flex: '1 1 auto',
-  },
   rightBar: {
     width: '250px',
     fontSize: '.75em',
     margin: theme.spacing.unit,
   },
+
+  grow: { ...theme.helpers.grow },
 
 });
 
@@ -57,6 +56,10 @@ class BuilderPage extends React.Component {
 
   static getInitialProps() {
     const buttons = [
+      {
+        text: 'New',
+        click: () => false,
+      },
       {
         text: 'Save',
         click: () => console.log('hello'),
