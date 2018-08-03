@@ -9,6 +9,7 @@ import {
 import { updateComponents } from '../actions/component-state';
 
 function* workOnLoadTemplate({ payload }) {
+  console.log('working!');
   yield put(startLoadingTemplate());
   const template = (yield import('../helpers/templates'))[payload];
   yield put(stopLoadingTemplate());

@@ -1,30 +1,19 @@
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import propTypes from 'prop-types';
+import AppBar from './AppBar';
 
-const ActionMenu = ({
-  classes,
-  buttons,
-  hidden,
-  label,
-}) => (
-    <AppBar className={`${classes.appBar} ${(hidden && classes.hidden) || ''}` } >
-      <Toolbar>
-        <Paper square={true} className={classes.label} >
-          <Typography color="inherit">{label}</Typography>
-        </Paper>
-          {
-            buttons.map(button => (
-              button.click ? <Button color="inherit" onClick={button.click}>{button.text}</Button> : <Button color="inherit" >{button.text}</Button>
-            ))
-          }
-      </Toolbar>
-    </AppBar>
-);
+
+const ActionMenu = ({ dispatch, ...props }) => {
+  const buttons = props.buttons.map(
+    (button) => {
+      return button.click ? { ...button, click: () => dispatch({ ...button.click }) } : button;
+    },
+  );
+  return <AppBar {...props} buttons={buttons} />
+}
+
 
 ActionMenu.propTypes = {
   classes: propTypes.shape({
@@ -37,6 +26,7 @@ ActionMenu.propTypes = {
   })),
   label: propTypes.string,
   hidden: propTypes.bool,
+  dispatch: propTypes.func,
 };
 
 ActionMenu.defaultProps = {
@@ -73,4 +63,8 @@ const styles = (theme) => {
   };
 };
 
-export default withStyles(styles)(ActionMenu);
+const mapStateToProps = () => ({});
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+)(ActionMenu);

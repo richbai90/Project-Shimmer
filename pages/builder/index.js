@@ -10,27 +10,26 @@ import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
 
 const styles = theme => ({
+  grow: { ...theme.helpers.grow },
   root: {
     display: 'flex',
-    extend: 'grow',
+    ...theme.helpers.vh100,
   },
   canvasBackground: {
-    ...theme.helpers.vh100,
-    width: '100%',
+    display: 'flex',
     background: theme.palette.grey['300'],
     padding: theme.spacing.unit * 2,
+    paddingBottom: '9vh',
+    extend: 'grow',
   },
   canvas: {
-    width: '100%',
-    height: '100%',
+    extend: 'grow',
   },
   rightBar: {
     width: '250px',
     fontSize: '.75em',
     margin: theme.spacing.unit,
   },
-
-  grow: { ...theme.helpers.grow },
 
 });
 
@@ -53,12 +52,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class BuilderPage extends React.Component {
-
   static getInitialProps() {
     const buttons = [
       {
         text: 'New',
-        click: () => false,
+        click: loadTemplate('withLeftMenu'),
       },
       {
         text: 'Save',
@@ -81,6 +79,9 @@ class BuilderPage extends React.Component {
       appBar: {
         buttons,
         label: 'Page Builder',
+      },
+      spacer: {
+        clip: true,
       },
     };
   }

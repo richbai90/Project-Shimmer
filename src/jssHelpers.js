@@ -1,10 +1,6 @@
 export default {
   grow: {
-    flex: {
-      flexGrow: 1,
-      flexShrink: 1,
-      flexBasis: 'auto',
-    },
+    flex: 'auto',
   },
   vh100: {
     height: '100vh',

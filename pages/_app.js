@@ -6,6 +6,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 import { Fragment } from 'react';
+import { merge } from 'lodash';
 
 import Spacer from '../components/Spacer';
 import AppBar from '../components/AppBar';
@@ -19,10 +20,19 @@ class Webclient extends App {
   }
 
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
+    const { dispatch } = ctx.store;
+    const defaultProps = {
+      appBar: {
+        buttons: [],
+      },
+      spacer: {
+        clip: false,
+      },
+    };
+    let pageProps = { ...defaultProps };
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      pageProps = merge({}, defaultProps, await Component.getInitialProps(ctx));
     }
 
     return { pageProps };
@@ -31,6 +41,7 @@ class Webclient extends App {
   pageContext = null;
 
   componentDidMount() {
+    const { pageProps, store } = this.props;
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
@@ -40,8 +51,10 @@ class Webclient extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
-    let { appBar } = pageProps;
+    let { appBar, spacer } = pageProps;
     appBar = appBar || {};
+    spacer = spacer || {};
+
     return (
       <Container>
         {/* Wrap every page in Jss and Theme providers */}
@@ -63,7 +76,7 @@ class Webclient extends App {
             <ReduxProvider store={store}>
               <Fragment>
                 <AppBar {...appBar} />
-                <Spacer appBar={!appBar.hidden}>
+                <Spacer appBar={!appBar.hidden} clip={spacer.clip}>
                   <Component pageContext={this.pageContext} {...pageProps} />
                 </Spacer>
               </Fragment>

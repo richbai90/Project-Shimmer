@@ -2,13 +2,12 @@
 
 
 import { SheetsRegistry, create } from 'jss';
-import { createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-import expand from 'jss-expand';
-import extend from 'jss-extend';
+import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import jssPreset from 'jss-preset-default';
 
 import helpers from './jssHelpers';
 // Configure JSS
-const jss = create({ plugins: [extend(), ...jssPreset().plugins, expand()] });
+const jss = create(jssPreset());
 
 // A theme with custom primary and secondary color.
 // It's optional.
