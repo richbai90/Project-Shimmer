@@ -9,6 +9,8 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "jss": "latest",
+    "jss-expand": "^5.3.0",
+    "jss-extend": "^6.2.0",
     "lodash": "^4.17.10",
     "lusca": "^1.6.0",
     "next": "latest",

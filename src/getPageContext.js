@@ -1,9 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SheetsRegistry } from 'jss';
-import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import { SheetsRegistry, create } from 'jss';
+import { createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import JssProvider from 'react-jss/lib/JssProvider';
+import expand from 'jss-expand';
+import extend from 'jss-extend';
+
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, expand(), extend()] });
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -31,6 +37,8 @@ function createPageContext() {
     sheetsRegistry: new SheetsRegistry(),
     // The standard class name generator.
     generateClassName: createGenerateClassName(),
+    // custom instance of jss
+    jss,
   };
 }
 
