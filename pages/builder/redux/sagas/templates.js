@@ -11,9 +11,9 @@ import { updateComponents } from '../actions/component-state';
 function* workOnLoadTemplate({ payload }) {
   console.log('working!');
   yield put(startLoadingTemplate());
-  const template = (yield import('../helpers/templates'))[payload];
+  const template = (yield import('../helpers/templates'))[payload.template];
   yield put(stopLoadingTemplate());
-  yield put(updateComponents(template));
+  yield put(updateComponents({ map: template }));
 }
 
 export default function* watchForLoadTemplate() {

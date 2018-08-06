@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import propTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 const ActionMenu = ({
   classes,
@@ -19,7 +18,6 @@ const ActionMenu = ({
         </Paper>
           {
             buttons.map((button) => {
-              debugger;
               return button.click ? <Button color="inherit" onClick={button.click}>{button.text}</Button> : <Button color="inherit" >{button.text}</Button>;
             })
           }

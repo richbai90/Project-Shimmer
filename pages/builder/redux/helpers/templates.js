@@ -42,11 +42,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: InboxIcon,
-                        },
-                      ],
+                      children: {
+                        component: InboxIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -60,11 +58,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: StarIcon,
-                        },
-                      ],
+                      children: {
+                        component: StarIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -78,11 +74,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: SendIcon,
-                        },
-                      ],
+                      children: {
+                        component: SendIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -96,11 +90,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: DraftsIcon,
-                        },
-                      ],
+                      children: {
+                        component: DraftsIcon,
+                      },
                     },
                     {
                       component: ListItemText,

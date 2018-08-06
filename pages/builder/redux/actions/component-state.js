@@ -1,4 +1,4 @@
-import { UPDATE_COMPONENTS } from '../types/component-state';
+import { UPDATE_COMPONENTS } from '../types/componentState';
 
 export const updateComponents = componentMap => ({
   type: UPDATE_COMPONENTS,

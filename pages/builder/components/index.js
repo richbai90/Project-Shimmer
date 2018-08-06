@@ -9,13 +9,12 @@ const Builder = ({
   classes,
   // cursor,
   // componentMap,
-  // componentTree,
   // templates,
   // loadingTemplates,
 }) => (
   <div className={classes.root}>
         <LeftBar classes={classes}/>
-        <Canvas classes={classes}/>
+        <Canvas classes={ classes } />
         <PropsBar classes={classes}/>
     {/* <Templates/> */}
   </div>
@@ -32,6 +31,10 @@ Builder.propTypes = {
   cursor: propTypes.string,
   componentMap: propTypes.object,
   componentTree: propTypes.node,
+};
+
+Builder.defaultProps = {
+  tree: null,
 };
 
 export default Builder;

@@ -1,6 +1,7 @@
 import ReactJsonSchema from 'react-json-schema';
-
+import { merge } from 'lodash';
 import { UPDATE_COMPONENTS } from '../types/componentState';
+import ReactDOMServer from 'react-dom/server';
 
 const defaultState = {
   componentMap: {},
@@ -8,11 +9,15 @@ const defaultState = {
   dragging: false,
 };
 
-const updateComponents = (state, action) => ({
-  ...state,
-  componentMap: action.payload,
-  componentTree: new ReactJsonSchema().parse(action.componentMap),
-});
+const updateComponents = (state, action) => {
+  const schemaParser = new ReactJsonSchema();
+  const { map } = action.payload;
+  const newState = {
+    componentMap: map,
+    componentTree: schemaParser.parseSchema(map),
+  };
+  return merge({}, state, newState);
+};
 
 export default (state = defaultState, action) => {
   switch (action.type) {

@@ -89,8 +89,6 @@ class BuilderPage extends React.Component {
   render() {
     const {
       classes,
-      componentMap,
-      componentTree,
       templates,
       loadingTemplates,
 
@@ -99,8 +97,6 @@ class BuilderPage extends React.Component {
     return (
       <Builder
         classes={classes}
-        map={componentMap}
-        tree={componentTree}
         templates={templates}
         loadingTemplates={loadingTemplates}
       />
