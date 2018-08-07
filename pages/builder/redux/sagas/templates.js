@@ -1,5 +1,6 @@
 import { takeEvery } from 'redux-saga';
 import { put } from 'redux-saga/effects';
+import { Fragment } from 'react';
 
 import { LOAD_TEMPLATE } from '../types/templates';
 import {
@@ -7,13 +8,18 @@ import {
   stopLoadingTemplate,
 } from '../actions/templates';
 import { updateComponents } from '../actions/component-state';
+import { withDynamicContent } from '../helpers/builder';
 
 function* workOnLoadTemplate({ payload }) {
-  console.log('working!');
+  // Notify the app that we are loading the template
   yield put(startLoadingTemplate());
+  // Load the actual template
   const template = (yield import('../helpers/templates'))[payload.template];
+  // Notify the app that we have loaded the template
   yield put(stopLoadingTemplate());
-  yield put(updateComponents({ map: template }));
+  const tree = withDynamicContent(template, template.styles, true)(Fragment);
+  // Update the canvas with the new template
+  yield put(updateComponents({ map: template, tree }));
 }
 
 export default function* watchForLoadTemplate() {

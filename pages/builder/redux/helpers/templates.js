@@ -23,11 +23,15 @@ export const blank = {
 };
 
 export const withLeftMenu = {
-  component: 'div',
-  className: 'root',
-  children: [
+  styles: {
+    drawerPaper: {
+      position: 'relative',
+    },
+  },
+  component: () => [
     {
       component: Drawer,
+      componentName: 'Drawer',
       variant: 'permanent',
       children: [
         {
@@ -105,6 +109,11 @@ export const withLeftMenu = {
           ],
         },
       ],
+    },
+    {
+      component: Grid,
+      container: true,
+      children: [],
     },
   ],
 };
