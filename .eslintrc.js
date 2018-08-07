@@ -10,7 +10,9 @@ module.exports = {
     'react/jsx-uses-vars': [2],
     'react/prop-types': [2],
     'import/no-extraneous-dependencies': false,
+    'import/prefer-default-export': false,
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-underscore-dangle': 0, // I like underscore private methods
   },
   settings: {
     'import/resolver': {
