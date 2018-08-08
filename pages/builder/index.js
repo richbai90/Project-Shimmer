@@ -8,12 +8,23 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
+import { open as openDrawer, close as closeDrawer } from './redux/actions/drawer';
 
 const styles = theme => ({
   grow: { ...theme.helpers.grow },
   root: {
     display: 'flex',
     ...theme.helpers.vh100,
+  },
+  icon: {
+    marginRight: 0,
+  },
+  leftBarDrawer: {
+    zIndex: theme.zIndex.appBar - 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    // width: drawerWidth,
   },
   canvasBackground: {
     display: 'flex',
@@ -39,16 +50,23 @@ const mapStateToProps = ({ builder }) => {
     available: templates,
     loading: loadingTemplates,
   } = builder.templates;
+
+  // const { openDrawer, closeDrawer } = builder.leftBar;
+
   return {
     componentMap,
     componentTree,
     templates,
     loadingTemplates,
+    openDrawer,
+    closeDrawer,
   };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadTemplate,
+  handleOpen: openDrawer,
+  handleClose: closeDrawer,
 }, dispatch);
 
 class BuilderPage extends React.Component {
@@ -91,12 +109,18 @@ class BuilderPage extends React.Component {
       classes,
       templates,
       loadingTemplates,
-
+      drawer,
+      openDrawer,
+      handleOpen,
+      handleClose,
     } = this.props;
 
     return (
       <Builder
         classes={classes}
+        openDrawer={openDrawer}
+        handleOpen={ handleOpen }
+        handleClose={ handleClose }
         templates={templates}
         loadingTemplates={loadingTemplates}
       />
@@ -106,10 +130,10 @@ class BuilderPage extends React.Component {
 
 BuilderPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  // open: PropTypes.bool.isRequired,
-  // handleOpen: PropTypes.func.isRequired,
-  // handleClose: PropTypes.func.isRequired,
-  handleMenuItemDrag: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  // handleMenuItemDrag: PropTypes.func.isRequired,
 };
 
 export default compose(

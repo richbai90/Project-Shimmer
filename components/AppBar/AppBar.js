@@ -16,11 +16,13 @@ const ActionMenu = ({
         <Paper square={true} className={classes.label} >
           <Typography color="inherit">{label}</Typography>
         </Paper>
-          {
-            buttons.map((button) => {
-              return button.click ? <Button color="inherit" onClick={button.click}>{button.text}</Button> : <Button color="inherit" >{button.text}</Button>;
-            })
-          }
+        {
+          buttons.map(button => (
+            button.click
+              ? <Button color="inherit" onClick={button.click}>{button.text}</Button>
+              : <Button color="inherit" >{button.text}</Button>
+          ))
+        }
       </Toolbar>
     </AppBar>
 );
