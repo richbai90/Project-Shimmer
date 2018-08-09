@@ -7,13 +7,15 @@ import PropsBar from './propsBar';
 
 const Builder = ({
   classes,
+  items,
+  drawerFilter,
   // cursor,
   // componentMap,
   // templates,
   // loadingTemplates,
 }) => (
   <div className={classes.root}>
-        <LeftBar classes={classes}/>
+        <LeftBar items={items} drawerFilter={drawerFilter} classes={classes}/>
         <Canvas classes={ classes } />
         <PropsBar classes={classes}/>
     {/* <Templates/> */}

@@ -53,7 +53,11 @@ export const withDynamicContent = (map, styles = {}, inCanvas = false) => ((Comp
 
       // recursively check all children for components that need special handling
       if (preppedTree.children) {
-        preppedTree.children = this.prepForRender(preppedTree.children, renderInCanvas, parseStyles);
+        preppedTree.children = this.prepForRender(
+          preppedTree.children,
+          renderInCanvas,
+          parseStyles,
+        );
       }
 
       return preppedTree;

@@ -1,2 +1,5 @@
-export const DRAWER_OPEN = 'DRAWER/OPEN';
-export const DRAWER_CLOSE = 'DRAWER/CLOSE';
+// export const DRAWER_OPEN = 'DRAWER/OPEN';
+// export const DRAWER_CLOSE = 'DRAWER/CLOSE';
+export const OPEN_DRAWER = 'DRAWER/OPEN';
+export const CLOSE_DRAWER = 'DRAWER/CLOSE';
+export const SET_DRAWER_FILTER = 'DRAWER/SET_DRAWER_FILTER';

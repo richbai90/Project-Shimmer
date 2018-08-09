@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
-import { open as openDrawer, close as closeDrawer } from './redux/actions/drawer';
+import { open as openDrawer, close as closeDrawer, filter as drawerFilter  } from './redux/actions/drawer';
 
 const styles = theme => ({
   grow: { ...theme.helpers.grow },
@@ -50,9 +50,12 @@ const mapStateToProps = ({ builder }) => {
     available: templates,
     loading: loadingTemplates,
   } = builder.templates;
-
-  // const { openDrawer, closeDrawer } = builder.leftBar;
-
+  const {
+    open,
+    close,
+    activeItem,
+    items,
+  } = builder.drawer;
   return {
     componentMap,
     componentTree,
@@ -60,6 +63,10 @@ const mapStateToProps = ({ builder }) => {
     loadingTemplates,
     openDrawer,
     closeDrawer,
+    open,
+    close,
+    activeItem,
+    items,
   };
 };
 
@@ -67,6 +74,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   loadTemplate,
   handleOpen: openDrawer,
   handleClose: closeDrawer,
+  drawerFilter,
 }, dispatch);
 
 class BuilderPage extends React.Component {
@@ -113,6 +121,8 @@ class BuilderPage extends React.Component {
       openDrawer,
       handleOpen,
       handleClose,
+      items,
+      drawerFilter,
     } = this.props;
 
     return (
@@ -123,6 +133,8 @@ class BuilderPage extends React.Component {
         handleClose={ handleClose }
         templates={templates}
         loadingTemplates={loadingTemplates}
+        drawerFilter={drawerFilter}
+        items={items}
       />
     );
   }
