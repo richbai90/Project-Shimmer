@@ -8,41 +8,10 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
-import { open as openDrawer, close as closeDrawer, filter as drawerFilter  } from './redux/actions/drawer';
-
-const styles = theme => ({
-  grow: { ...theme.helpers.grow },
-  root: {
-    display: 'flex',
-    ...theme.helpers.vh100,
-  },
-  icon: {
-    marginRight: 0,
-  },
-  leftBarDrawer: {
-    zIndex: theme.zIndex.appBar - 1,
-  },
-  drawerPaper: {
-    position: 'relative',
-    // width: drawerWidth,
-  },
-  canvasBackground: {
-    display: 'flex',
-    background: theme.palette.grey['300'],
-    padding: theme.spacing.unit * 2,
-    paddingBottom: '9vh',
-    extend: 'grow',
-  },
-  canvas: {
-    extend: 'grow',
-  },
-  rightBar: {
-    width: '250px',
-    fontSize: '.75em',
-    margin: theme.spacing.unit,
-  },
-
-});
+import {
+  open as openDrawerAction, close as closeDrawerAction,
+  filter as drawerFilterAction,
+} from './redux/actions/drawer';
 
 const mapStateToProps = ({ builder }) => {
   const { componentMap, componentTree } = builder.page;
@@ -51,8 +20,7 @@ const mapStateToProps = ({ builder }) => {
     loading: loadingTemplates,
   } = builder.templates;
   const {
-    open,
-    close,
+    isOpen,
     activeItem,
     items,
   } = builder.drawer;
@@ -61,10 +29,9 @@ const mapStateToProps = ({ builder }) => {
     componentTree,
     templates,
     loadingTemplates,
-    openDrawer,
-    closeDrawer,
-    open,
-    close,
+    openDrawerAction,
+    closeDrawerAction,
+    isOpen,
     activeItem,
     items,
   };
@@ -72,33 +39,33 @@ const mapStateToProps = ({ builder }) => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadTemplate,
-  handleOpen: openDrawer,
-  handleClose: closeDrawer,
-  drawerFilter,
+  openDrawerAction,
+  closeDrawerAction,
+  drawerFilterAction,
 }, dispatch);
 
 class BuilderPage extends React.Component {
   static getInitialProps() {
     const buttons = [
       {
-        text: 'New',
+        text: 'New', key:'AppBarNew',
         click: loadTemplate('withLeftMenu'),
       },
       {
-        text: 'Save',
-        click: () => console.log('hello'),
+        text: 'Save', key:'AppBarSave',
+        // click: () => console.log('hello'),
       },
       {
-        text: 'Copy',
+        text: 'Copy', key:'AppBarCopy',
       },
       {
-        text: 'Delete',
+        text: 'Delete', key:'AppBarDelete',
       },
       {
-        text: 'Undo',
+        text: 'Undo', key:'AppBarUndo',
       },
       {
-        text: 'Redo',
+        text: 'Redo', key:'AppBarRedo',
       },
     ];
     return {
@@ -118,23 +85,23 @@ class BuilderPage extends React.Component {
       templates,
       loadingTemplates,
       drawer,
-      openDrawer,
-      handleOpen,
-      handleClose,
       items,
-      drawerFilter,
+      isOpen,
+      openDrawerAction,
+      closeDrawerAction,
+      drawerFilterAction,
     } = this.props;
 
     return (
       <Builder
         classes={classes}
-        openDrawer={openDrawer}
-        handleOpen={ handleOpen }
-        handleClose={ handleClose }
+        openDrawerAction={openDrawerAction}
+        closeDrawerAction={closeDrawerAction}
         templates={templates}
         loadingTemplates={loadingTemplates}
-        drawerFilter={drawerFilter}
+        drawerFilterAction={drawerFilterAction}
         items={items}
+        open={isOpen}
       />
     );
   }
@@ -142,11 +109,44 @@ class BuilderPage extends React.Component {
 
 BuilderPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  // handleOpen: PropTypes.func.isRequired,
+  // handleClose: PropTypes.func.isRequired,
   // handleMenuItemDrag: PropTypes.func.isRequired,
 };
+
+const styles = theme => ({
+  grow: { ...theme.helpers.grow },
+  root: {
+    display: 'flex',
+    ...theme.helpers.vh100,
+  },
+  icon: {
+    marginRight: 0,
+  },
+  leftBarDrawer: {
+    zIndex: theme.zIndex.appBar - 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    left: '250px',
+    width: 'fit-content',
+  },
+  canvasBackground: {
+    display: 'flex',
+    background: theme.palette.grey['300'],
+    padding: theme.spacing.unit * 2,
+    paddingBottom: '9vh',
+    extend: 'grow',
+  },
+  canvas: {
+    extend: 'grow',
+  },
+  rightBar: {
+    width: '250px',
+    fontSize: '.75em',
+    margin: theme.spacing.unit,
+  },
+});
 
 export default compose(
   withStyles(styles),

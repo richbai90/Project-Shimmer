@@ -17,9 +17,7 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 // when an button is pressed, pops out with options, and title like "draw shape:"
 
-const DrawerItems = ({ items }) => {
-
-  return (
+const DrawerItems = ({ items }) => (
     <Fragment>
       <MenuList>
       {
@@ -39,24 +37,23 @@ const DrawerItems = ({ items }) => {
       };
       </MenuList>
     </Fragment>
-  );
-};
-
+);
 const handleMenuClick = (clickHandler, filterValue) => (
   (e) => {
     window.clickHandler = clickHandler
     console.log(filterValue);
     clickHandler(filterValue);
+    // TODO: somehow, if filter value === parent, opend drawer.
   }
 );
 
 const leftBar = ({
   classes,
-  setDrawerFilter,
-  handleClose,
-  openShapesDrawer,
-  drawerFilter,
+  openDrawerAction,
+  closeDrawerAction,
+  drawerFilterAction,
   items,
+  isOpen,
   // handleMenuItemDrag,
   // draggingItem,
 }) => (
@@ -67,7 +64,9 @@ const leftBar = ({
           <ListItemIcon className={classes.icon}>
               <CreateIcon
                 /* onClick: open modal */
-                onClick={handleMenuClick(drawerFilter, 'none')}
+                onClick={handleMenuClick(drawerFilterAction, 'none')}
+                // onClose
+
               />
           </ListItemIcon>
         </Tooltip>
@@ -76,7 +75,7 @@ const leftBar = ({
         <Tooltip title="Shapes" placement="right">
           <ListItemIcon className={classes.icon}>
             <CropSquareIcon
-              onClick={handleMenuClick(drawerFilter, 'shapes')}
+              onClick={handleMenuClick(drawerFilterAction, 'shapes')}
               value='shapes'
             />
             </ListItemIcon>
@@ -87,8 +86,7 @@ const leftBar = ({
           <Tooltip title="Labels" placement="right">
             <TextFormatIcon
               /* onDrag: handle activeItem */
-              onClick={handleMenuClick(drawerFilter, 'none')}
-
+              onClick={handleMenuClick(drawerFilterAction, 'none')}
             />
           </Tooltip>
         </ListItemIcon>
@@ -98,7 +96,7 @@ const leftBar = ({
           <Tooltip title="Input Fields" placement="right">
             <FormatShapesIcon /* ------ Input Fields ------ */
               value='inputFields'
-              onClick={handleMenuClick(drawerFilter, 'inputFields')}
+              onClick={handleMenuClick(drawerFilterAction, 'inputFields')}
             />
           </Tooltip>
         </ListItemIcon>
@@ -107,7 +105,7 @@ const leftBar = ({
         <ListItemIcon className={classes.icon}>
           <Tooltip title="Tables" placement="right">
             <TableChartIcon
-              onClick={handleMenuClick(drawerFilter, 'none')}
+              onClick={handleMenuClick(drawerFilterAction, 'none')}
             />
           </Tooltip>
         </ListItemIcon>
@@ -116,7 +114,7 @@ const leftBar = ({
         <ListItemIcon className={classes.icon}>
           <Tooltip title="Buttons" placement="right">
             <PlayCircleFilledIcon /* ------ Buttons ------ */
-              onClick={handleMenuClick(drawerFilter, 'none')}
+              onClick={handleMenuClick(drawerFilterAction, 'none')}
             />
           </Tooltip>
         </ListItemIcon>
@@ -124,9 +122,11 @@ const leftBar = ({
     </MenuList>
     <Drawer
       classes={{ paper: classes.drawerPaper }}
-      variant="permanent" // or persistant
+      variant="persistant" // or persistant
       className={classes.leftBarDrawer}
-      // open={open}
+      onOpen={openDrawerAction}
+      open=''
+      open={isOpen}
     >
       < DrawerItems items={items} />
     </Drawer>
@@ -135,7 +135,8 @@ const leftBar = ({
 
 leftBar.propTypes = {
   classes: propTypes.object.isRequired,
-  // setDrawerFilter: propTypes.functions.isRequired,
+  setDrawerFilter: propTypes.object.isRequired,
+  items: propTypes.object.isRequired,
 };
 
 export default leftBar;

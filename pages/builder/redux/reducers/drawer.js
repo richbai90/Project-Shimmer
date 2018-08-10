@@ -12,9 +12,8 @@ const items = [
 ];
 
 const defaultState = {
-  open: false,
-  close: true,
-  activeItem: '',
+  isOpen: 'false',
+  // activeItem: '',
   items,
 };
 
@@ -22,6 +21,7 @@ const setFilter = (initialState, filter) => {
   const newState = clone(initialState);
   const newArray = items.filter(item => item.parent === filter);
   newState.items = newArray;
+  // newState.isOpen = newArray.length > 1 ? newState.isOpen = true : newState.isOpen = false;
   return newState;
 };
 
@@ -29,9 +29,9 @@ const setFilter = (initialState, filter) => {
 export default (state = defaultState, { payload, type }) => {
   switch (type) {
     case OPEN_DRAWER:
-      return Object.assign({}, state, { open: payload });
+      return Object.assign({}, state, { isOpen: payload });
     case CLOSE_DRAWER:
-      return Object.assign({}, state, { close: payload });
+      return Object.assign({}, state, { isOpen: payload });
     case SET_DRAWER_FILTER:
       return setFilter(state, payload.filter);
     default:
