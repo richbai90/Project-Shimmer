@@ -12,7 +12,7 @@ const items = [
 ];
 
 const defaultState = {
-  isOpen: 'false',
+  isOpen: false,
   // activeItem: '',
   items,
 };

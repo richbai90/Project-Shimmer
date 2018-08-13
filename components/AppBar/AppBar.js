@@ -13,13 +13,13 @@ const ActionMenu = ({
 }) => (
     <AppBar className={`${classes.appBar} ${(hidden && classes.hidden) || ''}` } >
       <Toolbar>
-        <Paper square={true} className={classes.label} >
+        <div square={true} className={classes.label} >
           <Typography color="inherit">{label}</Typography>
-        </Paper>
+        </div>
         {
           buttons.map(button => (
             button.click
-              ? <Button color="inherit" onClick={button.click}>{button.text}</Button>
+              ? <Button color="inherit" key={button.key} onClick={button.click}>{button.text}</Button>
               : <Button color="inherit" >{button.text}</Button>
           ))
         }

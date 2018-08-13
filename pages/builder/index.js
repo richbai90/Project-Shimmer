@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
-import {
-  open as openDrawerAction, close as closeDrawerAction,
-  filter as drawerFilterAction,
-} from './redux/actions/drawer';
+// import {
+//   open as openDrawerAction, close as closeDrawerAction,
+//   filter as drawerFilterAction,
+// } from './redux/actions/drawer';
 
 const mapStateToProps = ({ builder }) => {
   const { componentMap, componentTree } = builder.page;
@@ -19,53 +19,71 @@ const mapStateToProps = ({ builder }) => {
     available: templates,
     loading: loadingTemplates,
   } = builder.templates;
-  const {
-    isOpen,
-    activeItem,
-    items,
-  } = builder.drawer;
+  // const {
+  //   isOpen,
+  //   activeItem,
+  //   items,
+  // } = builder.drawer;
   return {
     componentMap,
     componentTree,
     templates,
     loadingTemplates,
-    openDrawerAction,
-    closeDrawerAction,
-    isOpen,
-    activeItem,
-    items,
+    // openDrawerAction,
+    // closeDrawerAction,
+    // isOpen,
+    // activeItem,
+    // items,
   };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadTemplate,
-  openDrawerAction,
-  closeDrawerAction,
-  drawerFilterAction,
+  // openDrawerAction,
+  // closeDrawerAction,
+  // drawerFilterAction,
 }, dispatch);
 
 class BuilderPage extends React.Component {
   static getInitialProps() {
     const buttons = [
       {
-        text: 'New', key:'AppBarNew',
+        text: 'New',
+        key: 'AppBarNew',
+        icon: 'AddBoxIcon',
+        title: 'add_box',
         click: loadTemplate('withLeftMenu'),
       },
       {
-        text: 'Save', key:'AppBarSave',
+        text: 'Save',
+        key: 'AppBarSave',
+        icon: 'SaveIcon',
+        title: 'save',
         // click: () => console.log('hello'),
       },
       {
-        text: 'Copy', key:'AppBarCopy',
+        text: 'Copy',
+        key: 'AppBarCopy',
+        icon: 'FileCopyIcon',
+        title: 'file_copy',
       },
       {
-        text: 'Delete', key:'AppBarDelete',
+        text: 'Delete',
+        key: 'AppBarDelete',
+        icon: 'DeleteIcon',
+        title: 'delete',
       },
       {
-        text: 'Undo', key:'AppBarUndo',
+        text: 'Undo',
+        key: 'AppBarUndo',
+        icon: 'UndoIcon',
+        title: 'undo',
       },
       {
-        text: 'Redo', key:'AppBarRedo',
+        text: 'Redo',
+        key: 'AppBarRedo',
+        icon: 'RedoIcon',
+        title: 'redo',
       },
     ];
     return {
@@ -95,13 +113,13 @@ class BuilderPage extends React.Component {
     return (
       <Builder
         classes={classes}
-        openDrawerAction={openDrawerAction}
-        closeDrawerAction={closeDrawerAction}
+        // openDrawerAction={openDrawerAction}
+        // closeDrawerAction={closeDrawerAction}
         templates={templates}
         loadingTemplates={loadingTemplates}
-        drawerFilterAction={drawerFilterAction}
-        items={items}
-        open={isOpen}
+      //   drawerFilterAction={drawerFilterAction}
+      //   items={items}
+      //   open={isOpen}
       />
     );
   }
@@ -123,14 +141,10 @@ const styles = theme => ({
   icon: {
     marginRight: 0,
   },
-  leftBarDrawer: {
-    zIndex: theme.zIndex.appBar - 1,
-  },
-  drawerPaper: {
-    position: 'relative',
-    left: '250px',
-    width: 'fit-content',
-  },
+  // leftBarDrawer: {
+  //   zIndex: theme.zIndex.appBar - 1,
+  // },
+
   canvasBackground: {
     display: 'flex',
     background: theme.palette.grey['300'],

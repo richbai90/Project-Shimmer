@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Tooltip from '@material-ui/core/Tooltip';
 // import Typography from '@material-ui/core/Typography';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
@@ -29,7 +31,6 @@ const DrawerItems = ({ items }) => (
             <MenuItem
             name={name}
             value={value}
-            // style={{ display: 'none' }}
             >{name}
             </MenuItem>
           );
@@ -41,101 +42,94 @@ const DrawerItems = ({ items }) => (
 const handleMenuClick = (clickHandler, filterValue) => (
   (e) => {
     window.clickHandler = clickHandler
-    console.log(filterValue);
     clickHandler(filterValue);
-    // TODO: somehow, if filter value === parent, opend drawer.
   }
 );
 
+const checkVisibility = (x) => {
+  console.log('checkVisibility fired');
+  return (
+    x !== true ? 'none' : ''
+  )
+};
+
+// const closeDrawer = () => {
+//   console.log('something leftbar.js');
+// }
+
 const leftBar = ({
   classes,
-  openDrawerAction,
-  closeDrawerAction,
-  drawerFilterAction,
-  items,
-  isOpen,
+  loadDrawerComponentsAction,
+  items = null,
+  isOpen = false,
   // handleMenuItemDrag,
   // draggingItem,
 }) => (
   <Fragment>
     <MenuList>
-      <MenuItem /* ------ Templates ------ */ >
+      <MenuItem
+        onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
         <Tooltip title="Templates" placement="right">
           <ListItemIcon className={classes.icon}>
-              <CreateIcon
-                /* onClick: open modal */
-                onClick={handleMenuClick(drawerFilterAction, 'none')}
-                // onClose
-
-              />
+              <CreateIcon />
           </ListItemIcon>
         </Tooltip>
       </MenuItem>
-      <MenuItem /* ------ Shapes ------ */ >
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'shapes')} >
         <Tooltip title="Shapes" placement="right">
           <ListItemIcon className={classes.icon}>
             <CropSquareIcon
-              onClick={handleMenuClick(drawerFilterAction, 'shapes')}
               value='shapes'
             />
             </ListItemIcon>
         </Tooltip>
       </MenuItem>
-      <MenuItem /* ------ Labels: ------ */>
-        <ListItemIcon className={classes.icon}>
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
+        <ListItemIcon >
           <Tooltip title="Labels" placement="right">
-            <TextFormatIcon
-              /* onDrag: handle activeItem */
-              onClick={handleMenuClick(drawerFilterAction, 'none')}
-            />
+            <TextFormatIcon className={classes.icon} />
           </Tooltip>
         </ListItemIcon>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'inputFields')} >
         <ListItemIcon className={classes.icon}>
           <Tooltip title="Input Fields" placement="right">
-            <FormatShapesIcon /* ------ Input Fields ------ */
-              value='inputFields'
-              onClick={handleMenuClick(drawerFilterAction, 'inputFields')}
-            />
+            <FormatShapesIcon value='inputFields' />
           </Tooltip>
         </ListItemIcon>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
         <ListItemIcon className={classes.icon}>
           <Tooltip title="Tables" placement="right">
-            <TableChartIcon
-              onClick={handleMenuClick(drawerFilterAction, 'none')}
-            />
+            <TableChartIcon />
           </Tooltip>
         </ListItemIcon>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={loadDrawerComponentsAction} >
         <ListItemIcon className={classes.icon}>
           <Tooltip title="Buttons" placement="right">
-            <PlayCircleFilledIcon /* ------ Buttons ------ */
-              onClick={handleMenuClick(drawerFilterAction, 'none')}
+            <PlayCircleFilledIcon
             />
           </Tooltip>
         </ListItemIcon>
       </MenuItem>
     </MenuList>
-    <Drawer
-      classes={{ paper: classes.drawerPaper }}
-      variant="persistant" // or persistant
-      className={classes.leftBarDrawer}
-      onOpen={openDrawerAction}
-      open=''
-      open={isOpen}
-    >
-      < DrawerItems items={items} />
-    </Drawer>
+    <ClickAwayListener onClickAway={loadDrawerComponentsAction} >
+      <Drawer
+        classes={{ paper: isOpen === true ? classes.drawerPaper : classes.drawerPaperClose }}
+        variant="persistent"
+        className={classes.leftBarDrawer}
+        open={isOpen}
+      >
+        <DrawerItems items={items}/>
+      </Drawer>
+    </ClickAwayListener>
   </Fragment>
 );
 
 leftBar.propTypes = {
   classes: propTypes.object.isRequired,
-  setDrawerFilter: propTypes.object.isRequired,
+  // setDrawerFilter: propTypes.object.isRequired,
   items: propTypes.object.isRequired,
 };
 

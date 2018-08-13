@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 // import InputLabel from '@material-ui/core/InputLabel';
 // import InputAdornment from '@material-ui/core/InputAdornment';
 import Table from '@material-ui/core/Table';
-// import TableHead from '@material-ui/core/TableHead';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,9 +17,13 @@ import TableCell from '@material-ui/core/TableCell';
 const PropsBar = ({ classes }) => (
   <div className={classes.rightBar}>
     <Table>
-      <Typography>
-        Properties&nbsp;Table
-      </Typography>
+      <TableHead>
+      <TableCell>
+        <Typography>
+          Properties&nbsp;Table
+        </Typography>
+        </TableCell>
+      </TableHead>
       <TableBody>
         <TableRow/>
         <TableRow>
