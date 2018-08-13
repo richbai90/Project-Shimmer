@@ -24,6 +24,7 @@ const styles = theme => ({
   },
   canvas: {
     extend: 'grow',
+    display: 'flex',
   },
   rightBar: {
     width: '250px',
