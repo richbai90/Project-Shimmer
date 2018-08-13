@@ -7,14 +7,25 @@ import PropsBar from './propsBar';
 
 const Builder = ({
   classes,
+  items,
+  drawerFilterAction,
+  openDrawerAction,
+  closeDrawerAction,
+  isOpen,
   // cursor,
   // componentMap,
   // templates,
   // loadingTemplates,
 }) => (
   <div className={classes.root}>
-        <LeftBar classes={classes}/>
-        <Canvas classes={ classes } />
+        <LeftBar items={items}
+          open={isOpen}
+          openDrawerAction={openDrawerAction}
+          closeDrawerAction={closeDrawerAction}
+          drawerFilterAction={drawerFilterAction}
+          classes={classes}
+        />
+        <Canvas classes={classes} />
         <PropsBar classes={classes}/>
     {/* <Templates/> */}
   </div>

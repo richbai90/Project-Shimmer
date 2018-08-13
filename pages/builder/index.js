@@ -8,31 +8,10 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { loadTemplate } from './redux/actions/templates';
 import Builder from './components';
-
-const styles = theme => ({
-  grow: { ...theme.helpers.grow },
-  root: {
-    display: 'flex',
-    ...theme.helpers.vh100,
-  },
-  canvasBackground: {
-    display: 'flex',
-    background: theme.palette.grey['300'],
-    padding: theme.spacing.unit * 2,
-    paddingBottom: '9vh',
-    extend: 'grow',
-  },
-  canvas: {
-    extend: 'grow',
-    display: 'flex',
-  },
-  rightBar: {
-    width: '250px',
-    fontSize: '.75em',
-    margin: theme.spacing.unit,
-  },
-
-});
+// import {
+//   open as openDrawerAction, close as closeDrawerAction,
+//   filter as drawerFilterAction,
+// } from './redux/actions/drawer';
 
 const mapStateToProps = ({ builder }) => {
   const { componentMap, componentTree } = builder.page;
@@ -40,16 +19,29 @@ const mapStateToProps = ({ builder }) => {
     available: templates,
     loading: loadingTemplates,
   } = builder.templates;
+  // const {
+  //   isOpen,
+  //   activeItem,
+  //   items,
+  // } = builder.drawer;
   return {
     componentMap,
     componentTree,
     templates,
     loadingTemplates,
+    // openDrawerAction,
+    // closeDrawerAction,
+    // isOpen,
+    // activeItem,
+    // items,
   };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadTemplate,
+  // openDrawerAction,
+  // closeDrawerAction,
+  // drawerFilterAction,
 }, dispatch);
 
 class BuilderPage extends React.Component {
@@ -57,23 +49,41 @@ class BuilderPage extends React.Component {
     const buttons = [
       {
         text: 'New',
+        key: 'AppBarNew',
+        icon: 'AddBoxIcon',
+        title: 'add_box',
         click: loadTemplate('withLeftMenu'),
       },
       {
         text: 'Save',
-        click: () => console.log('hello'),
+        key: 'AppBarSave',
+        icon: 'SaveIcon',
+        title: 'save',
+        // click: () => console.log('hello'),
       },
       {
         text: 'Copy',
+        key: 'AppBarCopy',
+        icon: 'FileCopyIcon',
+        title: 'file_copy',
       },
       {
         text: 'Delete',
+        key: 'AppBarDelete',
+        icon: 'DeleteIcon',
+        title: 'delete',
       },
       {
         text: 'Undo',
+        key: 'AppBarUndo',
+        icon: 'UndoIcon',
+        title: 'undo',
       },
       {
         text: 'Redo',
+        key: 'AppBarRedo',
+        icon: 'RedoIcon',
+        title: 'redo',
       },
     ];
     return {
@@ -92,14 +102,24 @@ class BuilderPage extends React.Component {
       classes,
       templates,
       loadingTemplates,
-
+      drawer,
+      items,
+      isOpen,
+      openDrawerAction,
+      closeDrawerAction,
+      drawerFilterAction,
     } = this.props;
 
     return (
       <Builder
         classes={classes}
+        // openDrawerAction={openDrawerAction}
+        // closeDrawerAction={closeDrawerAction}
         templates={templates}
         loadingTemplates={loadingTemplates}
+      //   drawerFilterAction={drawerFilterAction}
+      //   items={items}
+      //   open={isOpen}
       />
     );
   }
@@ -107,11 +127,40 @@ class BuilderPage extends React.Component {
 
 BuilderPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  // open: PropTypes.bool.isRequired,
   // handleOpen: PropTypes.func.isRequired,
   // handleClose: PropTypes.func.isRequired,
-  handleMenuItemDrag: PropTypes.func.isRequired,
+  // handleMenuItemDrag: PropTypes.func.isRequired,
 };
+
+const styles = theme => ({
+  grow: { ...theme.helpers.grow },
+  root: {
+    display: 'flex',
+    ...theme.helpers.vh100,
+  },
+  icon: {
+    marginRight: 0,
+  },
+  // leftBarDrawer: {
+  //   zIndex: theme.zIndex.appBar - 1,
+  // },
+
+  canvasBackground: {
+    display: 'flex',
+    background: theme.palette.grey['300'],
+    padding: theme.spacing.unit * 2,
+    paddingBottom: '9vh',
+    extend: 'grow',
+  },
+  canvas: {
+    extend: 'grow',
+  },
+  rightBar: {
+    width: '250px',
+    fontSize: '.75em',
+    margin: theme.spacing.unit,
+  },
+});
 
 export default compose(
   withStyles(styles),

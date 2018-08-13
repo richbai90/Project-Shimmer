@@ -6,13 +6,13 @@ import AppBar from './AppBar';
 
 
 const ActionMenu = ({ dispatch, ...props }) => {
-  const buttons = props.buttons.map(
-    (button) => {
-      return button.click ? { ...button, click: () => dispatch({ ...button.click }) } : button;
-    },
-  );
-  return <AppBar {...props} buttons={buttons} />
-}
+  const buttons = props.buttons.map(button => (
+    button.click
+      ? { ...button, click: () => dispatch({ ...button.click }) }
+      : button
+  ));
+  return <AppBar {...props} buttons={buttons} />;
+};
 
 
 ActionMenu.propTypes = {
