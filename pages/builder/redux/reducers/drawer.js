@@ -29,9 +29,9 @@ const setFilter = (initialState, filter) => {
 export default (state = defaultState, { payload, type }) => {
   switch (type) {
     case OPEN_DRAWER:
-      return Object.assign({}, state, { isOpen: payload });
+      return Object.assign({}, state, { ...payload });
     case CLOSE_DRAWER:
-      return Object.assign({}, state, { isOpen: payload });
+      return Object.assign({}, state, { ...payload });
     case SET_DRAWER_FILTER:
       return setFilter(state, payload.filter);
     default:

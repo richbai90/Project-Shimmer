@@ -1,12 +1,12 @@
 // import Link from 'next/link';
 import { Fragment } from 'react';
 import propTypes from 'prop-types';
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@root/components/Drawer';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Tooltip from '@material-ui/core/Tooltip';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import shortid from 'shortid';
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
@@ -26,6 +26,7 @@ const DrawerItems = ({ items }) => (
             <MenuItem
             name={name}
             value={value}
+            key={shortid.generate()}
             >{name}
             </MenuItem>
           );
@@ -36,8 +37,7 @@ const DrawerItems = ({ items }) => (
 );
 
 const handleMenuClick = (clickHandler, filterValue) => (
-  (e) => {
-    window.clickHandler = clickHandler;
+  () => {
     clickHandler(filterValue);
   }
 );
@@ -97,22 +97,21 @@ const leftBar = ({
         </ListItemIcon>
       </MenuItem>
     </MenuList>
-    <ClickAwayListener onClickAway={loadDrawerComponentsAction} >
       <Drawer
-        classes={{ paper: isOpen === true ? classes.drawerPaper : classes.drawerPaperClose }}
+        classes={{ paper: classes.drawerPaper }}
         variant="persistent"
         className={classes.leftBarDrawer}
         open={isOpen}
+        onClickAway={loadDrawerComponentsAction}
       >
         <DrawerItems items={items}/>
       </Drawer>
-    </ClickAwayListener>
   </Fragment>
 );
 
 leftBar.propTypes = {
   classes: propTypes.object.isRequired,
-  items: propTypes.object.isRequired,
+  items: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 export default leftBar;

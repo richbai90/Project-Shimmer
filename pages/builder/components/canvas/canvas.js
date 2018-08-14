@@ -6,7 +6,7 @@ const Canvas = ({
   classes,
   tree: Tree,
 }) => (
-  <div className={classes.canvasBackground}>
+  <div className={classes.canvasBackground} id="canvas">
     <Paper elevation={6} className={classes.canvas}>
         { Tree ? <Tree /> : null }
     </Paper>

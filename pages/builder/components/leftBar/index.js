@@ -45,14 +45,14 @@ const styles = theme => ({
     marginRight: 0,
   },
   leftBarDrawer: {
-    width: '0',
-    // zIndex: '1100',
+    width: 0,
   },
   drawerPaper: {
     display: 'flex',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: 'fit-content',
+    zIndex: 1000,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
