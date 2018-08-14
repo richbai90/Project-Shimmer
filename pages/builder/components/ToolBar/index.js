@@ -3,22 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
-import LeftBarComponent from './leftBar';
 
-import { loadDrawerComponentsAction } from '../../redux/actions/drawer';
+import ToolBarComponent from './ToolBar';
+import { loadComponentDetailsAction, closeDrawerAction } from '../../redux/actions/drawer';
 
-class LeftBar extends Component {
-
+class ToolBar extends Component {
   render() {
-    // const {
-    //   items,
-    //   isOpen,
-    //   openDrawerAction,
-    //   closeDrawerAction,
-    //   drawerFilterAction,
-    // } = this.props;
     return (
-      <LeftBarComponent {...this.props}/>
+      <ToolBarComponent {...this.props}/>
     );
   }
 }
@@ -45,23 +37,28 @@ const styles = theme => ({
   icon: {
     marginRight: 0,
   },
-  leftBarDrawer: {
+  toolBarDrawer: {
     width: 0,
+  },
+  toolBar: {
+    zIndex: theme.zIndex.appBar - 1,
+    background: theme.palette.common.white,
   },
   drawerPaper: {
     display: 'flex',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: 'fit-content',
-    zIndex: 1000,
+    zIndex: theme.zIndex.appBar - 2,
   },
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  loadDrawerComponentsAction,
+  loadComponentDetailsAction,
+  closeComponentDetailsAction: closeDrawerAction,
 }, dispatch);
 
 export default compose(
-  withStyles(styles),
   connect(mapStateToProps, mapDispatchToProps),
-)(LeftBar);
+  withStyles(styles),
+)(ToolBar);

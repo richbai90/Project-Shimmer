@@ -18,7 +18,7 @@ export const closeDrawerAction = () => ({
   payload: { isOpen: false },
 });
 
-export const loadDrawerComponentsAction = filterText => ({
+export const loadComponentDetailsAction = filterText => ({
   type: LOAD_DRAWER_COMPONENTS,
   payload: { filter: filterText },
 });

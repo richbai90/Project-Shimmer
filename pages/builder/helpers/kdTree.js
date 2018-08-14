@@ -3,7 +3,7 @@
 /* eslint no-shadow: "off" */
 /* eslint prefer-const: "off" */
 /* eslint no-use-before-define: "off" */
-
+/* eslint no-constant-condition: "off" */
 function Node(obj, dimension, parent) {
   this.obj = obj;
   this.left = null;
