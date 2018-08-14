@@ -49,7 +49,7 @@ const leftBar = ({
   isOpen = false,
 }) => (
   <Fragment>
-    <MenuList>
+    <MenuList className={classes.leftBar}>
       <MenuItem
         onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
         <Tooltip title="Templates" placement="right">
@@ -61,40 +61,38 @@ const leftBar = ({
       <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'shapes')} >
         <Tooltip title="Shapes" placement="right">
           <ListItemIcon className={classes.icon}>
-            <CropSquareIcon
-              value='shapes'
-            />
+            <CropSquareIcon value='shapes' />
+          </ListItemIcon>
+        </Tooltip>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
+        <Tooltip title="Labels" placement="right">
+          <ListItemIcon className={classes.icon} >
+            <TextFormatIcon value='label'/>
+          </ListItemIcon>
+        </Tooltip>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'inputFields')} >
+        <Tooltip title="Input Fields" placement="right">
+        <ListItemIcon className={classes.icon}>
+            <FormatShapesIcon value='inputFields' />
             </ListItemIcon>
         </Tooltip>
       </MenuItem>
       <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
-        <ListItemIcon >
-          <Tooltip title="Labels" placement="right">
-            <TextFormatIcon className={classes.icon} />
-          </Tooltip>
-        </ListItemIcon>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'inputFields')} >
-        <ListItemIcon className={classes.icon}>
-          <Tooltip title="Input Fields" placement="right">
-            <FormatShapesIcon value='inputFields' />
-          </Tooltip>
-        </ListItemIcon>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadDrawerComponentsAction, 'none')} >
-        <ListItemIcon className={classes.icon}>
-          <Tooltip title="Tables" placement="right">
+        <Tooltip title="Tables" placement="right">
+          <ListItemIcon className={classes.icon}>
             <TableChartIcon />
-          </Tooltip>
-        </ListItemIcon>
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
       <MenuItem onClick={loadDrawerComponentsAction} >
-        <ListItemIcon className={classes.icon}>
-          <Tooltip title="Buttons" placement="right">
+        <Tooltip title="Buttons" placement="right">
+          <ListItemIcon className={classes.icon}>
             <PlayCircleFilledIcon
             />
-          </Tooltip>
-        </ListItemIcon>
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
     </MenuList>
       <Drawer

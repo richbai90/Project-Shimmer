@@ -41,21 +41,26 @@ const styles = theme => ({
     display: 'flex',
     ...theme.helpers.vh100,
   },
+
   icon: {
     marginRight: 0,
   },
+  leftBar: {
+    // zIndex: '1001',
+  },
   leftBarDrawer: {
-    width: 0,
+    width: 'auto',
+    zIndex: '0',
   },
   drawerPaper: {
     display: 'flex',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: 'fit-content',
-    zIndex: 1000,
+    zIndex: '0',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      // duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerPaperClose: {
@@ -65,7 +70,6 @@ const styles = theme => ({
     zIndex: '1000',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.leavingScreen,
     }),
   },
 });
