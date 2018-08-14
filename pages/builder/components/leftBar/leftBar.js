@@ -6,10 +6,7 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Tooltip from '@material-ui/core/Tooltip';
-// import Typography from '@material-ui/core/Typography';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
-
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
@@ -17,15 +14,13 @@ import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
-// when an button is pressed, pops out with options, and title like "draw shape:"
-
 const DrawerItems = ({ items }) => (
     <Fragment>
       <MenuList>
       {
         items.map((item) => {
           const {
-            name, value, // parent,
+            name, value,
           } = item;
           return (
             <MenuItem
@@ -39,31 +34,19 @@ const DrawerItems = ({ items }) => (
       </MenuList>
     </Fragment>
 );
+
 const handleMenuClick = (clickHandler, filterValue) => (
   (e) => {
-    window.clickHandler = clickHandler
+    window.clickHandler = clickHandler;
     clickHandler(filterValue);
   }
 );
-
-const checkVisibility = (x) => {
-  console.log('checkVisibility fired');
-  return (
-    x !== true ? 'none' : ''
-  )
-};
-
-// const closeDrawer = () => {
-//   console.log('something leftbar.js');
-// }
 
 const leftBar = ({
   classes,
   loadDrawerComponentsAction,
   items = null,
   isOpen = false,
-  // handleMenuItemDrag,
-  // draggingItem,
 }) => (
   <Fragment>
     <MenuList>
@@ -129,7 +112,6 @@ const leftBar = ({
 
 leftBar.propTypes = {
   classes: propTypes.object.isRequired,
-  // setDrawerFilter: propTypes.object.isRequired,
   items: propTypes.object.isRequired,
 };
 

@@ -8,7 +8,6 @@ import LeftBarComponent from './leftBar';
 import { loadDrawerComponentsAction } from '../../redux/actions/drawer';
 
 class LeftBar extends Component {
-
   render() {
     // const {
     //   items,
@@ -66,7 +65,7 @@ const styles = theme => ({
     zIndex: '1000',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.leavingScreen,
     }),
   },
 });
