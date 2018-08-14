@@ -18,11 +18,13 @@ const PropsBar = ({ classes }) => (
   <div className={classes.rightBar}>
     <Table>
       <TableHead>
+        <TableRow>
       <TableCell>
         <Typography>
           Properties&nbsp;Table
         </Typography>
         </TableCell>
+        </TableRow>
       </TableHead>
       <TableBody>
         <TableRow/>

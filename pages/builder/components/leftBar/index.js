@@ -46,28 +46,14 @@ const styles = theme => ({
     marginRight: 0,
   },
   leftBarDrawer: {
-    width: '0',
-    // zIndex: '1100',
+    width: 0,
   },
   drawerPaper: {
     display: 'flex',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: 'fit-content',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    display: 'flex',
-    position: 'relative',
-    width: 'fit-content',
-    zIndex: '1000',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    zIndex: 1000,
   },
 });
 
