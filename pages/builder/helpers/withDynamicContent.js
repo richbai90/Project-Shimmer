@@ -65,8 +65,6 @@ const withDynamicContent = (
         this.kdTree.insert({ ...getTopLeft(ref[0].current), tree: { ...ref[1] }, ref: ref[0] });
         this.kdTree.insert({ ...getBottomRight(ref[0].current), tree: { ...ref[1] }, ref: ref[0] });
       });
-      // for debugging purposes only
-      window.kd = this.kdTree;
     }
 
     prepForRender(treeSegment, renderInCanvas = false, parseStyles = true, parent = null) {

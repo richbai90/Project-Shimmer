@@ -2,15 +2,20 @@ import { clone } from 'lodash';
 import { OPEN_DRAWER, CLOSE_DRAWER, SET_DRAWER_FILTER } from '../types/drawer';
 
 const items = [
-  { name: 'Input Fields', value: 'headding', parent: 'inputFields' },
+  { name: 'Input Fields', value: 'heading', parent: 'inputFields' },
+  { name: 'Text Input', value: 'subheading', parent: 'inputFields' },
   { name: 'Textbox', value: 'textbox', parent: 'inputFields' },
   { name: 'Multiline', value: 'multiline', parent: 'inputFields' },
+
+  { name: ' ', value: 'subheading', parent: 'inputFields' },
   { name: 'Drop down Menu', value: 'Drop down Menu', parent: 'inputFields' },
   { name: 'Radio box', value: 'radio box', parent: 'inputFields' },
   { name: 'Checkbox', value: 'checkbox', parent: 'inputFields' },
-  { name: 'Shapes', value: 'headding', parent: 'shapes' },
-  { name: 'Box Container', value: 'boxContainer', parent: 'shapes' },
+
+  { name: 'Shapes', value: 'heading', parent: 'shapes' },
   { name: 'Line', value: 'line', parent: 'shapes' },
+  { name: 'Containers', value: 'subheading', parent: 'shapes' },
+  { name: 'Box Container', value: 'boxContainer', parent: 'shapes' },
 ];
 
 const defaultState = {

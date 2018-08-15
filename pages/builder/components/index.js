@@ -1,7 +1,7 @@
 // import Link from 'next/link';
 import propTypes from 'prop-types';
-import LeftBar from './leftBar';
-import Canvas from './canvas';
+import ToolBar from './ToolBar';
+import Canvas from './Canvas';
 import PropsBar from './propsBar';
 
 
@@ -19,7 +19,7 @@ const Builder = ({
   // loadingTemplates,
 }) => (
   <div className={classes.root}>
-        <LeftBar items={items}
+        <ToolBar items={items}
           open={isOpen}
           filterValue = {filterValue}
           openDrawerAction={openDrawerAction}
@@ -36,7 +36,7 @@ const Builder = ({
 Builder.propTypes = {
   classes: propTypes.shape({
     appbar: propTypes.string,
-    leftbar: propTypes.string,
+    toolbar: propTypes.string,
     takespace: propTypes.string,
     rightbar: propTypes.string,
     index: propTypes.string,
