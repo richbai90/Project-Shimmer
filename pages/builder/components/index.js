@@ -11,6 +11,7 @@ const Builder = ({
   drawerFilterAction,
   openDrawerAction,
   closeDrawerAction,
+  filterValue,
   isOpen,
   // cursor,
   // componentMap,
@@ -20,6 +21,7 @@ const Builder = ({
   <div className={classes.root}>
         <LeftBar items={items}
           open={isOpen}
+          filterValue = {filterValue}
           openDrawerAction={openDrawerAction}
           closeDrawerAction={closeDrawerAction}
           drawerFilterAction={drawerFilterAction}

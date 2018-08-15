@@ -1,12 +1,5 @@
 import Drawer from '@material-ui/core/Drawer';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-// import {Fragment} from 'react';
-
-// const Preview = () => {
-//   <Fragment>
-//   blah
-//   <Fragment/>
-// }
 
 export default ({
   onClickAway,

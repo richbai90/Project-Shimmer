@@ -6,6 +6,8 @@ import compose from 'recompose/compose';
 import LeftBarComponent from './leftBar';
 
 import { loadDrawerComponentsAction } from '../../redux/actions/drawer';
+// import { setActiveItem } from '../../redux/actions/component-state';
+
 
 class LeftBar extends Component {
   render() {
@@ -25,11 +27,13 @@ class LeftBar extends Component {
 const mapStateToProps = ({ builder }) => {
   const {
     isOpen,
+    filterValue,
     activeItem,
     items,
   } = builder.drawer;
   return {
     isOpen,
+    filterValue,
     activeItem,
     items,
   };
@@ -41,7 +45,10 @@ const styles = theme => ({
     display: 'flex',
     ...theme.helpers.vh100,
   },
-
+  header: {
+    fontSize: '1.5em',
+    textAlign: 'center',
+  },
   icon: {
     marginRight: 0,
   },
@@ -50,7 +57,7 @@ const styles = theme => ({
   },
   leftBarDrawer: {
     width: 'auto',
-    zIndex: '0',
+    // zIndex: '0',
   },
   drawerPaper: {
     display: 'flex',
@@ -76,6 +83,7 @@ const styles = theme => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadDrawerComponentsAction,
+  // setActiveItem,
 }, dispatch);
 
 export default compose(

@@ -105,6 +105,7 @@ class BuilderPage extends React.Component {
       drawer,
       items,
       isOpen,
+      filterValue,
       openDrawerAction,
       closeDrawerAction,
       drawerFilterAction,
