@@ -73,7 +73,7 @@ const styles = theme => ({
     // backgroundColor: theme.palette.primary.light,
     // backgroundColor: theme.palette.grey[800],
     background: 'rgba 66, 165, 245, .10',
-    border: '.5px solid #c1c1c1',
+    borderLeft: '.5px solid #c1c1c1',
     // borderLeft: '3px solid #42A5F5',
     boxShadow: '2px 5px 9px #c1c1c1', // janky solution to make drawer 'appear' over canvas paper.
     height: 'fit-content',
