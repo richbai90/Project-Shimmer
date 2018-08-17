@@ -16,11 +16,23 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 //
 // import Card from '@material-ui/core/Card';
 
-const DraggableItem = ({ name, classes }) => {
+const handleItemClick = (clickHandler, itemID) => () => {
+  console.log(itemID);
+  clickHandler(itemID);
+};
+
+const DraggableItem = ({
+  setActiveItem,
+  name,
+  id,
+  classes,
+}) => {
   switch (name) {
     case 'Box Container':
       return (
-        <Card>{name}</Card>
+        <Card
+          onClick={handleItemClick(setActiveItem, id)}
+        >{name}</Card>
       );
     case 'Line':
       return (

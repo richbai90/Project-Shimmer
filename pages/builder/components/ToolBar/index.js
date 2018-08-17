@@ -6,6 +6,7 @@ import compose from 'recompose/compose';
 
 import ToolBarComponent from './ToolBar';
 import { loadComponentDetailsAction, closeDrawerAction } from '../../redux/actions/drawer';
+import { setActiveItem } from '../../redux/actions/component-state';
 
 class ToolBar extends Component {
   render() {
@@ -112,6 +113,7 @@ const styles = theme => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadComponentDetailsAction,
   closeComponentDetailsAction: closeDrawerAction,
+  setActiveItem,
 }, dispatch);
 
 export default compose(

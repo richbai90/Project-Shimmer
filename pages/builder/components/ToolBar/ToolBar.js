@@ -18,11 +18,20 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 import DraggableItem from './draggableItem';
 
+const handleMenuClick = (clickHandler, filterValue) => () => {
+  clickHandler(filterValue);
+};
+
+const handleItemClick = (clickHandler, itemID) => () => {
+  console.log(itemID);
+  clickHandler(itemID);
+};
+
 const DrawerItems = ({ items, classes }) => (
     <Fragment>
       <MenuList>
       {items.map((item) => {
-        const { name, value } = item;
+        const { name, value, id } = item;
         if (value === 'heading') {
           return (
             <div>
@@ -50,12 +59,16 @@ const DrawerItems = ({ items, classes }) => (
               name={name}
               value={value}
               className={classes.drawerItems}
-
               key={shortid.generate()}
               draggable
               // onDrag={handleItemDrag({ value })}
             >
-              <DraggableItem name={name} classes={classes}/>
+              <DraggableItem
+                id={id}
+                name={name}
+                classes={classes}
+                onClick={handleItemClick(setActiveItem, id)}
+              />
             </MenuItem>
             {/* <Divider light/> */}
           </div>
@@ -67,6 +80,7 @@ const DrawerItems = ({ items, classes }) => (
 );
 
 DrawerItems.propTypes = {
+  classes: propTypes.object,
   items: propTypes.arrayOf(
     propTypes.shape({
       name: propTypes.string,
@@ -75,14 +89,12 @@ DrawerItems.propTypes = {
   ),
 };
 
-const handleMenuClick = (clickHandler, filterValue) => () => {
-  clickHandler(filterValue);
-};
-
 const ToolBar = ({
+  activeItem = '',
   classes,
   loadComponentDetailsAction,
   closeComponentDetailsAction,
+  setActiveItem,
   items = null,
   isOpen = false,
 }) => (
@@ -138,12 +150,20 @@ const ToolBar = ({
       open={isOpen}
       onClickAway={closeComponentDetailsAction}
     >
-      <DrawerItems className={classes.drawerItems} items={items} classes={classes} />
+      <DrawerItems
+        className={classes.drawerItems}
+        setActiveItem = {setActiveItem}
+        activeItem = {activeItem}
+        items={items}
+        classes={classes}
+      />
     </Drawer>
   </Fragment>
 );
 
 ToolBar.propTypes = {
+  activeItem: propTypes.object.isRequired,
+  setActiveItem: propTypes.func.isRequired,
   classes: propTypes.object.isRequired,
   loadComponentDetailsAction: propTypes.func.isRequired,
   closeComponentDetailsAction: propTypes.func.isRequired,
