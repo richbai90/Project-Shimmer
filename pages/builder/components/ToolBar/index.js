@@ -36,10 +36,19 @@ const styles = theme => ({
     display: 'flex',
     ...theme.helpers.vh100,
   },
+  highlightTool: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
   header: {
-    marginLeft: theme.spacing.unit,
+    // marginLeft: theme.spacing.unit,
     fontSize: '1.5em',
-    // textAlign: 'center',
+    margin: 0,
+    textAlign: 'center',
   },
   subheader: {
     fontSize: '.75em',
@@ -56,17 +65,47 @@ const styles = theme => ({
     width: 0,
   },
   toolBar: {
-    zIndex: theme.zIndex.appBar - 1,
+    zIndex: theme.zIndex.appBar + 1,
     background: theme.palette.common.white,
+    // backgroundColor: theme.palette.grey[150],
   },
   drawerPaper: {
     // backgroundColor: theme.palette.primary.light,
-    backgroundColor: theme.palette.grey[50],
+    // backgroundColor: theme.palette.grey[800],
+    background: 'rgba 66, 165, 245, .10',
+    border: '.5px solid #c1c1c1',
+    // borderLeft: '3px solid #42A5F5',
+    boxShadow: '2px 5px 9px #c1c1c1', // janky solution to make drawer 'appear' over canvas paper.
+    height: 'fit-content',
+    radius: '5px',
+    // marginLeft: '4px',
+    // marginTop: '4px',
     display: 'flex',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: 'fit-content',
-    zIndex: theme.zIndex.appBar - 2,
+    zIndex: theme.zIndex.appBar,
+  },
+  drawerItems: {
+    height: 'auto',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  submitButton: {
+    marginLeft: '4px',
+    marginRight: '4px',
+    color: 'white',
+    backgroundColor: '#4CAF50',
+    '&:hover': {
+      backgroundColor: '#388E3C',
+    },
+  },
+  button: {
+    marginLeft: '4px',
+    marginRight: '4px',
   },
 });
 

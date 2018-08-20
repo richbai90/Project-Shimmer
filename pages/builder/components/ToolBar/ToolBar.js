@@ -15,8 +15,6 @@ import TextFormatIcon from '@material-ui/icons/TextFormat';
 import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-
-
 import DraggableItem from './DraggableItem';
 
 const DrawerItems = ({ items, classes }) => (
@@ -27,7 +25,7 @@ const DrawerItems = ({ items, classes }) => (
         if (value === 'heading') {
           return (
             <div>
-              <Typography className={classes.header}>
+              <Typography style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }} className={classes.header}>
                 {name}
               </Typography>
               <Divider/>
@@ -50,13 +48,19 @@ const DrawerItems = ({ items, classes }) => (
             <MenuItem
               name={name}
               value={value}
+              className={classes.drawerItems}
+
               key={shortid.generate()}
               draggable
               // onDrag={handleItemDrag({ value })}
             >
               <DraggableItem name={name} classes={classes}/>
             </MenuItem>
+<<<<<<< HEAD
             { /* <Divider light/> */ }
+=======
+            {/* <Divider light/> */}
+>>>>>>> a36fffe481145280b10e46ce094966f4199a7f86
           </div>
         );
       })
@@ -92,61 +96,47 @@ const ToolBar = ({
 }) => (
   <Fragment>
     <MenuList className={classes.toolBar}>
-      <MenuItem onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
-        <Fragment>
-          <Tooltip title="Templates" placement="right">
-            <ListItemIcon className={classes.icon}>
-              <CreateIcon />
-            </ListItemIcon>
-          </Tooltip>
-        </Fragment>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
+        <Tooltip title="Templates" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <CreateIcon />
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadComponentDetailsAction, 'shapes')}>
-        <Fragment>
-          <Tooltip title="Shapes" placement="right">
-            <ListItemIcon className={classes.icon}>
-              <CropSquareIcon value="shapes" />
-            </ListItemIcon>
-          </Tooltip>
-        </Fragment>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'shapes')}>
+        <Tooltip title="Shapes" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <CropSquareIcon value="shapes" />
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
-        <ListItemIcon>
-          <Fragment>
-            <Tooltip title="Labels" placement="right">
-              <TextFormatIcon className={classes.icon} />
-            </Tooltip>
-          </Fragment>
-        </ListItemIcon>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'text')}>
+        <Tooltip title="Text" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <TextFormatIcon value='text'/>
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
-      <MenuItem
-        onClick={handleMenuClick(loadComponentDetailsAction, 'inputFields')}
-      >
-        <ListItemIcon className={classes.icon}>
-          <Fragment>
-            <Tooltip title="Input Fields" placement="right">
-              <FormatShapesIcon value="inputFields" />
-            </Tooltip>
-          </Fragment>
-        </ListItemIcon>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'inputFields')}>
+        <Tooltip title="Input Fields" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <FormatShapesIcon value="inputFields" />
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
-        <ListItemIcon className={classes.icon}>
-          <Fragment>
-            <Tooltip title="Tables" placement="right">
-              <TableChartIcon />
-            </Tooltip>
-          </Fragment>
-        </ListItemIcon>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
+        <Tooltip title="Tables" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <TableChartIcon />
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
-      <MenuItem onClick={handleMenuClick(loadComponentDetailsAction, 'buttons')}>
-        <ListItemIcon className={classes.icon}>
-          <Fragment>
-            <Tooltip title="Buttons" placement="right">
-              <PlayCircleFilledIcon />
-            </Tooltip>
-          </Fragment>
-        </ListItemIcon>
+      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'buttons')}>
+        <Tooltip title="Buttons" placement="right">
+          <ListItemIcon className={classes.icon}>
+            <PlayCircleFilledIcon value="buttons"/>
+          </ListItemIcon>
+        </Tooltip>
       </MenuItem>
     </MenuList>
     <Drawer
@@ -156,7 +146,7 @@ const ToolBar = ({
       open={isOpen}
       onClickAway={closeComponentDetailsAction}
     >
-      <DrawerItems items={items} classes={classes} />
+      <DrawerItems className={classes.drawerItems} items={items} classes={classes} />
     </Drawer>
   </Fragment>
 );

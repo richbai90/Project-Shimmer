@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
 
-import CanvasComponent from './canvas';
+import CanvasComponent from './Canvas';
 
 
 const Canvas = props => (
@@ -29,6 +29,7 @@ const styles = theme => ({
   canvas: {
     extend: 'grow',
     display: 'flex',
+    // zIndex: theme.zIndex.appBar - 100,
   },
 });
 
