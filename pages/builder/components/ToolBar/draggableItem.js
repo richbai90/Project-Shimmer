@@ -22,8 +22,26 @@ const handleItemClick = (clickHandler, itemID) => () => {
   clickHandler(itemID);
 };
 
+const handleDragStart = (clickHandler, itemID, dragging) => (
+  (e) => {
+    clickHandler(itemID, dragging)
+    console.log('log drag Start: ', clickHandler, itemID, dragging);
+  }
+
+
+);
+
+const handleDragEnd = (clickHandler, itemID, dragging) => (
+  (e) => {
+    clickHandler(itemID, dragging)
+    console.log('log drag end: ', clickHandler, itemID, dragging);
+  }
+
+
+);
+
 const DraggableItem = ({
-  setActiveItem,
+  selectActiveItem,
   name,
   id,
   classes,
@@ -32,7 +50,9 @@ const DraggableItem = ({
     case 'Box Container':
       return (
         <Card
-          onClick={handleItemClick(setActiveItem, id)}
+          onClick={handleItemClick(selectActiveItem, id)}
+          onDragStart={handleDragStart(selectActiveItem, id, true)}
+          onDragEnd={handleDragEnd(selectActiveItem, id, false)}
         >{name}</Card>
       );
     case 'Line':
@@ -56,7 +76,7 @@ const DraggableItem = ({
             id="multiline-flexible"
             label="Multiline"
             multiline
-            rowsMax="4"
+            rowsMax="2"
             className={classes.textField}
             margin="normal"
           />
@@ -77,7 +97,7 @@ const DraggableItem = ({
                 className: classes.menu,
               },
             }}
-            autoWidth='true'
+            autowidth='true'
             // helpertext="Dropdown Menu Options"
             margin='normal'
           >{name}
@@ -182,10 +202,10 @@ const DraggableItem = ({
     case 'Icon Button':
       return (
         <div>
-          <Button variant="fab" mini color="secondary" labelPlacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
+          <Button variant="fab" mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
             <DeleteIcon />
           </Button>
-          <Button mini color="secondary" labelPlacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
+          <Button mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
             <DeleteIcon />
           </Button>
         </div>

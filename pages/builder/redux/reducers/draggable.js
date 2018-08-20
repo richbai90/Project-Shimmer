@@ -6,9 +6,9 @@ const defaultState = {
   dragging: false,
 };
 
-const setActiveItem = (initialState, { item }) => {
+const setActiveItem = (initialState, { activeItem }) => {
   const newState = clone(initialState);
-  newState.activeItem = item;
+  newState.activeItem = activeItem;
   return newState;
 };
 
@@ -20,7 +20,7 @@ export default (state = defaultState, { type, payload }) => {
       return setActiveItem(state, payload);
     case START_DRAGGING:
     case END_DRAGGING:
-      return toggleDragging(payload);
+      return toggleDragging(state, payload);
     default:
       return state;
   }

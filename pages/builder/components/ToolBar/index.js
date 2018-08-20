@@ -6,7 +6,7 @@ import compose from 'recompose/compose';
 
 import ToolBarComponent from './ToolBar';
 import { loadComponentDetailsAction, closeDrawerAction } from '../../redux/actions/drawer';
-import { setActiveItem } from '../../redux/actions/component-state';
+import { selectActiveItem } from '../../redux/actions/draggable';
 
 class ToolBar extends Component {
   render() {
@@ -41,6 +41,7 @@ const styles = theme => ({
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& $primary, & $icon': {
+      // '& $icon': {
         color: theme.palette.common.white,
       },
     },
@@ -75,20 +76,26 @@ const styles = theme => ({
     // backgroundColor: theme.palette.grey[800],
     background: 'rgba 66, 165, 245, .10',
     borderLeft: '.5px solid #c1c1c1',
+    borderRight: 0,
     // borderLeft: '3px solid #42A5F5',
     boxShadow: '2px 5px 9px #c1c1c1', // janky solution to make drawer 'appear' over canvas paper.
-    height: 'fit-content',
-    radius: '5px',
-    // marginLeft: '4px',
-    // marginTop: '4px',
     display: 'flex',
     position: 'relative',
-    whiteSpace: 'nowrap',
+    // whiteSpace: 'nowrap',
     width: 'fit-content',
     zIndex: theme.zIndex.appBar,
+    minHeight: '360px',
+    height: 'fit-content',
   },
   drawerItems: {
     height: 'auto',
+    // cursor: 'pointer',
+    // cursor: 'move',
+    cursor: 'grab',
+    '&:active': {
+      cursor: 'grabbing',
+    },
+
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -104,6 +111,15 @@ const styles = theme => ({
       backgroundColor: '#388E3C',
     },
   },
+  item: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& $primary': {
+      // '& $icon': {
+        color: '#42A5F5',
+      },
+    },
+  },
   button: {
     marginLeft: '4px',
     marginRight: '4px',
@@ -113,7 +129,7 @@ const styles = theme => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   loadComponentDetailsAction,
   closeComponentDetailsAction: closeDrawerAction,
-  setActiveItem,
+  selectActiveItem,
 }, dispatch);
 
 export default compose(

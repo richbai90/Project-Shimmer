@@ -9,6 +9,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import shortid from 'shortid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
@@ -22,13 +24,31 @@ const handleMenuClick = (clickHandler, filterValue) => () => {
 };
 
 const handleItemClick = (clickHandler, itemID) => () => {
-  console.log(itemID);
+  console.log(clickHandler);
   clickHandler(itemID);
 };
 
-const DrawerItems = ({ items, classes }) => (
+const handleDragStart = (clickHandler, itemID, dragging) => (
+  (e) => {
+    clickHandler(itemID, dragging)
+    console.log('log drag Start: ', clickHandler, ' id: ', itemID, ' dragging: ', dragging);
+  }
+
+
+);
+
+const handleDragEnd = (clickHandler, itemID, dragging) => (
+  (e) => {
+    clickHandler(itemID, dragging)
+    console.log('log drag end: ', clickHandler, itemID, dragging);
+  }
+
+
+);
+
+const DrawerItems = ({ items, classes, selectActiveItem }) => (
     <Fragment>
-      <MenuList>
+      <Grid style={{ minwidth: '250px' }}>
       {items.map((item) => {
         const { name, value, id } = item;
         if (value === 'heading') {
@@ -54,27 +74,33 @@ const DrawerItems = ({ items, classes }) => (
         }
         return (
           <div>
-            <MenuItem
+            <Grid
               name={name}
               value={value}
+              id={value}
               className={classes.drawerItems}
               key={shortid.generate()}
               draggable
-              // onDrag={handleItemDrag({ value })}
+              onClick={handleItemClick(selectActiveItem, id)}
+              style={{ width: '250px' }}
+              onDragStart={handleDragStart(selectActiveItem, id, true)}
+              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
             >
               <DraggableItem
+                className={classes.item}
                 id={id}
                 name={name}
                 classes={classes}
-                onClick={handleItemClick(setActiveItem, id)}
+                // onDragStart={handleDragStart(selectActiveItem, id, true)}
+                // onDragEnd={handleDragEnd(selectActiveItem, id, false)}
               />
-            </MenuItem>
+            </Grid>
             { /* <Divider light/> */ }
           </div>
         );
       })
       }
-      </MenuList>
+      </Grid>
     </Fragment>
 );
 
@@ -93,9 +119,10 @@ const ToolBar = ({
   classes,
   loadComponentDetailsAction,
   closeComponentDetailsAction,
-  setActiveItem,
+  setActiveItem = null,
   items = null,
   isOpen = false,
+  selectActiveItem,
 }) => (
   <Fragment>
     <MenuList className={classes.toolBar}>
@@ -151,7 +178,7 @@ const ToolBar = ({
     >
       <DrawerItems
         className={classes.drawerItems}
-        setActiveItem = {setActiveItem}
+        selectActiveItem = {selectActiveItem}
         activeItem = {activeItem}
         items={items}
         classes={classes}
