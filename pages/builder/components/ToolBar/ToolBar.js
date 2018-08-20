@@ -15,8 +15,7 @@ import TextFormatIcon from '@material-ui/icons/TextFormat';
 import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-
-import DraggableItem from './draggableItem';
+import DraggableItem from './DraggableItem';
 
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
@@ -70,7 +69,11 @@ const DrawerItems = ({ items, classes }) => (
                 onClick={handleItemClick(setActiveItem, id)}
               />
             </MenuItem>
+<<<<<<< HEAD
+            { /* <Divider light/> */ }
+=======
             {/* <Divider light/> */}
+>>>>>>> a36fffe481145280b10e46ce094966f4199a7f86
           </div>
         );
       })
@@ -87,6 +90,11 @@ DrawerItems.propTypes = {
       value: propTypes.string,
     }),
   ),
+  classes: propTypes.shape({
+    header: propTypes.string,
+    subheader: propTypes.string,
+    leftMargin: propTypes.string,
+  }),
 };
 
 const ToolBar = ({

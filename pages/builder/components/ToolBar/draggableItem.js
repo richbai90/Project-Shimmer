@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import MenuItem from '@material-ui/core/MenuItem';
+import propTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
@@ -202,4 +203,12 @@ const DraggableItem = ({
       return <Typography>Error: `{name}` preview not found.</Typography>;
   }
 };
+
+DraggableItem.propTypes = {
+  name: propTypes.string.isRequired,
+  classes: propTypes.shape({
+    marginLeft: propTypes.string,
+  }),
+};
+
 export default DraggableItem;
