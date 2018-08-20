@@ -69,11 +69,7 @@ const DrawerItems = ({ items, classes }) => (
                 onClick={handleItemClick(setActiveItem, id)}
               />
             </MenuItem>
-<<<<<<< HEAD
             { /* <Divider light/> */ }
-=======
-            {/* <Divider light/> */}
->>>>>>> a36fffe481145280b10e46ce094966f4199a7f86
           </div>
         );
       })
@@ -90,11 +86,6 @@ DrawerItems.propTypes = {
       value: propTypes.string,
     }),
   ),
-  classes: propTypes.shape({
-    header: propTypes.string,
-    subheader: propTypes.string,
-    leftMargin: propTypes.string,
-  }),
 };
 
 const ToolBar = ({
