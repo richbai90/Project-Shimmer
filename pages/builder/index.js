@@ -64,15 +64,6 @@ class BuilderPage extends React.Component {
   render() {
     const {
       classes,
-      templates,
-      loadingTemplates,
-      drawer,
-      items,
-      isOpen,
-      filterValue,
-      openDrawerAction,
-      closeDrawerAction,
-      drawerFilterAction,
     } = this.props;
 
     return (

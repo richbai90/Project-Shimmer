@@ -17,7 +17,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 
-import DraggableItem from './draggableItem';
+import DraggableItem from './DraggableItem';
 
 const DrawerItems = ({ items, classes }) => (
     <Fragment>
@@ -56,7 +56,7 @@ const DrawerItems = ({ items, classes }) => (
             >
               <DraggableItem name={name} classes={classes}/>
             </MenuItem>
-            {/*<Divider light/>*/}
+            { /* <Divider light/> */ }
           </div>
         );
       })
@@ -72,6 +72,11 @@ DrawerItems.propTypes = {
       value: propTypes.string,
     }),
   ),
+  classes: propTypes.shape({
+    header: propTypes.string,
+    subheader: propTypes.string,
+    leftMargin: propTypes.string,
+  }),
 };
 
 const handleMenuClick = (clickHandler, filterValue) => () => {

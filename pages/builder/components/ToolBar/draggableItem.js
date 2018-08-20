@@ -6,8 +6,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import propTypes from 'prop-types';
 
 
 //
@@ -98,4 +98,12 @@ const DraggableItem = ({ name, classes }) => {
       return <Typography>Error: {name} not found</Typography>;
   }
 };
+
+DraggableItem.propTypes = {
+  name: propTypes.string.isRequired,
+  classes: propTypes.shape({
+    marginLeft: propTypes.string,
+  }),
+};
+
 export default DraggableItem;
