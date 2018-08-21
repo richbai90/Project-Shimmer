@@ -112,6 +112,7 @@ const styles = theme => ({
     },
   },
   item: {
+    height: '50px',
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& $primary': {

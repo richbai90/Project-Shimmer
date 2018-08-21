@@ -22,24 +22,6 @@ const handleItemClick = (clickHandler, itemID) => () => {
   clickHandler(itemID);
 };
 
-const handleDragStart = (clickHandler, itemID, dragging) => (
-  (e) => {
-    clickHandler(itemID, dragging)
-    console.log('log drag Start: ', clickHandler, itemID, dragging);
-  }
-
-
-);
-
-const handleDragEnd = (clickHandler, itemID, dragging) => (
-  (e) => {
-    clickHandler(itemID, dragging)
-    console.log('log drag end: ', clickHandler, itemID, dragging);
-  }
-
-
-);
-
 const DraggableItem = ({
   selectActiveItem,
   name,
@@ -50,10 +32,9 @@ const DraggableItem = ({
     case 'Box Container':
       return (
         <Card
+        style={{ height: '75px', width: '75px' }}
           onClick={handleItemClick(selectActiveItem, id)}
-          onDragStart={handleDragStart(selectActiveItem, id, true)}
-          onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-        >{name}</Card>
+        ><br/><br/>{name}<br/><br/></Card>
       );
     case 'Line':
       return (

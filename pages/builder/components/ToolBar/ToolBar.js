@@ -1,6 +1,9 @@
 // import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, PropTypes } from 'react';
 import propTypes from 'prop-types';
+
+import { DragSource } from 'react-dnd'
+
 import Drawer from '@root/components/Drawer';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -30,20 +33,25 @@ const handleItemClick = (clickHandler, itemID) => () => {
 
 const handleDragStart = (clickHandler, itemID, dragging) => (
   (e) => {
-    clickHandler(itemID, dragging)
-    console.log('log drag Start: ', clickHandler, ' id: ', itemID, ' dragging: ', dragging);
+    // Make ghostPreview
+
+    // const ghostPreview = React.cloneElement(e.target, {
+    //   id: 'ghostPreview',
+    //   style: {
+    //     opacity: 0.3,
+    //     backgroundColor: 'blue',
+    //     border: '5px solid #4CAF50',
+    //   },
+    // });
+    clickHandler(itemID, dragging);
   }
-
-
 );
 
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
     clickHandler(itemID, dragging)
-    console.log('log drag end: ', clickHandler, itemID, dragging);
+    // console.log('log drag end: ', clickHandler, itemID, dragging);
   }
-
-
 );
 
 const DrawerItems = ({ items, classes, selectActiveItem }) => (
@@ -54,7 +62,12 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
         if (value === 'heading') {
           return (
             <div>
-              <Typography style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }} className={classes.header}>
+              <Typography
+                key={shortid.generate()}
+                style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }}
+                className={classes.header}
+                id={value}
+              >
                 {name}
               </Typography>
               <Divider/>
@@ -65,7 +78,10 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
           return (
             <div>
               <Divider/>
-              <Typography className={classes.subheader}>
+              <Typography
+                key={shortid.generate()}
+                className={classes.subheader}
+              >
                 {name}
               </Typography>
               <Divider/>
@@ -82,18 +98,23 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
               key={shortid.generate()}
               draggable
               onClick={handleItemClick(selectActiveItem, id)}
-              style={{ width: '250px' }}
+              style={{ width: '250px', minHeight: '90px', height: 'auto' }}
               onDragStart={handleDragStart(selectActiveItem, id, true)}
               onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-            >
+            ><Grid>
+              <Typography>
+                {name}   </Typography>
+            </Grid>
+            <Grid>
               <DraggableItem
                 className={classes.item}
                 id={id}
                 name={name}
                 classes={classes}
-                // onDragStart={handleDragStart(selectActiveItem, id, true)}
-                // onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+                onDragStart={handleDragStart(selectActiveItem, id, true)}
+                onDragEnd={handleDragEnd(selectActiveItem, id, false)}
               />
+              </Grid>
             </Grid>
             { /* <Divider light/> */ }
           </div>
@@ -104,12 +125,24 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
     </Fragment>
 );
 
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    dragging: monitor.dragging(),
+  };
+}
+
 DrawerItems.propTypes = {
+  // connectDragSource: PropTypes.func,
+  // connectDragPreview: PropTypes.func,
+  // selectActiveItem: PropTypes.func,
   classes: propTypes.object,
   items: propTypes.arrayOf(
     propTypes.shape({
       name: propTypes.string,
       value: propTypes.string,
+      key: propTypes.string,
     }),
   ),
 };
@@ -119,7 +152,7 @@ const ToolBar = ({
   classes,
   loadComponentDetailsAction,
   closeComponentDetailsAction,
-  setActiveItem = null,
+  // setActiveItem = null,
   items = null,
   isOpen = false,
   selectActiveItem,
@@ -198,3 +231,4 @@ ToolBar.propTypes = {
 };
 
 export default ToolBar;
+// export default DragSource(ToolBar);
