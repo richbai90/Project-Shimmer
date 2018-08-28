@@ -1,10 +1,8 @@
 // import Link from 'next/link';
 import { Fragment, PropTypes } from 'react';
 import propTypes from 'prop-types';
-
-import { DragSource } from 'react-dnd'
-
-import Drawer from '@root/components/Drawer';
+// import Drawer from '@root/components/Drawer';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,6 +11,8 @@ import shortid from 'shortid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import Portal from '@material-ui/core/Portal';
+import Paper from '@material-ui/core/Paper';
 
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
@@ -21,6 +21,7 @@ import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import DraggableItem from './DraggableItem';
+import { RadioButtonBlue, TriangleRightPointing } from './custom_icons/CustomIcons';
 
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
@@ -34,7 +35,6 @@ const handleItemClick = (clickHandler, itemID) => () => {
 const handleDragStart = (clickHandler, itemID, dragging) => (
   (e) => {
     // Make ghostPreview
-
     // const ghostPreview = React.cloneElement(e.target, {
     //   id: 'ghostPreview',
     //   style: {
@@ -49,22 +49,77 @@ const handleDragStart = (clickHandler, itemID, dragging) => (
 
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
-    clickHandler(itemID, dragging)
-    // console.log('log drag end: ', clickHandler, itemID, dragging);
+    console.log('words line 52');
+    const infoID = `${itemID}, ${e.target.clientHeight}, ${e.target.clientWidth}`;
+    console.log('infoID: ', infoID);
+    clickHandler(itemID, dragging);
   }
 );
 
-const DrawerItems = ({ items, classes, selectActiveItem }) => (
-    <Fragment>
-      <Grid style={{ minwidth: '250px' }}>
+const MenuListItems = ({ classes, loadComponentDetailsAction, filterValue }) => {
+  const listItems = [
+    { title: 'Shapes', value: 'shapes', icon: <CropSquareIcon/> },
+    { title: 'Text', value: 'text', icon: <TextFormatIcon/> },
+    { title: 'Input Fields', value: 'inputFields', icon: <FormatShapesIcon/> },
+    { title: 'Tables', value: 'tables', icon: <TableChartIcon/> },
+    { title: 'Buttons', value: 'buttons', icon: <PlayCircleFilledIcon/> },
+  ];
+
+  return (
+    <MenuList style={{ padding: 0, margin: 0 }}>
+      {listItems.map((listItem) => {
+        const { title, value, icon } = listItem;
+        if (value === filterValue) {
+          return (
+            <>
+              <MenuItem
+                className={ classes.highlightTool }
+                onClick={handleMenuClick(loadComponentDetailsAction, value)}
+              >
+                <Tooltip title={title} placement="right">
+                  <ListItemIcon className={ classes.icon }>
+                    {icon}
+                  </ListItemIcon>
+                </Tooltip>
+              </MenuItem>
+              {/* <div className={classes.cssTriangle}>&nbsp;</div>
+              <TriangleRightPointing className={classes.pointingTriangle}/> */}
+            </>
+          );
+        }
+        return (
+          <MenuItem
+            className={ classes.inactiveTool }
+            onClick={handleMenuClick(loadComponentDetailsAction, value)}
+          >
+            <Tooltip title={title} placement="right">
+              <ListItemIcon className={ classes.icon }>
+                {icon}
+              </ListItemIcon>
+            </Tooltip>
+          </MenuItem>
+        );
+      })}
+    </MenuList >
+  );
+};
+
+const PortalItems = ({ items, classes, selectActiveItem, activeItem }) => {
+  console.log('items: ', items, 'classes: ', classes, 'activeItem: ', activeItem);
+return (
+  <div>
+      <Grid className={classes.portal}>
       {items.map((item) => {
-        const { name, value, id } = item;
+        const {
+          name, value, id,
+          // parent,
+        } = item;
         if (value === 'heading') {
           return (
             <div>
               <Typography
                 key={shortid.generate()}
-                style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }}
+                style={{ backgroundColor: '#ffa754', color: 'white', paddingTop: '8px' }}
                 className={classes.header}
                 id={value}
               >
@@ -77,53 +132,43 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
         if (value === 'subheading') {
           return (
             <div>
-              <Divider/>
-              <Typography
-                key={shortid.generate()}
-                className={classes.subheader}
-              >
+              <Typography key={shortid.generate()} className={classes.subheader}>
                 {name}
               </Typography>
-              <Divider/>
             </div>
           );
         }
         return (
-          <div>
-            <Grid
-              name={name}
-              value={value}
-              id={value}
-              className={classes.drawerItems}
-              key={shortid.generate()}
-              draggable
-              onClick={handleItemClick(selectActiveItem, id)}
-              style={{ width: '250px', minHeight: '90px', height: 'auto' }}
-              onDragStart={handleDragStart(selectActiveItem, id, true)}
-              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-            ><Grid>
-              <Typography>
-                {name}   </Typography>
+          <Grid container
+            style={{ justifyContent: 'space-between', height: '50px' }}
+            draggable
+            name={name}
+            value={value}
+            id={value}
+            key={shortid.generate()}
+          >
+            <Grid item style={{ margin: 'auto 0 0 0' }} >
+              <Typography>{name}</Typography>
             </Grid>
-            <Grid>
+            <Grid item style={{ margin: 'auto 8px 2px 0' }} >
               <DraggableItem
                 className={classes.item}
                 id={id}
+                key={id}
                 name={name}
                 classes={classes}
+                onClick={handleItemClick(selectActiveItem, id)}
                 onDragStart={handleDragStart(selectActiveItem, id, true)}
                 onDragEnd={handleDragEnd(selectActiveItem, id, false)}
               />
-              </Grid>
             </Grid>
-            { /* <Divider light/> */ }
-          </div>
+          </Grid>
         );
-      })
-      }
+      })}
       </Grid>
-    </Fragment>
-);
+    </div>
+  );
+};
 
 function collect(connect, monitor) {
   return {
@@ -133,10 +178,9 @@ function collect(connect, monitor) {
   };
 }
 
-DrawerItems.propTypes = {
+PortalItems.propTypes = {
   // connectDragSource: PropTypes.func,
   // connectDragPreview: PropTypes.func,
-  // selectActiveItem: PropTypes.func,
   classes: propTypes.object,
   items: propTypes.arrayOf(
     propTypes.shape({
@@ -146,7 +190,7 @@ DrawerItems.propTypes = {
     }),
   ),
 };
-
+let container;
 const ToolBar = ({
   activeItem = '',
   classes,
@@ -156,73 +200,42 @@ const ToolBar = ({
   items = null,
   isOpen = false,
   selectActiveItem,
-}) => (
-  <Fragment>
-    <MenuList className={classes.toolBar}>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
-        <Tooltip title="Templates" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <CreateIcon />
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'shapes')}>
-        <Tooltip title="Shapes" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <CropSquareIcon value="shapes" />
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'text')}>
-        <Tooltip title="Text" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <TextFormatIcon value='text'/>
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'inputFields')}>
-        <Tooltip title="Input Fields" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <FormatShapesIcon value="inputFields" />
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'none')}>
-        <Tooltip title="Tables" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <TableChartIcon />
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-      <MenuItem className={classes.highlightTool} onClick={handleMenuClick(loadComponentDetailsAction, 'buttons')}>
-        <Tooltip title="Buttons" placement="right">
-          <ListItemIcon className={classes.icon}>
-            <PlayCircleFilledIcon value="buttons"/>
-          </ListItemIcon>
-        </Tooltip>
-      </MenuItem>
-    </MenuList>
-    <Drawer
-      classes={{ paper: classes.drawerPaper }}
-      variant="persistent"
-      className={classes.toolBarDrawer}
-      open={isOpen}
-      onClickAway={closeComponentDetailsAction}
-    >
-      <DrawerItems
-        className={classes.drawerItems}
-        selectActiveItem = {selectActiveItem}
-        activeItem = {activeItem}
-        items={items}
-        classes={classes}
+  filterValue,
+}) => {
+  return (
+    <ClickAwayListener onClickAway={closeComponentDetailsAction}>
+      <MenuList className={classes.toolBar}>
+        <MenuListItems
+          filterValue={filterValue}
+          classes={classes}
+          loadComponentDetailsAction = {loadComponentDetailsAction}
+        />
+      < div
+        ref={(ref) => { container = ref; }}
+        className={classes.portalContainer}
       />
-    </Drawer>
-  </Fragment>
-);
+      { isOpen && container ? (
+        <Portal
+        className={classes.portal}
+        container={container}
+        >
+          <PortalItems
+            className={classes.drawerItems}
+            selectActiveItem = {selectActiveItem}
+            activeItem = {activeItem}
+            items={items}
+            classes={classes}
+          />
+        </Portal>
+      ) : null }
+      </MenuList>
+    </ClickAwayListener>
+  );
+};
 
 ToolBar.propTypes = {
-  activeItem: propTypes.object.isRequired,
-  setActiveItem: propTypes.func.isRequired,
+  // activeItem: propTypes.object.isRequired,
+  // selectActiveItem: PropTypes.func,
   classes: propTypes.object.isRequired,
   loadComponentDetailsAction: propTypes.func.isRequired,
   closeComponentDetailsAction: propTypes.func.isRequired,

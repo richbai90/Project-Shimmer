@@ -8,7 +8,8 @@ const items = [
   { name: 'Shapes', value: 'heading', parent: 'shapes' },
   { name: 'Line', value: 'line', parent: 'shapes', id: 'drawer/line' },
   { name: 'Containers', value: 'subheading', parent: 'shapes' },
-  { name: 'Box Container', value: 'boxContainer', parent: 'shapes', id: 'drawer/boxContainer' },
+  { name: 'Paper', value: 'paper', parent: 'shapes', id: 'drawer/paper' },
+  { name: 'Card', value: 'card', parent: 'shapes', id: 'drawer/card' },
 
   // Insert text will be like labels, and non-interactive
   { name: 'Insert Text', value: 'heading', parent: 'text' },
@@ -24,19 +25,21 @@ const items = [
   { name: 'Textbox', value: 'textbox', parent: 'inputFields', id: 'drawer/textbox' },
   { name: 'Multiline', value: 'multiline', parent: 'inputFields', id: 'drawer/multiline' },
   // non text type inputsfields:
-  { name: ' ', value: 'subheading', parent: 'input' },
+  { name: '', value: 'subheading', parent: 'input' },
   { name: 'Drop down Menu', value: 'Drop down Menu', parent: 'inputFields', id: 'drawer/dropDown' },
-  { name: 'Radio box', value: 'radio box', parent: 'inputFields', id: 'drawer/radioBox' },
+  { name: 'Radio Box', value: 'radio box', parent: 'inputFields', id: 'drawer/radioBox' },
   { name: 'Checkbox', value: 'checkbox', parent: 'inputFields', id: 'drawer/checkBox' },
   { name: 'Drop zone', value: 'drop zone', parent: 'inputFields', id: 'drawer/dropZone' },
 
   { name: 'Buttons', value: 'heading', parent: 'buttons' },
-  { name: 'Button', value: 'button', parent: 'buttons', id: 'drawer/defaultButton' },
-  { name: 'Small Button', value: 'button', parent: 'buttons', id: 'drawer/smallButton' },
-  { name: 'Submit', value: 'submit', parent: 'buttons', id: 'drawer/submitButton' },
-  { name: 'Button With Icon', value: 'Button With Icon', parent: 'buttons', id: 'drawer/buttonWIcon'  },
+  { name: 'Contained Button', value: 'containedButton', parent: 'buttons', id: 'drawer/defaultContainedButton' },
+  { name: 'Button with Label', value: 'Button with Label', parent: 'buttons', id: 'drawer/buttonWIcon'  },
   { name: 'Icon Button', value: 'Icon button', parent: 'buttons', id: 'drawer/iconButton' },
+  { name: 'Round Button', value: 'Round button', parent: 'buttons', id: 'drawer/roundButton' },
   { name: 'Upload Button', value: 'Upload button', parent: 'buttons', id: 'drawer/uploadButton'  },
+
+  { name: 'Tables', value: 'heading', parent: 'tables' },
+  { name: 'iconPreviews', value: 'iconPreviews', parent: 'tables', id: 'drawer/iconPreviews' },
 
 
 ];

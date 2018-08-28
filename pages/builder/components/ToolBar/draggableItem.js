@@ -1,6 +1,6 @@
-import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,13 +9,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import propTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
-import IconButton from '@material-ui/core/IconButton';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+// import IconButton from '@material-ui/core/IconButton';
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-//
-// import Card from '@material-ui/core/Card';
+// import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import {
+  RadioButtonBlue,
+  TelephoneIcon,
+  CheckboxCustIcon,
+  Trashcan,
+  DropdownMenuDetails,
+  DropdownMenuSimple,
+} from './custom_icons/CustomIcons';
 
 const handleItemClick = (clickHandler, itemID) => () => {
   console.log(itemID);
@@ -23,44 +29,43 @@ const handleItemClick = (clickHandler, itemID) => () => {
 };
 
 const DraggableItem = ({
-  selectActiveItem,
-  name,
-  id,
-  classes,
+  selectActiveItem, name, id, classes,
 }) => {
   switch (name) {
-    case 'Box Container':
+    case 'Card':
       return (
         <Card
-        style={{ height: '75px', width: '75px' }}
+        style={{ height: '110px', width: '85px', margin: '50px' }}
           onClick={handleItemClick(selectActiveItem, id)}
-        ><br/><br/>{name}<br/><br/></Card>
+        ><br/><br/>&nbsp;<br/><br/>
+        </Card>
+      );
+    case 'Paper':
+      return (
+        <Paper
+        style={{ height: '110px', width: '85px', margin: '50px' }}
+          onClick={handleItemClick(selectActiveItem, id)}
+        ><br/><br/><br/><br/></Paper>
       );
     case 'Line':
       return (
-        <div>{name}
-          <Divider style={{ width: '100px' }}/>
-        </div>
+        <div>{name}</div>
       );
     case 'Textbox':
       return (
-        <TextField
-          id="name"
-          label="Name"
-          className={classes.textField}
-          margin="normal"
-        />
+        <Typography
+          id="texbox"
+        >TextBox
+        </Typography>
       );
     case 'Multiline':
       return (
-        <TextField
-            id="multiline-flexible"
-            label="Multiline"
-            multiline
-            rowsMax="2"
-            className={classes.textField}
-            margin="normal"
-          />
+        <Typography
+          id="multiline-flexible"
+          label="Multiline Textbox"
+          margin = '0'
+        >Multiline TextBox
+        </Typography>
       );
     case 'Drop down Menu':
       return (
@@ -70,7 +75,6 @@ const DraggableItem = ({
             id={`${name}_example`}
             select
             value={name}
-            // label={'Drop Down Menu Options'}
             className={classes.marginLeft}
             style={{ width: '200px' }}
             SelectProps={{
@@ -88,7 +92,7 @@ const DraggableItem = ({
           </TextField>
         </div>
       );
-    case 'Radio box':
+    case 'Radio Box':
       return (
         <div>
           <FormControlLabel
@@ -102,14 +106,15 @@ const DraggableItem = ({
       );
     case 'Checkbox':
       return (
-        <FormControlLabel
-              control={
-                <Checkbox/>
-              }
-              label={name}
-              labelPlacement="start"
-              className={classes.marginLeft}
-            />
+        <>
+          <path d="M462.329,493.291H30.614C18.726,493.291,9,483.565,9,471.677V29.905C9,18.017,18.726,8.291,30.614,8.291  h441.771c11.888,0,21.614,9.726,21.614,21.614V461.62C493.991,479.048,479.739,493.291,462.329,493.291z"/>
+          <FormControlLabel
+            control={ <Checkbox/> }
+            label={name}
+            labelPlacement="start"
+            className={classes.marginLeft}
+          />
+        </>
       );
     case 'Headline':
       return (
@@ -142,63 +147,43 @@ const DraggableItem = ({
         </Typography>
       );
     case 'Button':
-      return (
-        <div style={{ height: 'fit-content' }} >
-          <Button className={classes.button} variant="outlined"> Outlined </Button>
-          <Button className={classes.button}> Default </Button>
-        </div>
-      );
+      return (<Button className={classes.button}> Default </Button>);
+    case 'Contained Button':
+      return (<Button className={classes.button} variant="contained" color="primary" >Contained</Button>);
+    case 'Outlined Button':
+      return (<Button className={classes.button} variant="outlined"> Outlined </Button>);
     case 'Small Button':
-      return (
-        <div style={{ height: 'fit-content' }} >
-          <Button className={classes.button} size="small"> Small </Button>
-          <Button className={classes.button} size="small" variant="outlined"> Small </Button>
-          <Button className={classes.button} variant="contained" size="small" color="primary" >
-            Contained
-          </Button>
-        </div>
-      );
+      return (<Button className={classes.button} variant="contained" size="small" color="primary" > Small </Button>);
     case 'Submit':
-      return (
-        <div>
-          <Button size="small" className={classes.submitButton}>
-            {name}
-          </Button>
-          <Button variant="outlined" size="small" className={classes.button} style={{ borderColor: 'green' }}>
-            {name}
-          </Button>
-        </div>
-      );
-    case 'Button With Icon':
-      return (
-        <>
-          <Button variant="contained" size="small" className={classes.button}>
-            <SaveIcon/> Save
-          </Button>
-          <Button variant="contained" color="default" className={classes.button}>
-            Upload&nbsp; <CloudUploadIcon className={classes.rightIcon} />
-          </Button>
-        </>
-      );
+      return (<Button size="small" className={classes.submitButton}>{name}</Button>);
+    case 'Button with Label':
+      return (<Button variant="contained" size="small" className={classes.button}><SaveIcon/> Save </Button>);
     case 'Icon Button':
       return (
-        <div>
-          <Button variant="fab" mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
+          <DeleteIcon color="secondary" />
+      );
+    case 'Round Button':
+      return (
+          <Button variant="fab" disableRipple='true' disableFocusRipple='true' mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
             <DeleteIcon />
           </Button>
-          <Button mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
-            <DeleteIcon />
-          </Button>
-        </div>
       );
     case 'Upload Button':
       return (
-          <div>
-            <IconButton accept="image/*" className={classes.input} type="file" color="primary" className={classes.button} component="span">
-                <PhotoCamera />
-            </ IconButton>
-            <input className={classes.input} type="file" />
-          </div>
+        <>
+          <input className={classes.input} type="file" />
+        </>
+      );
+    case 'iconPreviews':
+      return (
+        <>
+          <CheckboxCustIcon width='50'/>
+          <TelephoneIcon width='50'/>
+          <RadioButtonBlue width='50'/>
+          <DropdownMenuDetails width='75' marginTop='300px'/>
+          <DropdownMenuSimple width='75' marginTop='300px'/>
+          <Trashcan width='75' marginTop='300px'/>
+        </>
       );
     default:
       return <Typography>Error: `{name}` preview not found.</Typography>;

@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import ToolBar from './ToolBar';
 import Canvas from './Canvas';
 import PropsBar from './propsBar';
+import DragPreview from './DragPreview';
 
 
 const Builder = ({
@@ -19,16 +20,18 @@ const Builder = ({
   // loadingTemplates,
 }) => (
   <div className={classes.root}>
-        <ToolBar items={items}
-          open={isOpen}
-          filterValue = {filterValue}
-          openDrawerAction={openDrawerAction}
-          closeDrawerAction={closeDrawerAction}
-          drawerFilterAction={drawerFilterAction}
-          classes={classes}
-        />
-        <Canvas classes={classes} />
-        <PropsBar classes={classes}/>
+    <ToolBar
+      items={items}
+      open={isOpen}
+      filterValue = {filterValue}
+      openDrawerAction={openDrawerAction}
+      closeDrawerAction={closeDrawerAction}
+      drawerFilterAction={drawerFilterAction}
+      classes={classes}
+    />
+    <DragPreview classes={classes}/>
+    <Canvas classes={classes} />
+    <PropsBar classes={classes}/>
     {/* <Templates/> */}
   </div>
 );

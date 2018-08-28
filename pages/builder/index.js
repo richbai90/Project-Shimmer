@@ -70,7 +70,7 @@ class BuilderPage extends React.Component {
       <div className={classes.root}>
         <ToolBar />
         <Canvas />
-  </div>
+      </div>
     );
   }
 }
