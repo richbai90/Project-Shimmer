@@ -30,7 +30,6 @@ const handleDragStart = (clickHandler, itemID, dragging) => (
 );
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
-    console.log('words line 52');
     const infoID = `${itemID}, ${e.target.clientHeight}, ${e.target.clientWidth}`;
     console.log('infoID: ', infoID);
     clickHandler(itemID, dragging);

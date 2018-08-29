@@ -19,12 +19,13 @@ import {
   TelephoneIcon,
   CheckboxCustIcon,
   Trashcan,
+  TrashcanCircle,
   DropdownMenuDetails,
   DropdownMenuSimple,
+  SaveButton,
 } from './custom_icons/CustomIcons';
 
 const handleItemClick = (clickHandler, itemID) => () => {
-  console.log(itemID);
   clickHandler(itemID);
 };
 
@@ -157,16 +158,19 @@ const DraggableItem = ({
     case 'Submit':
       return (<Button size="small" className={classes.submitButton}>{name}</Button>);
     case 'Button with Label':
-      return (<Button variant="contained" size="small" className={classes.button}><SaveIcon/> Save </Button>);
+      return (<SaveButton style={{width: '75', height:'55'}}/>);
     case 'Icon Button':
       return (
-          <DeleteIcon color="secondary" />
+          <Trashcan width='75'/>
       );
     case 'Round Button':
       return (
+        <>
           <Button variant="fab" disableRipple='true' disableFocusRipple='true' mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
             <DeleteIcon />
           </Button>
+          <TrashcanCircle width='75'/>
+        </>
       );
     case 'Upload Button':
       return (
@@ -177,12 +181,15 @@ const DraggableItem = ({
     case 'iconPreviews':
       return (
         <>
+          <SaveButton width='50'/>
           <CheckboxCustIcon width='50'/>
           <TelephoneIcon width='50'/>
           <RadioButtonBlue width='50'/>
-          <DropdownMenuDetails width='75' marginTop='300px'/>
-          <DropdownMenuSimple width='75' marginTop='300px'/>
-          <Trashcan width='75' marginTop='300px'/>
+          <DropdownMenuDetails width='75'/>
+          <DropdownMenuSimple width='75'/>
+          <Trashcan width='75'/>
+          <TrashcanCircle width='75'/>
+
         </>
       );
     default:

@@ -23,12 +23,48 @@ export const CheckboxGreyIcon = () => (
   </svg>
 );
 
+export const SaveButton = ({
+  style = {},
+  fill = '#E0E0E0',
+  width = '100%',
+  height = '100%',
+  className = '',
+  viewBox = '0 0 100 43',
+}) => {
+  const styles = {
+    grey: { fill },
+    font: { fontFamily: 'MyriadPro-Regular', fontSize: '19.625px' },
+  };
+  return (
+    < svg
+      width={width}
+      style={style}
+      viewBox={viewBox}
+      className='icon'
+      xmlns='http://www.w3.org/2000/svg'
+      xmlnsXlink='http://www.w3.org/1999/xlink'
+    >
+    < title id='title'>Save Button</title>
+      < path
+        style={styles.grey}
+        d="M88.9,47.5H5.2c-2.6,0-4.6-2.1-4.6-4.6V5.1c0-2.6,2.1-4.6,4.6-4.6h83.7c2.6,0,4.6,2.1,4.6,4.6v37.7 C93.5,45.4,91.4,47.5,88.9,47.5z"
+      />
+      <path
+        d="M32.1,12.9H16.7c-1.2,0-2.2,1-2.2,2.2v18.3c0,1.2,1,2.2,2.2,2.2H35c1.2,0,2.2-1,2.2-2.2V18L32.1,12.9z M17,15.2h12.7v5.3H17 V15.2z M26.7,33.3c-2.7,0.4-5-1.9-4.6-4.6c0.3-1.7,1.6-3.1,3.3-3.3c2.7-0.4,5,1.9,4.6,4.6C29.7,31.7,28.4,33.1,26.7,33.3z"
+      />
+      <text style={styles.font}
+        transform="matrix(1 0 0 1 41.9499 31.5611)"
+      >SAVE</text>
+    </svg>
+  );
+};
+
 export const RadioButtonBlue = ({
   style = {},
-  fill = '#000',
+  fill = '#4288DE',
   width = '100%',
   className = '',
-  viewBox = '0 0 500 500'
+  viewBox = '0 0 100 100'
 }) => (
   <svg
     width={width}
@@ -38,15 +74,8 @@ export const RadioButtonBlue = ({
     xmlns='http://www.w3.org/2000/svg'
     xmlnsXlink='http://www.w3.org/1999/xlink'
   >
-    <circle cx='204.7816' cy='204.85' r='201.85'
-      style={{
-        fill: 'none',
-        stroke: '#1D8BF1',
-        strokeWidth: 36,
-        strokeMiterlimit: 1.0,
-      }}
-      />
-    <circle cx='247.816' cy='248.5' r='130.656' fill='#1D8BF1' />
+    <path fill={fill} d="M49.8,0.8C22.6,0.8,0.6,22.9,0.6,50c0,27.2,22,49.2,49.2,49.2C77,99.2,99,77.2,99,50C99,22.9,77,0.8,49.8,0.8z M49.8,89.6c-21.9,0-39.6-17.7-39.6-39.6c0-21.9,17.7-39.6,39.6-39.6S89.4,28.2,89.4,50C89.4,71.9,71.7,89.6,49.8,89.6z"/>
+    <circle fill={fill} cx="49.8" cy="50" r="24.6"/>
   </svg>
 );
 
@@ -97,6 +126,29 @@ export const Trashcan = ({
   >
     <path fill={color} d="M201.371,58.316h85.018c3.311,0,6.486,1.315,8.827,3.656l14.772,14.772h53.078 c7.034,0,12.736,5.702,12.736,12.736v25.173H110.967V90.024c0-7.044,5.71-12.753,12.753-12.753h53.06l14.132-14.536 C193.659,59.91,197.431,58.316,201.371,58.316z"/>
     <path fill={color} d="M129.395,134.66l226.926-0.527v228.529c0,20.328-16.504,36.794-36.832,36.747l-152.884-0.355 c-20.564-0.048-37.21-16.732-37.21-37.296V134.66z"/>
+  </svg>
+);
+
+export const TrashcanCircle = ({
+  color='#FFA103',
+  style = {},
+  width = '100%',
+  className = '',
+  viewBox = '0 0 500 500'
+}) => (
+  <svg
+    color={color}
+    width={width}
+    style={style}
+    height={width}
+    viewBox={viewBox}
+    xmlns='http://www.w3.org/2000/svg'
+    className={`svg-icon ${className || ''}`}
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+  >
+    <circle fill={color} cx="250.077" cy="248.041" r="235.213"/>
+    <path d="M225.087,146.594h50.572c1.969,0,3.858,0.782,5.25,2.175l8.787,8.787h31.572c4.184,0,7.576,3.392,7.576,7.576v14.974 H171.311v-14.65c0-4.19,3.396-7.586,7.586-7.586h31.562l8.406-8.646C220.499,147.542,222.743,146.594,225.087,146.594z"/>
+    <path d="M182.273,192.006l134.983-0.313v135.937c0,12.092-9.817,21.886-21.909,21.858l-90.94-0.211 c-12.232-0.028-22.134-9.953-22.134-22.185V192.006z"/>
   </svg>
 );
 
