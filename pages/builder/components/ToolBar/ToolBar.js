@@ -12,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Portal from '@material-ui/core/Portal';
-import Paper from '@material-ui/core/Paper';
-
 import CreateIcon from '@material-ui/icons/Create';
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
@@ -26,27 +24,10 @@ import { RadioButtonBlue, TriangleRightPointing } from './custom_icons/CustomIco
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
 };
-
-const handleItemClick = (clickHandler, itemID) => () => {
-  console.log(clickHandler);
-  clickHandler(itemID);
-};
-
+const handleItemClick = (clickHandler, itemID) => () => { clickHandler(itemID); };
 const handleDragStart = (clickHandler, itemID, dragging) => (
-  (e) => {
-    // Make ghostPreview
-    // const ghostPreview = React.cloneElement(e.target, {
-    //   id: 'ghostPreview',
-    //   style: {
-    //     opacity: 0.3,
-    //     backgroundColor: 'blue',
-    //     border: '5px solid #4CAF50',
-    //   },
-    // });
-    clickHandler(itemID, dragging);
-  }
+  (e) => { clickHandler(itemID, dragging); }
 );
-
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
     console.log('words line 52');
@@ -56,7 +37,12 @@ const handleDragEnd = (clickHandler, itemID, dragging) => (
   }
 );
 
-const MenuListItems = ({ classes, loadComponentDetailsAction, filterValue }) => {
+const MenuListItems = ({
+  classes,
+  loadComponentDetailsAction,
+  filterValue,
+  isOpen
+}) => {
   const listItems = [
     { title: 'Shapes', value: 'shapes', icon: <CropSquareIcon/> },
     { title: 'Text', value: 'text', icon: <TextFormatIcon/> },
@@ -64,15 +50,14 @@ const MenuListItems = ({ classes, loadComponentDetailsAction, filterValue }) => 
     { title: 'Tables', value: 'tables', icon: <TableChartIcon/> },
     { title: 'Buttons', value: 'buttons', icon: <PlayCircleFilledIcon/> },
   ];
-
   return (
-    <MenuList style={{ padding: 0, margin: 0 }}>
+    <Grid container style={{ padding: 0, margin: 0 }}>
       {listItems.map((listItem) => {
         const { title, value, icon } = listItem;
         if (value === filterValue) {
           return (
-            <>
-              <MenuItem
+            <Fragment>
+              < Grid item
                 className={ classes.highlightTool }
                 onClick={handleMenuClick(loadComponentDetailsAction, value)}
               >
@@ -81,94 +66,96 @@ const MenuListItems = ({ classes, loadComponentDetailsAction, filterValue }) => 
                     {icon}
                   </ListItemIcon>
                 </Tooltip>
-              </MenuItem>
-              {/* <div className={classes.cssTriangle}>&nbsp;</div>
-              <TriangleRightPointing className={classes.pointingTriangle}/> */}
-            </>
+                { isOpen
+                  ? <div className={classes.cssTriangle} ></div>
+                  : null
+                }
+              </Grid>
+            </Fragment >
           );
         }
         return (
-          <MenuItem
+          < Grid item
             className={ classes.inactiveTool }
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
           >
             <Tooltip title={title} placement="right">
-              <ListItemIcon className={ classes.icon }>
+              <ListItemIcon className={ classes.icon } >
                 {icon}
               </ListItemIcon>
             </Tooltip>
-          </MenuItem>
-        );
-      })}
-    </MenuList >
-  );
-};
-
-const PortalItems = ({ items, classes, selectActiveItem, activeItem }) => {
-  console.log('items: ', items, 'classes: ', classes, 'activeItem: ', activeItem);
-return (
-  <div>
-      <Grid className={classes.portal}>
-      {items.map((item) => {
-        const {
-          name, value, id,
-          // parent,
-        } = item;
-        if (value === 'heading') {
-          return (
-            <div>
-              <Typography
-                key={shortid.generate()}
-                style={{ backgroundColor: '#ffa754', color: 'white', paddingTop: '8px' }}
-                className={classes.header}
-                id={value}
-              >
-                {name}
-              </Typography>
-              <Divider/>
-            </div>
-          );
-        }
-        if (value === 'subheading') {
-          return (
-            <div>
-              <Typography key={shortid.generate()} className={classes.subheader}>
-                {name}
-              </Typography>
-            </div>
-          );
-        }
-        return (
-          <Grid container
-            style={{ justifyContent: 'space-between', height: '50px' }}
-            draggable
-            name={name}
-            value={value}
-            id={value}
-            key={shortid.generate()}
-          >
-            <Grid item style={{ margin: 'auto 0 0 0' }} >
-              <Typography>{name}</Typography>
-            </Grid>
-            <Grid item style={{ margin: 'auto 8px 2px 0' }} >
-              <DraggableItem
-                className={classes.item}
-                id={id}
-                key={id}
-                name={name}
-                classes={classes}
-                onClick={handleItemClick(selectActiveItem, id)}
-                onDragStart={handleDragStart(selectActiveItem, id, true)}
-                onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-              />
-            </Grid>
           </Grid>
         );
       })}
-      </Grid>
-    </div>
+    </Grid >
   );
 };
+
+const PortalItems = ({
+  items,
+  classes,
+  selectActiveItem,
+  activeItem
+}) => (
+  <div>
+    <Grid className={classes.portal}>
+    {items.map((item) => {
+      const { name, value, id } = item;
+      if (value === 'heading') {
+        return (
+          <div>
+            < Typography
+              key={shortid.generate()}
+              style={{ backgroundColor: '#ffab00', color: 'white', paddingTop: '8px' }}
+              className={classes.header}
+              id={value}
+            >
+              {name}
+            </Typography>
+            <Divider/>
+          </div>
+        );
+      }
+      if (value === 'subheading') {
+        return (
+          <div>
+            < Typography key={shortid.generate()} className={classes.subheader}>
+              {name}
+            </Typography>
+          </div>
+        );
+      }
+      return (
+        < Grid container
+          style={{ justifyContent: 'space-between', height: '50px' }}
+          draggable
+          name={name}
+          value={value}
+          id={value}
+          key={shortid.generate()}
+        >
+          <Grid item style={{ margin: 'auto 0 0 0' }} >
+            <Typography>{name}</Typography>
+          </Grid>
+          < Grid item style={{ margin: 'auto 8px 2px 0' }} >
+            < DraggableItem
+              className={classes.item}
+              id={id}
+              key={id}
+              name={name}
+              classes={classes}
+              onClick={handleItemClick(selectActiveItem, id)}
+              onDragStart={handleDragStart(selectActiveItem, id, true)}
+              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+            />
+          </Grid>
+        </Grid>
+      );
+    })}
+    </Grid>
+  </div>
+);
+
 
 function collect(connect, monitor) {
   return {
@@ -206,6 +193,7 @@ const ToolBar = ({
     <ClickAwayListener onClickAway={closeComponentDetailsAction}>
       <MenuList className={classes.toolBar}>
         <MenuListItems
+          isOpen={isOpen}
           filterValue={filterValue}
           classes={classes}
           loadComponentDetailsAction = {loadComponentDetailsAction}
@@ -215,11 +203,11 @@ const ToolBar = ({
         className={classes.portalContainer}
       />
       { isOpen && container ? (
-        <Portal
-        className={classes.portal}
-        container={container}
+        < Portal
+          className={classes.portal}
+          container={container}
         >
-          <PortalItems
+          < PortalItems
             className={classes.drawerItems}
             selectActiveItem = {selectActiveItem}
             activeItem = {activeItem}
@@ -234,8 +222,6 @@ const ToolBar = ({
 };
 
 ToolBar.propTypes = {
-  // activeItem: propTypes.object.isRequired,
-  // selectActiveItem: PropTypes.func,
   classes: propTypes.object.isRequired,
   loadComponentDetailsAction: propTypes.func.isRequired,
   closeComponentDetailsAction: propTypes.func.isRequired,
@@ -244,4 +230,3 @@ ToolBar.propTypes = {
 };
 
 export default ToolBar;
-// export default DragSource(ToolBar);

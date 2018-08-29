@@ -30,16 +30,6 @@ const handleItemClick = (clickHandler, itemID) => () => {
 
 const handleDragStart = (clickHandler, itemID, dragging) => (
   (e) => {
-    // Make ghostPreview
-
-    // const ghostPreview = React.cloneElement(e.target, {
-    //   id: 'ghostPreview',
-    //   style: {
-    //     opacity: 0.3,
-    //     backgroundColor: 'blue',
-    //     border: '5px solid #4CAF50',
-    //   },
-    // });
     clickHandler(itemID, dragging);
   }
 );
@@ -54,44 +44,70 @@ const handleDragEnd = (clickHandler, itemID, dragging) => (
 );
 
 const DrawerItems = ({ items, classes, selectActiveItem }) => (
-    <Fragment>
-      <Grid style={{ minwidth: '250px', jsutifyContent: 'space-around' }}>
-      {items.map((item) => {
-        const {
-          name, value, id, parent,
-        } = item;
-        if (value === 'heading') {
-          return (
-            <div>
-              <Typography
-                key={shortid.generate()}
-                style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }}
-                className={classes.header}
-                id={value}
-              >
-                {name}
-              </Typography>
-              <Divider/>
-            </div>
-          );
-        }
-        if (value === 'subheading') {
-          return (
-            <div>
-              <Typography key={shortid.generate()} className={classes.subheader}>
-                {name}
-              </Typography>
-            </div>
-          );
-        }
-        if (parent === 'buttons') {
-          return (
-            <Grid item draggable
-              style={{ display: 'inline-block', height: 'auto', width: 'auto' }}
+  <Fragment>
+    <Grid style={{ minwidth: '250px', jsutifyContent: 'space-around' }}>
+    {items.map((item) => {
+      const {
+        name, value, id, parent,
+      } = item;
+      if (value === 'heading') {
+        return (
+          <div>
+            <Typography
+              key={shortid.generate()}
+              style={{ backgroundColor: '#42A5F5', color: 'white', paddingTop: '8px' }}
+              className={classes.header}
+              id={value}
+            >
+              {name}
+            </Typography>
+            <Divider/>
+          </div>
+        );
+      }
+      if (value === 'subheading') {
+        return (
+          <div>
+            <Typography key={shortid.generate()} className={classes.subheader}>
+              {name}
+            </Typography>
+          </div>
+        );
+      }
+      if (parent === 'buttons') {
+        return (
+          <Grid item draggable
+            style={{ display: 'inline-block', height: 'auto', width: 'auto' }}
+            onClick={handleItemClick(selectActiveItem, id)}
+            onDragStart={handleDragStart(selectActiveItem, id, true)}
+            onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+          >
+            <DraggableItem
+              className={classes.item}
+              id={id}
+              name={name}
+              classes={classes}
               onClick={handleItemClick(selectActiveItem, id)}
               onDragStart={handleDragStart(selectActiveItem, id, true)}
               onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-            >
+            />
+          </Grid>
+        );
+      }
+      return (
+        <div>
+          <Grid
+            draggable
+            name={name}
+            value={value}
+            id={value}
+            className={classes.drawerItems}
+            key={shortid.generate()}
+            style={{ width: '250px', height: 'auto' }}
+            onClick={handleItemClick(selectActiveItem, id)}
+            onDragStart={handleDragStart(selectActiveItem, id, true)}
+            onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+          >
               <DraggableItem
                 className={classes.item}
                 id={id}
@@ -101,38 +117,12 @@ const DrawerItems = ({ items, classes, selectActiveItem }) => (
                 onDragStart={handleDragStart(selectActiveItem, id, true)}
                 onDragEnd={handleDragEnd(selectActiveItem, id, false)}
               />
-            </Grid>
-          );
-        }
-        return (
-          <div>
-            <Grid
-              draggable
-              name={name}
-              value={value}
-              id={value}
-              className={classes.drawerItems}
-              key={shortid.generate()}
-              style={{ width: '250px', minHeight: '90px', height: 'auto' }}
-              onClick={handleItemClick(selectActiveItem, id)}
-              onDragStart={handleDragStart(selectActiveItem, id, true)}
-              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-            >
-                <DraggableItem
-                  className={classes.item}
-                  id={id}
-                  name={name}
-                  classes={classes}
-                  onClick={handleItemClick(selectActiveItem, id)}
-                  onDragStart={handleDragStart(selectActiveItem, id, true)}
-                  onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-                />
-            </Grid>
-          </div>
-        );
-      })}
-      </Grid>
-    </Fragment>
+          </Grid>
+        </div>
+      );
+    })}
+    </Grid>
+  </Fragment>
 );
 
 function collect(connect, monitor) {
