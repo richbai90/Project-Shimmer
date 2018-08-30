@@ -1,5 +1,5 @@
-import { LOADING_TEMPLATE } from "../types/templates";
-import { startLoadingTemplate } from "../actions/templates";
+import { LOADING_TEMPLATE } from '../types/templates';
+// import { startLoadingTemplate } from '../actions/templates';
 
 const actionMap = {
   [LOADING_TEMPLATE]: (state, loading) => ({ ...state, loading }),
@@ -21,6 +21,6 @@ const defaultState = {
 
 const defaultAction = state => state;
 
-export default (state, { type, payload }) => (
+export default (state = defaultState, { type, payload }) => (
   (actionMap[type] || defaultAction)(state, payload)
 );

@@ -3,69 +3,87 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
 
 import { loadTemplate } from './redux/actions/templates';
-import Builder from './components';
+import ToolBar from './components/ToolBar';
+import Canvas from './components/Canvas';
 
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-});
+class BuilderPage extends React.Component {
+  static getInitialProps() {
+    const buttons = [
+      {
+        text: 'New',
+        key: 'AppBarNew',
+        icon: 'AddBoxIcon',
+        title: 'add_box',
+        click: loadTemplate('withLeftMenu'),
+      },
+      {
+        text: 'Save',
+        key: 'AppBarSave',
+        icon: 'SaveIcon',
+        title: 'save',
+        // click: () => console.log('hello'),
+      },
+      {
+        text: 'Copy',
+        key: 'AppBarCopy',
+        icon: 'FileCopyIcon',
+        title: 'file_copy',
+      },
+      {
+        text: 'Delete',
+        key: 'AppBarDelete',
+        icon: 'DeleteIcon',
+        title: 'delete',
+      },
+      {
+        text: 'Undo',
+        key: 'AppBarUndo',
+        icon: 'UndoIcon',
+        title: 'undo',
+      },
+      {
+        text: 'Redo',
+        key: 'AppBarRedo',
+        icon: 'RedoIcon',
+        title: 'redo',
+      },
+    ];
+    return {
+      appBar: {
+        buttons,
+        label: 'Page Builder',
+      },
+      spacer: {
+        clip: true,
+      },
+    };
+  }
 
-const mapStateToProps = ({ builder }) => {
-  const { componentMap, componentTree } = builder.page;
-  const {
-    available: templates,
-    loading: loadingTemplates,
-  } = builder.templates;
-  return {
-    componentMap,
-    componentTree,
-    templates,
-    loadingTemplates,
-  };
-};
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  loadTemplate,
-}, dispatch);
-
-class Index extends React.Component {
   render() {
     const {
       classes,
-      componentMap,
-      componentTree,
-      templates,
-      loadingTemplates,
-
     } = this.props;
 
     return (
-      <Builder
-        classes={classes}
-        map={componentMap}
-        tree={componentTree}
-        templates={templates}
-        loadingTemplates={loadingTemplates}
-      />
+      <div className={classes.root}>
+        <ToolBar />
+        <Canvas />
+      </div>
     );
   }
 }
 
-Index.propTypes = {
+BuilderPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
 };
 
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps),
-)(Index);
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    ...theme.helpers.vh100,
+  },
+});
+
+export default withStyles(styles)(BuilderPage);

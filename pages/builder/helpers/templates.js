@@ -23,11 +23,15 @@ export const blank = {
 };
 
 export const withLeftMenu = {
-  component: 'div',
-  className: 'root',
-  children: [
+  styles: {
+    drawerPaper: {
+      position: 'relative',
+    },
+  },
+  component: () => [
     {
       component: Drawer,
+      componentName: 'Drawer',
       variant: 'permanent',
       children: [
         {
@@ -42,11 +46,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: InboxIcon,
-                        },
-                      ],
+                      children: {
+                        component: InboxIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -60,11 +62,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: StarIcon,
-                        },
-                      ],
+                      children: {
+                        component: StarIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -78,11 +78,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: SendIcon,
-                        },
-                      ],
+                      children: {
+                        component: SendIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -96,11 +94,9 @@ export const withLeftMenu = {
                   children: [
                     {
                       component: ListItemIcon,
-                      children: [
-                        {
-                          component: DraftsIcon,
-                        },
-                      ],
+                      children: {
+                        component: DraftsIcon,
+                      },
                     },
                     {
                       component: ListItemText,
@@ -113,6 +109,11 @@ export const withLeftMenu = {
           ],
         },
       ],
+    },
+    {
+      component: Grid,
+      container: true,
+      children: [],
     },
   ],
 };

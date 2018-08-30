@@ -1,31 +1,26 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SheetsRegistry, create } from 'jss';
-import { createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import JssProvider from 'react-jss/lib/JssProvider';
-import expand from 'jss-expand';
-import extend from 'jss-extend';
 
+import { SheetsRegistry, create } from 'jss';
+import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import jssPreset from 'jss-preset-default';
+
+import helpers from './jssHelpers';
 // Configure JSS
-const jss = create({ plugins: [...jssPreset().plugins, expand(), extend()] });
+const jss = create(jssPreset());
 
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: purple[300],
-      main: purple[500],
-      dark: purple[700],
+      main: '#1e88e5',
     },
     secondary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700],
+      main: '#ffab00',
     },
   },
+  helpers,
 });
 
 function createPageContext() {

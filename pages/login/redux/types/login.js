@@ -1,0 +1,2 @@
+export const UPDATE_USERNAME = 'LOGIN/USERNAME';
+export const UPDATE_PASSWORD = 'LOGIN/PASSWORD';

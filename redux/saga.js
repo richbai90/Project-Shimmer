@@ -1,14 +1,13 @@
-import { takeEvery } from 'redux-saga';
-import { put } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/effects';
+import templateWatcher from '@root/pages/builder/redux/sagas/templates';
+import drawerWatcher from '@root/pages/builder/redux/sagas/drawer';
+import draggingWatcher from '@root/pages/builder/redux/sagas/dragging';
 
-function* workTest() {
-  yield put({ type: 'TEST_DONE', payload: { data: 'done' } });
-}
-
-function* watchTest() {
-  yield takeEvery('TEST', workTest);
-}
 
 export default function* () {
-  yield [watchTest];
+  yield all([
+    fork(templateWatcher),
+    fork(drawerWatcher),
+    fork(draggingWatcher),
+  ]);
 }
