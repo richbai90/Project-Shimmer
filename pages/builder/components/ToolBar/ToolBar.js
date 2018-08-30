@@ -118,7 +118,7 @@ const PortalItems = ({
       if (value === 'subheading') {
         return (
           <div>
-            < Typography key={shortid.generate()} className={classes.subheader}>
+            < Typography key={shortid.generate()} variant="subheading" className={classes.subheader}>
               {name}
             </Typography>
           </div>
@@ -126,28 +126,27 @@ const PortalItems = ({
       }
       return (
         < Grid container
-          style={{ justifyContent: 'space-between', height: '50px' }}
+          style={{
+            minHeight: '50px',
+            maxHeight: '60px',
+            padding: '4px',
+          }}
           draggable
           name={name}
           value={value}
           id={value}
           key={shortid.generate()}
         >
-          <Grid item style={{ margin: 'auto 0 0 0' }} >
-            <Typography>{name}</Typography>
-          </Grid>
-          < Grid item style={{ margin: 'auto 8px 2px 0' }} >
-            < DraggableItem
-              className={classes.item}
-              id={id}
-              key={id}
-              name={name}
-              classes={classes}
-              onClick={handleItemClick(selectActiveItem, id)}
-              onDragStart={handleDragStart(selectActiveItem, id, true)}
-              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-            />
-          </Grid>
+          < DraggableItem
+            className={classes.item}
+            id={id}
+            key={id}
+            name={name}
+            classes={classes}
+            onClick={handleItemClick(selectActiveItem, id)}
+            onDragStart={handleDragStart(selectActiveItem, id, true)}
+            onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+          />
         </Grid>
       );
     })}
@@ -207,7 +206,6 @@ const ToolBar = ({
           container={container}
         >
           < PortalItems
-            className={classes.drawerItems}
             selectActiveItem = {selectActiveItem}
             activeItem = {activeItem}
             items={items}

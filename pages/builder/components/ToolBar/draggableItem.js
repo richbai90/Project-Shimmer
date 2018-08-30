@@ -1,5 +1,7 @@
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
+import Divider from '@material-ui/core/Divider';
+
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,16 +15,19 @@ import InputLabel from '@material-ui/core/InputLabel';
 // import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import PersonIcon from '@material-ui/icons/Person';
+
 // import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   RadioButtonBlue,
-  TelephoneIcon,
   CheckboxCustIcon,
+  UploadFileButton,
   Trashcan,
   TrashcanCircle,
   DropdownMenuDetails,
   DropdownMenuSimple,
   SaveButton,
+  DefaultButton,
 } from './custom_icons/CustomIcons';
 
 const handleItemClick = (clickHandler, itemID) => () => {
@@ -35,17 +40,17 @@ const DraggableItem = ({
   switch (name) {
     case 'Card':
       return (
-        <Card
-        style={{ height: '110px', width: '85px', margin: '50px' }}
+        < Paper
+          style={{ height: '45px', width: '45px' }}
           onClick={handleItemClick(selectActiveItem, id)}
-        ><br/><br/>&nbsp;<br/><br/>
-        </Card>
+        > <PersonIcon style={{ width: '100%', height: '66%' }}/>
+          <Divider/>
+        </Paper>
       );
     case 'Paper':
       return (
-        <Paper
-        style={{ height: '110px', width: '85px', margin: '50px' }}
-          onClick={handleItemClick(selectActiveItem, id)}
+        <Paper onClick={handleItemClick(selectActiveItem, id)}
+          style={{ height: '45px', width: '45px' }}
         ><br/><br/><br/><br/></Paper>
       );
     case 'Line':
@@ -68,53 +73,23 @@ const DraggableItem = ({
         >Multiline TextBox
         </Typography>
       );
-    case 'Drop down Menu':
+    case 'Dropdown Menu':
       return (
-        <div>
-          <InputLabel>input label</InputLabel>
-          <TextField
-            id={`${name}_example`}
-            select
-            value={name}
-            className={classes.marginLeft}
-            style={{ width: '200px' }}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu,
-              },
-            }}
-            autowidth='true'
-            // helpertext="Dropdown Menu Options"
-            margin='normal'
-          >{name}
-            <MenuItem>Option 1</MenuItem>
-            <MenuItem>Option 2</MenuItem>
-            <MenuItem>Option 3</MenuItem>
-          </TextField>
-        </div>
+
+        <div className={classes.cssTriangleDown}> &nbsp;</div>
+
       );
-    case 'Radio Box':
+    case 'Radio Button':
       return (
-        <div>
-          <FormControlLabel
-              value={name}
-              control={<Radio color="primary" />}
-              label={name}
-              labelPlacement="start"
-              className={classes.marginLeft}
-            />
+        <div style={{ alignContent: 'center' }}>
+          <RadioButtonBlue style={{ width: '20px', height: '50px' }}/>
+          <Typography >{name}</Typography>
         </div>
       );
     case 'Checkbox':
       return (
         <>
-          <path d="M462.329,493.291H30.614C18.726,493.291,9,483.565,9,471.677V29.905C9,18.017,18.726,8.291,30.614,8.291  h441.771c11.888,0,21.614,9.726,21.614,21.614V461.62C493.991,479.048,479.739,493.291,462.329,493.291z"/>
-          <FormControlLabel
-            control={ <Checkbox/> }
-            label={name}
-            labelPlacement="start"
-            className={classes.marginLeft}
-          />
+          <CheckboxCustIcon style={{ fill: 'orange', width: '20px' }}/>
         </>
       );
     case 'Headline':
@@ -148,48 +123,23 @@ const DraggableItem = ({
         </Typography>
       );
     case 'Button':
-      return (<Button className={classes.button}> Default </Button>);
-    case 'Contained Button':
-      return (<Button className={classes.button} variant="contained" color="primary" >Contained</Button>);
-    case 'Outlined Button':
-      return (<Button className={classes.button} variant="outlined"> Outlined </Button>);
-    case 'Small Button':
-      return (<Button className={classes.button} variant="contained" size="small" color="primary" > Small </Button>);
-    case 'Submit':
-      return (<Button size="small" className={classes.submitButton}>{name}</Button>);
+      return <DefaultButton style={{ height: '35', width: '75' }} />;
     case 'Button with Label':
-      return (<SaveButton style={{width: '75', height:'55'}}/>);
+      return <SaveButton style={{ height: '55', width: '75' }} />;
     case 'Icon Button':
-      return (
-          <Trashcan width='75'/>
-      );
+      return <Trashcan width='30'/>;
     case 'Round Button':
-      return (
-        <>
-          <Button variant="fab" disableRipple='true' disableFocusRipple='true' mini color="secondary" labelplacement="start" label="Icon Button" className={classes.button} aria-label="Icon Button">
-            <DeleteIcon />
-          </Button>
-          <TrashcanCircle width='75'/>
-        </>
-      );
+      return <TrashcanCircle width='40'/>;
     case 'Upload Button':
-      return (
-        <>
-          <input className={classes.input} type="file" />
-        </>
-      );
+      return <UploadFileButton width='80'/>;
     case 'iconPreviews':
       return (
         <>
-          <SaveButton width='50'/>
-          <CheckboxCustIcon width='50'/>
-          <TelephoneIcon width='50'/>
-          <RadioButtonBlue width='50'/>
           <DropdownMenuDetails width='75'/>
           <DropdownMenuSimple width='75'/>
-          <Trashcan width='75'/>
-          <TrashcanCircle width='75'/>
-
+          <Trashcan width='30' />
+          <TrashcanCircle width='40' />
+          <UploadFileButton width='50'/>
         </>
       );
     default:

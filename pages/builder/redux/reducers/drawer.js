@@ -26,21 +26,19 @@ const items = [
   { name: 'Multiline', value: 'multiline', parent: 'inputFields', id: 'drawer/multiline' },
   // non text type inputsfields:
   { name: '', value: 'subheading', parent: 'input' },
-  { name: 'Drop down Menu', value: 'Drop down Menu', parent: 'inputFields', id: 'drawer/dropDown' },
-  { name: 'Radio Box', value: 'radio box', parent: 'inputFields', id: 'drawer/radioBox' },
+  { name: 'Dropdown Menu', value: 'dropdownMenu', parent: 'inputFields', id: 'drawer/dropDown' },
+  { name: 'Radio Button', value: 'radio button', parent: 'inputFields', id: 'drawer/radioBox' },
   { name: 'Checkbox', value: 'checkbox', parent: 'inputFields', id: 'drawer/checkBox' },
-  { name: 'Drop zone', value: 'drop zone', parent: 'inputFields', id: 'drawer/dropZone' },
-
+  // Buttons
   { name: 'Buttons', value: 'heading', parent: 'buttons' },
-  { name: 'Contained Button', value: 'containedButton', parent: 'buttons', id: 'drawer/defaultContainedButton' },
+  { name: 'Button', value: 'button', parent: 'buttons', id: 'drawer/defaultContainedButton' },
   { name: 'Button with Label', value: 'Button with Label', parent: 'buttons', id: 'drawer/buttonWIcon'  },
   { name: 'Icon Button', value: 'Icon button', parent: 'buttons', id: 'drawer/iconButton' },
   { name: 'Round Button', value: 'Round button', parent: 'buttons', id: 'drawer/roundButton' },
   { name: 'Upload Button', value: 'Upload button', parent: 'buttons', id: 'drawer/uploadButton'  },
-
+  // Tables
   { name: 'Tables', value: 'heading', parent: 'tables' },
   { name: 'iconPreviews', value: 'iconPreviews', parent: 'tables', id: 'drawer/iconPreviews' },
-
 
 ];
 

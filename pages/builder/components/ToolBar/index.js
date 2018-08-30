@@ -49,9 +49,7 @@ const styles = theme => ({
     width: theme.spacing.unit * 6,
     height: theme.spacing.unit * 6,
     backgroundColor: theme.palette.primary.main,
-    '& $icon': {
-      color: theme.palette.common.white,
-    },
+    '& $icon': { color: theme.palette.common.white },
   },
   highlightTool: {
     margin: 0,
@@ -71,13 +69,26 @@ const styles = theme => ({
     top: '-3.25em',
     bottom: '0px',
     left: '3em',
-    // content: '',
+    position: 'relative',
+    width: 0,
+    height: 0,
+  },
+  cssTriangleDown: {
+    borderTop: '.5em solid #000000',
+    borderLeft: '.5em solid transparent',
+    borderRight: '.5em solid transparent',
+    borderBottom: '.5em solid transparent',
+    top: '1em',
+    bottom: '0px',
+    // left: '3em',
     position: 'relative',
     width: 0,
     height: 0,
   },
   item: {
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
+    marginTop: theme.spacing.unit,
+    mararginBottom: theme.spacing.unit,
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& $icon': {
@@ -92,8 +103,8 @@ const styles = theme => ({
     textAlign: 'center',
   },
   subheader: {
-    fontSize: '.75em',
-    textAlign: 'left',
+    fontSize: '1em',
+    textAlign: 'center',
     marginLeft: theme.spacing.unit,
   },
   marginLeft: { marginLeft: theme.spacing.unit },
@@ -131,10 +142,20 @@ const styles = theme => ({
   },
   portalContainer: {
     zIndex: theme.zIndex.appBar + 100,
-    width: 'fitContent',
+    height: 'fitContent',
     position: 'absolute',
     left: theme.spacing.unit * 7,
     top: theme.spacing.unit * 1,
+  },
+  portalItems: {
+    margin: '2px 4px 4px 4px',
+  },
+  customIcons: {
+    boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+    padding: theme.spacing.unit,
+    position: 'relative',
+    bottom: theme.spacing.unit,
+    right: theme.spacing.unit,
   },
 });
 
@@ -148,3 +169,9 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
 )(ToolBar);
+
+//        <>
+        // </*<div>
+        //   <DropdownMenuDetails style={{ width: '75px', justify: 'right' }}/>
+        // </div>*/>
+        // </>

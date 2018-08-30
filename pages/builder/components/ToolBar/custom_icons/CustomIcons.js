@@ -59,6 +59,32 @@ export const SaveButton = ({
   );
 };
 
+export const DefaultButton = ({
+  style = {},
+  fill = '#42A5F5',
+  width = '100%',
+  height = '100%',
+  className = '',
+  viewBox = '0 0 50 28',
+}) => {
+  const styles = {
+    words: { fill: '#FFFFFF', fontFamily: 'MyriadPro-Regular', fontSize: '8.8715px' },
+  };
+  return (
+    < svg
+      width={width}
+      style={style}
+      viewBox={viewBox}
+      className='icon'
+      xmlns='http://www.w3.org/2000/svg'
+      xmlnsXlink='http://www.w3.org/1999/xlink'
+    >
+      <path fill={fill} d="M47.6,26H2.2c-1.1,0-1.9-0.9-1.9-1.9V2.2c0-1.1,0.9-1.9,1.9-1.9h45.4c1.1,0,1.9,0.9,1.9,1.9V24"/>
+      <text transform="matrix(1 0 0 1 9.1064 15.9219)" style={styles.words} >BUTTON</text>
+    </svg>
+  );
+};
+
 export const RadioButtonBlue = ({
   style = {},
   fill = '#4288DE',
@@ -152,10 +178,45 @@ export const TrashcanCircle = ({
   </svg>
 );
 
+export const UploadFileButton = ({
+  style = {},
+  width = '100%',
+  className = '',
+  viewBox = '0 0 85 20',
+}) => {
+  const styles = {
+    st0: {
+      fill: 'none',
+      stroke: '#545454',
+      strokeMiterlimit: '10',
+    },
+    st1: {
+      fill: 'none',
+    },
+    st2: {
+      fontFamily: 'ArialMT',
+      fontSize: '13px',
+    },
+  };
+  return (
+    <svg
+      width={width}
+      style={style}
+      viewBox={viewBox}
+      xmlns='http://www.w3.org/2000/svg'
+      className={`svg-icon ${className || ''}`}
+      xmlnsXlink='http://www.w3.org/1999/xlink'
+    >
+      <rect x="0.5" y="0.5" style={styles.st0} width="82.9" height="19.1"/>
+      <rect x="7.4" y="4.7" style={styles.st1} width="69.9" height="10"/>
+      <text transform="matrix(1 0 0 1 7.4407 14.0189)" style={styles.st2}>Choose File</text>
+    </svg>
+  );
+};
+
 export const TriangleRightPointing = ({
   style = {},
-  // fill = '#FFA103',
-  fill = 'black',
+  fill = '#FFA103',
   width = '100%',
   className = '',
   viewBox = '0 0 10 10'
