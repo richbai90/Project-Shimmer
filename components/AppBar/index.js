@@ -47,15 +47,19 @@ const styles = (theme) => {
         ...toolbar[theme.breakpoints.up('sm')],
         marginLeft: -1 * gutters()[theme.breakpoints.up('sm')].paddingLeft,
       },
-      background: theme.palette.primary.main,
+      background: theme.palette.common.white,
+      color: theme.palette.common.black,
       display: 'flex',
       alignItems: 'center',
-      boxShadow: `inset -1px 0px 15px 0px rgba(0, 0, 0, 0.12),
-      inset -2px 0px 2px 0px rgba(0, 0, 0, 0.14),
-      inset -3px 0px 1px -2px rgba(0, 0, 0, 0.12);`,
+      // boxShadow: `inset -1px 0px 15px 0px rgba(0, 0, 0, 0.12),
+      // inset -2px 0px 2px 0px rgba(0, 0, 0, 0.14),
+      // inset -3px 0px 1px -2px rgba(0, 0, 0, 0.12);`,
     },
     appBar: {
       justifyContent: 'space-between',
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.common.black,
+
     },
     hidden: {
       display: 'none',

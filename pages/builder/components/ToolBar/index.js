@@ -36,40 +36,54 @@ const styles = theme => ({
     display: 'flex',
     ...theme.helpers.vh100,
   },
+  toolBar: {
+    zIndex: theme.zIndex.appBar + 1,
+    background: theme.palette.primary.darkest,
+    width: theme.spacing.unit * 15,
+  },
   icon: {
     margin: 0,
-    padding: theme.spacing.unit,
-    width: theme.spacing.unit * 6,
-    height: theme.spacing.unit * 6,
   },
-
   inactiveTool: {
-    margin: 0,
-    marginTop: theme.spacing.unit,
-    width: theme.spacing.unit * 6,
-    height: theme.spacing.unit * 6,
-    backgroundColor: theme.palette.primary.main,
-    '& $icon': { color: theme.palette.common.white },
+    margin: `0 0 ${theme.spacing.unit}px 0`,
+    padding: '4px',
+    '&:hover': {
+      background: theme.palette.secondary.main,
+      color: theme.palette.common.black,
+    },
+    '& $icon': {
+      color: theme.palette.common.white,
+      margin: '0',
+    },
+    background: theme.palette.primary.main,
+  },
+  darkFont: {
+    margin: `0 ${theme.spacing.unit}px`,
+    color: theme.palette.common.black,
+  },
+  lightFont: {
+    margin: `0 ${theme.spacing.unit}px`,
+    color: theme.palette.common.white,
   },
   highlightTool: {
-    margin: 0,
-    marginTop: theme.spacing.unit,
-    width: '3em',
-    height: '3em',
-    backgroundColor: '#ffab00',
+    margin: `0 0 ${theme.spacing.unit}px 0`,
+    padding: '4px',
+    color: theme.palette.common.white,
+    // backgroundColor: theme.palette.primary.main,
+    background: theme.palette.secondary.main,
+    '&:hover': { background: theme.palette.secondary.main },
     '& $icon': {
       color: theme.palette.common.black,
     },
   },
   cssTriangle: {
-    borderLeft: '.5em solid #ffab00',
-    borderTop: '1.5em solid transparent',
-    borderRight: '1.5em solid transparent',
-    borderBottom: '1.5em solid transparent',
-    top: '-3.25em',
-    bottom: '0px',
-    left: '3em',
-    position: 'relative',
+    borderRight: `.5em solid ${theme.palette.secondary.light}`,
+    borderTop: '1em solid transparent',
+    borderLeft: '0em solid transparent',
+    borderBottom: '1em solid transparent',
+    top: '0px',
+    right: '0em',
+    position: 'absolute',
     width: 0,
     height: 0,
   },
@@ -80,13 +94,11 @@ const styles = theme => ({
     borderBottom: '.5em solid transparent',
     top: '1em',
     bottom: '0px',
-    // left: '3em',
     position: 'relative',
     width: 0,
     height: 0,
   },
   item: {
-    // justifyContent: 'space-between',
     marginTop: theme.spacing.unit,
     mararginBottom: theme.spacing.unit,
     '&:focus': {
@@ -111,12 +123,6 @@ const styles = theme => ({
   toolBarDrawer: {
     width: '25px',
   },
-  toolBar: {
-    zIndex: theme.zIndex.appBar + 1,
-    background: theme.palette.common.white,
-    width: '3em',
-    padding: 0,
-  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -132,17 +138,16 @@ const styles = theme => ({
     margin: 'auto 4px auto auto',
   },
   portal: {
-    boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
-    backgroundColor: 'white',
+    boxShadow: '5px 1px 5px 0px rgba(0, 0, 0, 0.2), 2px 2px 2px 0px rgba(0, 0, 0, 0.14), 3px 3px 1px 0px rgba(0, 0, 0, 0.12)',
+    backgroundColor: 'rgba(999,999,999,0.7)',
     zIndex: theme.zIndex.appBar + 100,
-    border: '2px solid #ffab00', // if there's no border on the right side, the top-right corner will not be rounded :(
-    borderRadius: '5px',
   },
   portalContainer: {
-    zIndex: theme.zIndex.appBar + 100,
+    background: theme.palette.secondary.main,
+    // zIndex: theme.zIndex.appBar + 100,
     position: 'absolute',
-    left: theme.spacing.unit * 7,
-    top: theme.spacing.unit * 1,
+    left: theme.spacing.unit * 15,
+    top: 0,
   },
   portalItems: {
     margin: '2px 4px 4px 4px',
@@ -167,9 +172,3 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
 )(ToolBar);
-
-//        <>
-        // </*<div>
-        //   <DropdownMenuDetails style={{ width: '75px', justify: 'right' }}/>
-        // </div>*/>
-        // </>
