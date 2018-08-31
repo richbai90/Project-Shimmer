@@ -98,7 +98,7 @@ const styles = theme => ({
   },
   header: {
     fontSize: '1.5em',
-    width: '250px',
+    width: '215px',
     margin: 0,
     textAlign: 'center',
   },
@@ -128,27 +128,25 @@ const styles = theme => ({
     backgroundColor: '#4CAF50',
     '&:hover': { backgroundColor: '#388E3C' },
   },
-  // button: {
-  //   margin: '4px',
-  // },
+  buttonTypography: {
+    margin: 'auto 4px auto auto',
+  },
   portal: {
     boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
     backgroundColor: 'white',
     zIndex: theme.zIndex.appBar + 100,
     border: '2px solid #ffab00', // if there's no border on the right side, the top-right corner will not be rounded :(
-    // borderRight: '2px solid #ffab00',
-    // borderLeft: '2px solid #ffab00',
     borderRadius: '5px',
   },
   portalContainer: {
     zIndex: theme.zIndex.appBar + 100,
-    height: 'fitContent',
     position: 'absolute',
     left: theme.spacing.unit * 7,
     top: theme.spacing.unit * 1,
   },
   portalItems: {
     margin: '2px 4px 4px 4px',
+    maxHeight: 'fitContent',
   },
   customIcons: {
     boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',

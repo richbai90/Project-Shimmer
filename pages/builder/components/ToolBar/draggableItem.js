@@ -61,6 +61,7 @@ const DraggableItem = ({
       return (
         <Typography
           id="texbox"
+          margin = 'auto'
         >TextBox
         </Typography>
       );
@@ -69,27 +70,29 @@ const DraggableItem = ({
         <Typography
           id="multiline-flexible"
           label="Multiline Textbox"
-          margin = '0'
+          margin = 'auto'
         >Multiline TextBox
         </Typography>
       );
     case 'Dropdown Menu':
       return (
-
-        <div className={classes.cssTriangleDown}> &nbsp;</div>
-
+        < >
+          <div className={classes.cssTriangleDown} style={{ margin: 'auto auto auto 0' }}> &nbsp;</div>
+          <Typography className={classes.buttonTypography} style={{ marginBottom: 'auto' }} >{name}</Typography>
+        </>
       );
     case 'Radio Button':
       return (
-        <div style={{ alignContent: 'center' }}>
-          <RadioButtonBlue style={{ width: '20px', height: '50px' }}/>
-          <Typography >{name}</Typography>
-        </div>
+        < >
+          <RadioButtonBlue style={{ width: '20px', height: '20px', margin: 'auto auto auto 0'}}/>
+          <Typography className={classes.buttonTypography} style={{ marginBottom: 'auto' }} >{name}</Typography>
+        </>
       );
     case 'Checkbox':
       return (
         <>
-          <CheckboxCustIcon style={{ fill: 'orange', width: '20px' }}/>
+          <CheckboxCustIcon style={{ fill: 'orange', width: '20px', margin: 'auto auto auto 0'}}/>
+          <Typography className={classes.buttonTypography} style={{ marginBottom: 'auto' }} >{name}</Typography>
         </>
       );
     case 'Headline':
@@ -123,23 +126,44 @@ const DraggableItem = ({
         </Typography>
       );
     case 'Button':
-      return <DefaultButton style={{ height: '35', width: '75' }} />;
+      return (
+        <>
+          <DefaultButton style={{ height: '35', width: '63' }} />
+          <Typography className={classes.buttonTypography} > Contained </Typography>
+        </>
+      );
     case 'Button with Label':
-      return <SaveButton style={{ height: '55', width: '75' }} />;
+      return (
+        <>
+         <SaveButton style={{ height: '55', width: '75' }} />
+           <Typography className={classes.buttonTypography} > With Icon and Label</Typography>
+        </>
+      );
     case 'Icon Button':
-      return <Trashcan width='30'/>;
+      return (
+        <>
+          <Trashcan width='30'/>
+          <Typography className={classes.buttonTypography} >Icon</Typography>
+        </>
+      );
     case 'Round Button':
-      return <TrashcanCircle width='40'/>;
+      return (
+        <>
+          <TrashcanCircle width='40'/>
+          <Typography className={classes.buttonTypography} >Round</Typography>
+        </>
+      );
     case 'Upload Button':
-      return <UploadFileButton width='80'/>;
+      return (
+        <>
+          <UploadFileButton width='80'/>
+          <Typography className={classes.buttonTypography} >Upload File</Typography>
+        </>
+      );
     case 'iconPreviews':
       return (
         <>
           <DropdownMenuDetails width='75'/>
-          <DropdownMenuSimple width='75'/>
-          <Trashcan width='30' />
-          <TrashcanCircle width='40' />
-          <UploadFileButton width='50'/>
         </>
       );
     default:
