@@ -1,21 +1,9 @@
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
-
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Radio from '@material-ui/core/Radio';
-import MenuItem from '@material-ui/core/MenuItem';
-import propTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-// import IconButton from '@material-ui/core/IconButton';
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SaveIcon from '@material-ui/icons/Save';
 import PersonIcon from '@material-ui/icons/Person';
+import propTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 
 // import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
@@ -134,13 +122,23 @@ const DraggableItem = ({
       return <UploadFileButton width='80'/>;
     case 'iconPreviews':
       return (
-        <>
-          <DropdownMenuDetails width='75'/>
-          <DropdownMenuSimple width='75'/>
-          <Trashcan width='30' />
-          <TrashcanCircle width='40' />
-          <UploadFileButton width='50'/>
-        </>
+        <Grid container>
+          <Grid item>
+            <DropdownMenuDetails width='75'/>
+          </Grid>
+          <Grid item>
+            <DropdownMenuSimple width='75'/>
+          </Grid>
+          <Grid item>
+            <Trashcan width='30' />
+          </Grid>
+          <Grid item>
+            <TrashcanCircle width='40' />
+          </Grid>
+          <Grid item>
+            <UploadFileButton width='50'/>
+          </Grid>
+        </Grid>
       );
     default:
       return <Typography>Error: `{name}` preview not found.</Typography>;

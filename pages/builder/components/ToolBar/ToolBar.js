@@ -97,21 +97,19 @@ const PortalItems = ({
   activeItem
 }) => (
   <div>
-    <Grid className={classes.portal}>
+    <Grid container className={classes.portal}>
     {items.map((item) => {
       const { name, value, id } = item;
       if (value === 'heading') {
         return (
-          <div>
+          <div className={classes.headerWrapper}>
             < Typography
               key={shortid.generate()}
-              style={{ backgroundColor: '#ffab00', color: 'white', paddingTop: '8px' }}
               className={classes.header}
               id={value}
             >
               {name}
             </Typography>
-            <Divider/>
           </div>
         );
       }
@@ -125,29 +123,18 @@ const PortalItems = ({
         );
       }
       return (
-        < Grid container
-          style={{
-            minHeight: '50px',
-            maxHeight: '60px',
-            padding: '4px',
-          }}
-          draggable
-          name={name}
-          value={value}
-          id={value}
-          key={shortid.generate()}
-        >
-          < DraggableItem
-            className={classes.item}
-            id={id}
-            key={id}
-            name={name}
-            classes={classes}
-            onClick={handleItemClick(selectActiveItem, id)}
-            onDragStart={handleDragStart(selectActiveItem, id, true)}
-            onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-          />
-        </Grid>
+          <Grid item>
+            < DraggableItem
+              className={classes.item}
+              id={id}
+              key={id}
+              name={name}
+              classes={classes}
+              onClick={handleItemClick(selectActiveItem, id)}
+              onDragStart={handleDragStart(selectActiveItem, id, true)}
+              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+            />
+          </Grid>
       );
     })}
     </Grid>
