@@ -20,6 +20,8 @@ const theme = createMuiTheme({
       dark: '#0a4980',
       darker: '#073054',
       darkest: '#18242f',
+      bgDark: '#0b283d',
+      bgLight: '#0f3b5a',
       contrastText: '#fff',
     },
     secondary: {
@@ -28,6 +30,11 @@ const theme = createMuiTheme({
       dark: '#7d5400',
       darker: '#452e00',
       contrastText: '#fff',
+    },
+    backgrounds: {
+      light: '#8dabc0',
+      dark: '#0f3b5a',
+      darker: '#0b283d',
     },
     other: {
       greenBlue: '#1ed7e5',

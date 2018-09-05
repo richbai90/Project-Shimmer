@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Portal from '@material-ui/core/Portal';
 // import CreateIcon from '@material-ui/icons/Create';
+
 import CropSquareIcon from '@material-ui/icons/CropSquare';
 import TextFormatIcon from '@material-ui/icons/TextFormat';
 import FormatShapesIcon from '@material-ui/icons/FormatShapes';
@@ -50,35 +51,21 @@ const MenuListItems = ({
     { title: 'Buttons', value: 'buttons', icon: <PlayCircleFilledIcon/> },
   ];
   return (
-    <Fragment style={{ padding: 0, margin: 0 }}>
+    <Fragment >
       {listItems.map((listItem) => {
         const { title, value, icon } = listItem;
-        if (value === filterValue) {
-          return (
-              <MenuItem
-                className={ classes.highlightTool }
-                onClick={handleMenuClick(loadComponentDetailsAction, value)}
-              >
-                  <ListItemIcon className={ classes.icon }>
-                    {icon}
-                  </ListItemIcon>
-                  <Typography className={classes.darkFont}>{title}</Typography>
-                { isOpen
-                  ? <div className={classes.cssTriangle}></div>
-                  : null
-                }
-            </MenuItem >
-          );
-        }
         return (
           <MenuItem
-            className={ classes.inactiveTool }
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
+            className={(value === filterValue ? classes.highlightTool : classes.inactiveTool)}
           >
-              <ListItemIcon className={ classes.icon }>
+              <ListItemIcon className={classes.icon}>
                 {icon}
               </ListItemIcon>
-              <Typography className={classes.lightFont}>{title}</Typography>
+              { /* {title}  // TODO: want to remove typography div: */ }
+              <Typography
+              className={(value === filterValue ? classes.whiteFont : classes.lightFont)}
+              >{title}</Typography>
           </MenuItem>
         );
       })}
@@ -90,31 +77,39 @@ const PortalItems = ({
   items,
   classes,
   selectActiveItem,
-  activeItem
-}) => (
-  <div>
+  activeItem,
+}) => {
+  return (
+  <div style={{ height: '100%' }}>
     <Grid className={classes.portal}>
     {items.map((item) => {
-      const { name, value, id } = item;
+      const {
+        name,
+        value,
+        id,
+        position,
+      } = item;
       if (value === 'heading') {
         return (
-          <div>
+          <div className={classes.portalHeader} key={shortid.generate()} >
+            <div
+              style={{ top: `${position * 40}px` }}
+              className={classes.cssTriangle}></div>
             < Typography
-              key={shortid.generate()}
               style={{ paddingTop: '8px' }}
               className={classes.header}
               id={value}
             >
               {name}
             </Typography>
-            <Divider/>
+            <Divider style={{ color: 'white' }} />
           </div>
         );
       }
       if (value === 'subheading') {
         return (
           <div>
-            < Typography key={shortid.generate()} variant="subheading" className={classes.subheader}>
+            <Typography key={shortid.generate()} variant="subheading" className={classes.subheader}>
               {name}
             </Typography>
           </div>
@@ -134,7 +129,6 @@ const PortalItems = ({
           key={shortid.generate()}
         >
           < DraggableItem
-            className={classes.item}
             id={id}
             key={id}
             name={name}
@@ -148,7 +142,7 @@ const PortalItems = ({
     })}
     </Grid>
   </div>
-);
+)};
 
 
 function collect(connect, monitor) {

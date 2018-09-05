@@ -47,8 +47,8 @@ const styles = (theme) => {
         ...toolbar[theme.breakpoints.up('sm')],
         marginLeft: -1 * gutters()[theme.breakpoints.up('sm')].paddingLeft,
       },
-      background: theme.palette.common.white,
-      color: theme.palette.common.black,
+      background: theme.palette.common.bgDark,
+      color: theme.palette.common.white,
       display: 'flex',
       alignItems: 'center',
       // boxShadow: `inset -1px 0px 15px 0px rgba(0, 0, 0, 0.12),
@@ -57,8 +57,8 @@ const styles = (theme) => {
     },
     appBar: {
       justifyContent: 'space-between',
-      backgroundColor: theme.palette.common.white,
-      color: theme.palette.common.black,
+      backgroundColor: theme.palette.primary.bgDark,
+      color: theme.palette.common.white,
 
     },
     hidden: {
