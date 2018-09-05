@@ -4,11 +4,11 @@ import Paper from '@material-ui/core/Paper';
 import PersonIcon from '@material-ui/icons/Person';
 import propTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Checkbox from '@material-ui/core/Checkbox';
 
 // import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   RadioButtonBlue,
-  CheckboxCustIcon,
   UploadFileButton,
   Trashcan,
   TrashcanCircle,
@@ -16,7 +16,7 @@ import {
   DropdownMenuSimple,
   SaveButton,
   DefaultButton,
-} from './custom_icons/CustomIcons';
+} from '../custom_icons/CustomIcons';
 
 const handleItemClick = (clickHandler, itemID) => () => {
   clickHandler(itemID);
@@ -76,9 +76,7 @@ const DraggableItem = ({
       );
     case 'Checkbox':
       return (
-        <>
-          <CheckboxCustIcon style={{ fill: 'orange', width: '20px' }}/>
-        </>
+        <Checkbox />
       );
     case 'Headline':
       return (

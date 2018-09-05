@@ -45,16 +45,14 @@ const styles = theme => ({
 
   inactiveTool: {
     composes: 'icon',
-    '& $icon': { color: theme.palette.common.white },
+    color: theme.palette.common.white,
   },
   highlightTool: {
     margin: 0,
     width: theme.spacing.unit * 6,
     height: theme.spacing.unit * 6,
     background: theme.palette.secondary.main,
-    '& $icon': {
-      color: theme.palette.common.black,
-    },
+    color: theme.palette.common.black,
   },
   cssTriangle: {
     borderLeft: `.5em solid ${theme.palette.secondary.main}`,
