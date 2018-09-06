@@ -14,20 +14,25 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const PropsBar = ({ classes }) => (
-  <div className={classes.rightBar}>
+const PropsBar = ({ classes, activeItem }) => {
+  console.log('Active Item: propsbar: ', activeItem);
+  return (
+  <div style={{
+    backgroundColor: 'red',
+    width: '20%',
+    color: 'black',
+  }}> 'Blah'
     <Table>
       <TableHead>
         <TableRow>
-      <TableCell>
-        <Typography>
-          Properties&nbsp;Table
-        </Typography>
-        </TableCell>
+          <TableCell>
+            <Typography>
+              Properties Table
+            </Typography>
+          </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        <TableRow/>
         <TableRow>
           <TableCell>
             Object&nbsp;Name:
@@ -47,7 +52,7 @@ const PropsBar = ({ classes }) => (
       </TableBody>
     </Table>
   </div>
-);
+)};
 
 PropsBar.propTypes = {
   classes: propTypes.shape({

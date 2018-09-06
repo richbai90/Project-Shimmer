@@ -1,5 +1,8 @@
 // import Link from 'next/link';
-import { Fragment, PropTypes } from 'react';
+import {
+  Fragment,
+  // PropTypes,
+} from 'react';
 import propTypes from 'prop-types';
 // import Drawer from '@root/components/Drawer';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -27,12 +30,15 @@ const handleMenuClick = (clickHandler, filterValue) => () => {
 };
 const handleItemClick = (clickHandler, itemID) => () => { clickHandler(itemID); };
 const handleDragStart = (clickHandler, itemID, dragging) => (
-  (e) => { clickHandler(itemID, dragging); }
+  (e) => {
+    clickHandler(itemID, dragging);
+    // console.log(itemID);
+  }
 );
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
-    const infoID = `${itemID}, ${e.target.clientHeight}, ${e.target.clientWidth}`;
-    console.log('infoID: ', infoID);
+    // const infoID = `${itemID}, ${e.target.clientHeight}, ${e.target.clientWidth}`;
+    // console.log('infoID: ', infoID);
     clickHandler(itemID, dragging);
   }
 );
@@ -41,31 +47,38 @@ const MenuListItems = ({
   classes,
   loadComponentDetailsAction,
   filterValue,
-  isOpen
+  // isOpen
 }) => {
   const listItems = [
-    { title: 'Shapes', value: 'shapes', icon: <CropSquareIcon/> },
-    { title: 'Text', value: 'text', icon: <TextFormatIcon/> },
-    { title: 'Input Fields', value: 'inputFields', icon: <FormatShapesIcon/> },
-    { title: 'Tables', value: 'tables', icon: <TableChartIcon/> },
+    { title: 'Layout', value: 'layout', icon: <CropSquareIcon/> },
+    { title: 'Forms', value: 'forms', icon: <FormatShapesIcon/> },
+    { title: 'Text and Labels', value: 'text', icon: <TextFormatIcon/> },
+    { title: 'Charts', value: 'charts', icon: <TableChartIcon/> },
+    // { title: 'Image', value: 'image', icon: <TableChartIcon/> },
     { title: 'Buttons', value: 'buttons', icon: <PlayCircleFilledIcon/> },
   ];
   return (
     <Fragment >
       {listItems.map((listItem) => {
-        const { title, value, icon } = listItem;
+        const {
+          // title,
+          value,
+          icon,
+        } = listItem;
         return (
           <MenuItem
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
             className={(value === filterValue ? classes.highlightTool : classes.inactiveTool)}
           >
+          {/* <Tooltip title={title} enterDelay='500' style={{ left: '25' }} placement='right' > */}
               <ListItemIcon className={classes.icon}>
                 {icon}
               </ListItemIcon>
-              { /* {title}  // TODO: want to remove typography div: */ }
-              <Typography
+            {/* </Tooltip> */}
+            {/* <Typography
               className={(value === filterValue ? classes.whiteFont : classes.lightFont)}
-              >{title}</Typography>
+            > {title}
+            </Typography> */}
           </MenuItem>
         );
       })}
@@ -73,89 +86,95 @@ const MenuListItems = ({
   );
 };
 
+MenuListItems.propTypes = {
+  loadComponentDetailsAction: propTypes.func,
+  isOpen: propTypes.bool,
+  filterValue: propTypes.object,
+  classes: propTypes.object,
+};
+
 const PortalItems = ({
   items,
   classes,
   selectActiveItem,
-  activeItem,
-}) => {
-  return (
-  <div style={{ height: '100%' }}>
-    <Grid className={classes.portal}>
-    {items.map((item) => {
-      const {
-        name,
-        value,
-        id,
-        position,
-      } = item;
-      if (value === 'heading') {
+  // activeItem,
+}) => (
+  <div className={classes.portal}>
+      {items.map((item) => {
+        const {
+          name,
+          value,
+          id,
+          // position,
+        } = item;
+        if (value === 'heading') {
+          return (
+            <div className={classes.portalHeader} key={shortid.generate()} >
+              <div
+                // style={{ top: `${position * 3}px` }}
+                className={classes.cssTriangle}></div>
+              < Typography
+                style={{ paddingTop: '8px' }}
+                className={classes.header}
+                id={value}
+              >
+                {name}
+              </Typography>
+            </div>
+          );
+        }
+        if (value === 'subheading') {
+          return (
+            <div>
+              <Divider/>
+              < Typography
+                key={shortid.generate()}
+                variant="subheading"
+                className={classes.subheader}
+              > {name}
+              </Typography>
+              <Divider/>
+            </div>
+          );
+        }
         return (
-          <div className={classes.portalHeader} key={shortid.generate()} >
-            <div
-              style={{ top: `${position * 40}px` }}
-              className={classes.cssTriangle}></div>
-            < Typography
-              style={{ paddingTop: '8px' }}
-              className={classes.header}
-              id={value}
-            >
-              {name}
-            </Typography>
-            <Divider style={{ color: 'white' }} />
-          </div>
-        );
-      }
-      if (value === 'subheading') {
-        return (
-          <div>
-            <Typography key={shortid.generate()} variant="subheading" className={classes.subheader}>
-              {name}
-            </Typography>
-          </div>
-        );
-      }
-      return (
-        < Grid container
-          style={{
-            minHeight: '50px',
-            maxHeight: '60px',
-            padding: '4px',
-          }}
-          draggable
-          name={name}
-          value={value}
-          id={value}
-          key={shortid.generate()}
-        >
-          < DraggableItem
-            id={id}
-            key={id}
+          < Grid container
+            style = {{
+              height: 'fitContent',
+              // minHeight: '50px',
+              // maxHeight: '60px',
+              padding: '4px',
+            }}
+            draggable
             name={name}
-            classes={classes}
+            value={value}
+            id={value}
+            key={shortid.generate()}
             onClick={handleItemClick(selectActiveItem, id)}
             onDragStart={handleDragStart(selectActiveItem, id, true)}
             onDragEnd={handleDragEnd(selectActiveItem, id, false)}
-          />
-        </Grid>
-      );
-    })}
-    </Grid>
+          >
+            < DraggableItem
+              id={id}
+              key={id}
+              name={name}
+              value={value}
+              classes={classes}
+              onClick={handleItemClick(selectActiveItem, id)}
+              onDragStart={handleDragStart(selectActiveItem, id, true)}
+              onDragEnd={handleDragEnd(selectActiveItem, id, false)}
+              style={{ maxHeightheight: 'fitContent' }}
+            />
+          </Grid>
+        );
+      })}
   </div>
-)};
-
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    dragging: monitor.dragging(),
-  };
-}
+);
 
 PortalItems.propTypes = {
-  // connectDragSource: PropTypes.func,
-  // connectDragPreview: PropTypes.func,
+  selectActiveItem: propTypes.func,
+  activeItem: propTypes.object,
+  filterValue: propTypes.func,
   classes: propTypes.object,
   items: propTypes.arrayOf(
     propTypes.shape({
@@ -165,18 +184,19 @@ PortalItems.propTypes = {
     }),
   ),
 };
+
 let container;
 const ToolBar = ({
   activeItem = '',
   classes,
   loadComponentDetailsAction,
   closeComponentDetailsAction,
-  // setActiveItem = null,
   items = null,
   isOpen = false,
   selectActiveItem,
   filterValue,
 }) => {
+  console.log(items[0].position);
   return (
     <ClickAwayListener onClickAway={closeComponentDetailsAction}>
       <MenuList className={classes.toolBar}>
@@ -187,6 +207,9 @@ const ToolBar = ({
           loadComponentDetailsAction = {loadComponentDetailsAction}
         />
       < div
+        style={{
+          marginTop: (items.length > 0 ? `${items[0].position * 48}px` : 'null'),
+        }}
         ref={(ref) => { container = ref; }}
         className={classes.portalContainer}
       />
@@ -209,11 +232,15 @@ const ToolBar = ({
 };
 
 ToolBar.propTypes = {
+  selectActiveItem: propTypes.func,
+  filterValue: propTypes.object,
+  activeItem: propTypes.object,
+  setActiveItem: propTypes.func,
   classes: propTypes.object.isRequired,
   loadComponentDetailsAction: propTypes.func.isRequired,
   closeComponentDetailsAction: propTypes.func.isRequired,
   items: propTypes.arrayOf(propTypes.object).isRequired,
-  isOpen: propTypes.bool.isRequired,
+  isOpen: propTypes.bool,
 };
 
 export default ToolBar;

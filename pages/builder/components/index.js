@@ -2,9 +2,8 @@
 import propTypes from 'prop-types';
 import ToolBar from './ToolBar';
 import Canvas from './Canvas';
-import PropsBar from './propsBar';
+import PropsBar from './PropsBar';
 import DragPreview from './DragPreview';
-
 
 const Builder = ({
   classes,
@@ -14,10 +13,6 @@ const Builder = ({
   closeDrawerAction,
   filterValue,
   isOpen,
-  // cursor,
-  // componentMap,
-  // templates,
-  // loadingTemplates,
 }) => (
   <div className={classes.root}>
     <ToolBar
@@ -32,18 +27,21 @@ const Builder = ({
     <DragPreview classes={classes}/>
     <Canvas classes={classes} />
     <PropsBar classes={classes}/>
-    {/* <Templates/> */}
   </div>
 );
 
 Builder.propTypes = {
   classes: propTypes.shape({
-    appbar: propTypes.string,
     toolbar: propTypes.string,
-    takespace: propTypes.string,
     rightbar: propTypes.string,
     index: propTypes.string,
   }).isRequired,
+  items: propTypes.object,
+  filterValue: propTypes.object,
+  isOpen: propTypes.object,
+  drawerFilterAction: propTypes.function,
+  openDrawerAction: propTypes.function,
+  closeDrawerAction: propTypes.function,
   cursor: propTypes.string,
   componentMap: propTypes.object,
   componentTree: propTypes.node,
