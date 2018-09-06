@@ -4,7 +4,6 @@ import {
   // PropTypes,
 } from 'react';
 import propTypes from 'prop-types';
-// import Drawer from '@root/components/Drawer';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,7 +21,9 @@ import TextFormatIcon from '@material-ui/icons/TextFormat';
 import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import DraggableItem from './DraggableItem';
+import ToolBarItems from './components/ToolBarItems';
+import DraggableItem from './components/DraggableItem';
+
 // import { RadioButtonBlue, TriangleRightPointing } from './custom_icons/CustomIcons';
 
 const handleMenuClick = (clickHandler, filterValue) => () => {
@@ -105,7 +106,7 @@ const PortalItems = ({
           name,
           value,
           id,
-          // position,
+          position,
         } = item;
         if (value === 'heading') {
           return (
@@ -196,10 +197,16 @@ const ToolBar = ({
   selectActiveItem,
   filterValue,
 }) => {
-  console.log(items[0].position);
+  // console.log(items[0].position);
   return (
     <ClickAwayListener onClickAway={closeComponentDetailsAction}>
       <MenuList className={classes.toolBar}>
+        <ToolBarItems
+          isOpen={isOpen}
+          filterValue={filterValue}
+          classes={classes}
+          loadComponentDetailsAction = {loadComponentDetailsAction}
+        />
         <MenuListItems
           isOpen={isOpen}
           filterValue={filterValue}
@@ -208,12 +215,12 @@ const ToolBar = ({
         />
       < div
         style={{
-          marginTop: (items.length > 0 ? `${items[0].position * 48}px` : 'null'),
+          marginTop: ((items.length > 0) && (items[0].position !== 'undefined') ? `${(items[0].position * 48) + 144}px` : 0),
         }}
         ref={(ref) => { container = ref; }}
         className={classes.portalContainer}
       />
-      { isOpen && container ? (
+      { isOpen ? (
         < Portal
           className={classes.portal}
           container={container}

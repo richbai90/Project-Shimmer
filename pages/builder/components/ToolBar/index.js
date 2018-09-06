@@ -49,7 +49,7 @@ const styles = theme => ({
 
   inactiveTool: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    height: 'auto',
+    height: theme.spacing.unit * 4,
     '&:hover': {
       background: theme.palette.secondary.main,
       color: theme.palette.common.black,
@@ -61,7 +61,7 @@ const styles = theme => ({
   },
   highlightTool: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    height: 'auto',
+    height: theme.spacing.unit * 4,
     color: theme.palette.common.white,
     background: theme.palette.backgrounds.dark,
     '&:hover': {

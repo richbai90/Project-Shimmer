@@ -42,7 +42,11 @@ const theme = createMuiTheme({
       violetBlue: '#9C74E5',
       redOrange: '#ff7d7f',
       yellowOrange: '#ffde45',
+      main: '#2D3E50',
     },
+    // secondary: {
+    //   main: '#1BBC93',
+    // },
   },
   helpers,
 });
