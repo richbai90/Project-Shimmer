@@ -46,10 +46,13 @@ const styles = theme => ({
     height: theme.spacing.unit * 4,
     width: theme.spacing.unit * 4,
   },
-
-  inactiveTool: {
+  allMenuItems: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     height: theme.spacing.unit * 4,
+  },
+  inactiveTool: {
+    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    // height: theme.spacing.unit * 4,
     '&:hover': {
       background: theme.palette.secondary.main,
       color: theme.palette.common.black,
@@ -60,8 +63,8 @@ const styles = theme => ({
     },
   },
   highlightTool: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    height: theme.spacing.unit * 4,
+    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    // height: theme.spacing.unit * 4,
     color: theme.palette.common.white,
     background: theme.palette.backgrounds.dark,
     '&:hover': {
@@ -122,11 +125,11 @@ const styles = theme => ({
   },
   portal: {
     backgroundColor: 'rgba(216, 224, 231, 0.7)',
-    zIndex: theme.zIndex.appBar + 100,
     height: '100%',
     width: theme.spacing.unit * 32,
   },
   portalContainer: {
+    zIndex: theme.zIndex.appBar + 100,
     outline: 'none',
     position: 'absolute',
     left: theme.spacing.unit * 8,

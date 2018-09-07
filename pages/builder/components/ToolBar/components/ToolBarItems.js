@@ -6,6 +6,7 @@ import TocIcon from '@material-ui/icons/Toc';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import WidgetIcon from '@material-ui/icons/Widgets';
 
+
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
 };
@@ -27,15 +28,15 @@ const ToolBarItems = ({
     <Fragment>
       {listItems.map((listItem) => {
         const {
-          title,
+          // title,
           value,
           icon,
-          position
+          // position
         } = listItem;
         return (
           <MenuItem
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
-            className={(value === filterValue ? classes.highlightTool : classes.inactiveTool)}
+            className={`${(value === filterValue ? classes.highlightTool : classes.inactiveTool)} ${classes.allMenuItems}`}
           >
               <ListItemIcon className={classes.icon}>
                 {icon}

@@ -22,7 +22,7 @@ const handleItemClick = (clickHandler, itemID) => () => {
   clickHandler(itemID);
 };
 
-const DraggableItem = ({
+const PortalItem = ({
   selectActiveItem, value, id, classes, name,
 }) => {
   switch (value) {
@@ -43,7 +43,7 @@ const DraggableItem = ({
       );
     case 'line':
       return (
-        <div>{name}</div>
+        <Typography className={classes.darkFont}>{name}</Typography>
       );
     case 'textbox':
       return (
@@ -175,10 +175,10 @@ const DraggableItem = ({
   }
 };
 
-DraggableItem.propTypes = {
+PortalItem.propTypes = {
   value: propTypes.string.isRequired,
   classes: propTypes.shape({
     marginLeft: propTypes.string,
   }),
 };
-export default DraggableItem;
+export default PortalItem;

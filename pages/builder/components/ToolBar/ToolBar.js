@@ -22,7 +22,7 @@ import FormatShapesIcon from '@material-ui/icons/FormatShapes';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import ToolBarItems from './components/ToolBarItems';
-import DraggableItem from './components/DraggableItem';
+import PortalItem from './components/PortalItem';
 
 // import { RadioButtonBlue, TriangleRightPointing } from './custom_icons/CustomIcons';
 
@@ -33,13 +33,10 @@ const handleItemClick = (clickHandler, itemID) => () => { clickHandler(itemID); 
 const handleDragStart = (clickHandler, itemID, dragging) => (
   (e) => {
     clickHandler(itemID, dragging);
-    // console.log(itemID);
   }
 );
 const handleDragEnd = (clickHandler, itemID, dragging) => (
   (e) => {
-    // const infoID = `${itemID}, ${e.target.clientHeight}, ${e.target.clientWidth}`;
-    // console.log('infoID: ', infoID);
     clickHandler(itemID, dragging);
   }
 );
@@ -48,7 +45,6 @@ const MenuListItems = ({
   classes,
   loadComponentDetailsAction,
   filterValue,
-  // isOpen
 }) => {
   const listItems = [
     { title: 'Layout', value: 'layout', icon: <CropSquareIcon/> },
@@ -62,24 +58,17 @@ const MenuListItems = ({
     <Fragment >
       {listItems.map((listItem) => {
         const {
-          // title,
           value,
           icon,
         } = listItem;
         return (
           <MenuItem
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
-            className={(value === filterValue ? classes.highlightTool : classes.inactiveTool)}
+            className={`${(value === filterValue ? classes.highlightTool : classes.inactiveTool)} ${classes.allMenuItems}`}
           >
-          {/* <Tooltip title={title} enterDelay='500' style={{ left: '25' }} placement='right' > */}
               <ListItemIcon className={classes.icon}>
                 {icon}
               </ListItemIcon>
-            {/* </Tooltip> */}
-            {/* <Typography
-              className={(value === filterValue ? classes.whiteFont : classes.lightFont)}
-            > {title}
-            </Typography> */}
           </MenuItem>
         );
       })}
@@ -90,7 +79,7 @@ const MenuListItems = ({
 MenuListItems.propTypes = {
   loadComponentDetailsAction: propTypes.func,
   isOpen: propTypes.bool,
-  filterValue: propTypes.object,
+  filterValue: propTypes.string,
   classes: propTypes.object,
 };
 
@@ -106,13 +95,11 @@ const PortalItems = ({
           name,
           value,
           id,
-          position,
         } = item;
         if (value === 'heading') {
           return (
             <div className={classes.portalHeader} key={shortid.generate()} >
               <div
-                // style={{ top: `${position * 3}px` }}
                 className={classes.cssTriangle}></div>
               < Typography
                 style={{ paddingTop: '8px' }}
@@ -142,8 +129,6 @@ const PortalItems = ({
           < Grid container
             style = {{
               height: 'fitContent',
-              // minHeight: '50px',
-              // maxHeight: '60px',
               padding: '4px',
             }}
             draggable
@@ -155,7 +140,7 @@ const PortalItems = ({
             onDragStart={handleDragStart(selectActiveItem, id, true)}
             onDragEnd={handleDragEnd(selectActiveItem, id, false)}
           >
-            < DraggableItem
+            < PortalItem
               id={id}
               key={id}
               name={name}
@@ -174,8 +159,8 @@ const PortalItems = ({
 
 PortalItems.propTypes = {
   selectActiveItem: propTypes.func,
-  activeItem: propTypes.object,
-  filterValue: propTypes.func,
+  activeItem: propTypes.string,
+  filterValue: propTypes.string,
   classes: propTypes.object,
   items: propTypes.arrayOf(
     propTypes.shape({
@@ -196,51 +181,48 @@ const ToolBar = ({
   isOpen = false,
   selectActiveItem,
   filterValue,
-}) => {
-  // console.log(items[0].position);
-  return (
-    <ClickAwayListener onClickAway={closeComponentDetailsAction}>
-      <MenuList className={classes.toolBar}>
-        <ToolBarItems
-          isOpen={isOpen}
-          filterValue={filterValue}
-          classes={classes}
-          loadComponentDetailsAction = {loadComponentDetailsAction}
-        />
-        <MenuListItems
-          isOpen={isOpen}
-          filterValue={filterValue}
-          classes={classes}
-          loadComponentDetailsAction = {loadComponentDetailsAction}
-        />
-      < div
-        style={{
-          marginTop: ((items.length > 0) && (items[0].position !== 'undefined') ? `${(items[0].position * 48) + 144}px` : 0),
-        }}
-        ref={(ref) => { container = ref; }}
-        className={classes.portalContainer}
+}) => (
+  <ClickAwayListener onClickAway={closeComponentDetailsAction}>
+    <MenuList className={classes.toolBar}>
+      <ToolBarItems
+        isOpen={isOpen}
+        filterValue={filterValue}
+        classes={classes}
+        loadComponentDetailsAction = {loadComponentDetailsAction}
       />
-      { isOpen ? (
-        < Portal
-          className={classes.portal}
-          container={container}
-        >
-          < PortalItems
-            selectActiveItem = {selectActiveItem}
-            activeItem = {activeItem}
-            items={items}
-            classes={classes}
-          />
-        </Portal>
-      ) : null }
-      </MenuList>
-    </ClickAwayListener>
-  );
-};
+      <MenuListItems
+        isOpen={isOpen}
+        filterValue={filterValue}
+        classes={classes}
+        loadComponentDetailsAction = {loadComponentDetailsAction}
+      />
+    < div
+      style={{
+        marginTop: ((items.length > 0) && (items[0].position !== 'undefined') ? `${(items[0].position * 48) + 144}px` : 0),
+      }}
+      ref={(ref) => { container = ref; }}
+      className={classes.portalContainer}
+    />
+    { isOpen ? (
+      < Portal
+        container={container}
+      >
+        < PortalItems
+          selectActiveItem = {selectActiveItem}
+          activeItem = {activeItem}
+          items={items}
+          classes={classes}
+        />
+      </Portal>
+    ) : null }
+    </MenuList>
+  </ClickAwayListener>
+);
+
 
 ToolBar.propTypes = {
   selectActiveItem: propTypes.func,
-  filterValue: propTypes.object,
+  filterValue: propTypes.string,
   activeItem: propTypes.object,
   setActiveItem: propTypes.func,
   classes: propTypes.object.isRequired,
