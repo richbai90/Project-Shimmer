@@ -3,6 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import compose from 'recompose/compose';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 import { loadTemplate } from './redux/actions/templates';
 import ToolBar from './components/ToolBar';
@@ -86,4 +89,8 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(BuilderPage);
+export default compose(
+  withStyles(styles),
+  // this page is ready for DnD
+  DragDropContext(HTML5Backend),
+)(BuilderPage);

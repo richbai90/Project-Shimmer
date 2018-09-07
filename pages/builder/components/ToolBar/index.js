@@ -44,25 +44,18 @@ const styles = theme => ({
   },
 
   inactiveTool: {
-    margin: 0,
-    marginTop: theme.spacing.unit,
-    width: theme.spacing.unit * 6,
-    height: theme.spacing.unit * 6,
-    backgroundColor: theme.palette.primary.main,
-    '& $icon': { color: theme.palette.common.white },
+    composes: 'icon',
+    color: theme.palette.common.white,
   },
   highlightTool: {
     margin: 0,
-    marginTop: theme.spacing.unit,
-    width: '3em',
-    height: '3em',
-    backgroundColor: '#ffab00',
-    '& $icon': {
-      color: theme.palette.common.black,
-    },
+    width: theme.spacing.unit * 6,
+    height: theme.spacing.unit * 6,
+    background: theme.palette.secondary.main,
+    color: theme.palette.common.black,
   },
   cssTriangle: {
-    borderLeft: '.5em solid #ffab00',
+    borderLeft: `.5em solid ${theme.palette.secondary.main}`,
     borderTop: '1.5em solid transparent',
     borderRight: '1.5em solid transparent',
     borderBottom: '1.5em solid transparent',
@@ -73,34 +66,29 @@ const styles = theme => ({
     width: 0,
     height: 0,
   },
-  cssTriangleDown: {
-    borderTop: '.5em solid #000000',
-    borderLeft: '.5em solid transparent',
-    borderRight: '.5em solid transparent',
-    borderBottom: '.5em solid transparent',
-    top: '1em',
-    bottom: '0px',
-    // left: '3em',
-    position: 'relative',
-    width: 0,
-    height: 0,
-  },
   item: {
-    // justifyContent: 'space-between',
     marginTop: theme.spacing.unit,
     mararginBottom: theme.spacing.unit,
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& $icon': {
-        color: '#42A5F5',
-      },
-    },
   },
   header: {
+<<<<<<< HEAD
     fontSize: '1.5em',
     width: '215px',
+=======
+    width: '100%',
+>>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
     margin: 0,
     textAlign: 'center',
+    background: theme.palette.secondary.main,
+    position: 'relative',
+    top: '-2em',
+    paddingTop: '2em',
+    borderRadius: '3em',
+  },
+  headerWrapper: {
+    overflowY: 'hidden',
+    position: 'relative',
+    left: '-2.3em',
   },
   subheader: {
     fontSize: '1em',
@@ -113,10 +101,11 @@ const styles = theme => ({
   },
   toolBar: {
     zIndex: theme.zIndex.appBar + 1,
-    background: theme.palette.common.white,
+    background: theme.palette.primary.main,
     width: '3em',
     padding: 0,
   },
+<<<<<<< HEAD
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -131,12 +120,25 @@ const styles = theme => ({
   buttonTypography: {
     margin: 'auto 4px auto auto',
   },
+=======
+>>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
   portal: {
     boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
     backgroundColor: 'white',
     zIndex: theme.zIndex.appBar + 100,
+<<<<<<< HEAD
     border: '2px solid #ffab00', // if there's no border on the right side, the top-right corner will not be rounded :(
+=======
+    borderLeft: `1.5em solid ${theme.palette.secondary.main}`,
+    // borderTop: `1.5em solid ${theme.palette.secondary.main}`,
+>>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
     borderRadius: '5px',
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '30em',
+    paddingLeft: '1em',
+    paddingRight: '1em',
+    paddingBottom: '1em',
   },
   portalContainer: {
     zIndex: theme.zIndex.appBar + 100,

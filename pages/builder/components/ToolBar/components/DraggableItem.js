@@ -1,26 +1,14 @@
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
-
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Radio from '@material-ui/core/Radio';
-import MenuItem from '@material-ui/core/MenuItem';
-import propTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-// import IconButton from '@material-ui/core/IconButton';
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SaveIcon from '@material-ui/icons/Save';
 import PersonIcon from '@material-ui/icons/Person';
+import propTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Checkbox from '@material-ui/core/Checkbox';
 
 // import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   RadioButtonBlue,
-  CheckboxCustIcon,
   UploadFileButton,
   Trashcan,
   TrashcanCircle,
@@ -28,7 +16,7 @@ import {
   DropdownMenuSimple,
   SaveButton,
   DefaultButton,
-} from './custom_icons/CustomIcons';
+} from '../custom_icons/CustomIcons';
 
 const handleItemClick = (clickHandler, itemID) => () => {
   clickHandler(itemID);
@@ -90,10 +78,14 @@ const DraggableItem = ({
       );
     case 'Checkbox':
       return (
+<<<<<<< HEAD:pages/builder/components/ToolBar/draggableItem.js
         <>
           <CheckboxCustIcon style={{ fill: 'orange', width: '20px', margin: 'auto auto auto 0'}}/>
           <Typography className={classes.buttonTypography} style={{ marginBottom: 'auto' }} >{name}</Typography>
         </>
+=======
+        <Checkbox />
+>>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5:pages/builder/components/ToolBar/components/DraggableItem.js
       );
     case 'Headline':
       return (
@@ -162,9 +154,29 @@ const DraggableItem = ({
       );
     case 'iconPreviews':
       return (
+<<<<<<< HEAD:pages/builder/components/ToolBar/draggableItem.js
         <>
           <DropdownMenuDetails width='75'/>
         </>
+=======
+        <Grid container>
+          <Grid item>
+            <DropdownMenuDetails width='75'/>
+          </Grid>
+          <Grid item>
+            <DropdownMenuSimple width='75'/>
+          </Grid>
+          <Grid item>
+            <Trashcan width='30' />
+          </Grid>
+          <Grid item>
+            <TrashcanCircle width='40' />
+          </Grid>
+          <Grid item>
+            <UploadFileButton width='50'/>
+          </Grid>
+        </Grid>
+>>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5:pages/builder/components/ToolBar/components/DraggableItem.js
       );
     default:
       return <Typography>Error: `{name}` preview not found.</Typography>;

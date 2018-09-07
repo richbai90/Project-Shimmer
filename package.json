@@ -19,7 +19,7 @@
     "next-redux-saga": "^3.0.0-beta.1",
     "next-redux-wrapper": "^2.0.0",
     "next-routes": "^1.4.2",
-    "npm": "^6.3.0",
+    "npm": "^6.4.1",
     "prop-types": "^15.6.2",
     "pry": "^0.8.1",
     "react": "^16.4.2",

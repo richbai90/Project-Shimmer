@@ -14,10 +14,10 @@ const jss = create(jssPreset());
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#1e88e5',
+      main: '#2D3E50',
     },
     secondary: {
-      main: '#ffab00',
+      main: '#1BBC93',
     },
   },
   helpers,
