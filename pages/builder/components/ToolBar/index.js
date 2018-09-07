@@ -51,20 +51,15 @@ const styles = theme => ({
     height: theme.spacing.unit * 4,
   },
   inactiveTool: {
-    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    // height: theme.spacing.unit * 4,
     '&:hover': {
       background: theme.palette.secondary.main,
       color: theme.palette.common.black,
     },
     '& $icon': {
       color: theme.palette.backgrounds.light,
-      // margin: '0',
     },
   },
   highlightTool: {
-    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    // height: theme.spacing.unit * 4,
     color: theme.palette.common.white,
     background: theme.palette.backgrounds.dark,
     '&:hover': {

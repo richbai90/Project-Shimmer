@@ -1,12 +1,8 @@
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import PersonIcon from '@material-ui/icons/Person';
 import propTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Checkbox from '@material-ui/core/Checkbox';
 
-// import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   RadioButtonBlue,
   UploadFileButton,
