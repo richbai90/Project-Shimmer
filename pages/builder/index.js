@@ -10,6 +10,8 @@ import { DragDropContext } from 'react-dnd';
 import { loadTemplate } from './redux/actions/templates';
 import ToolBar from './components/ToolBar';
 import Canvas from './components/Canvas';
+import PropsBar from './components/PropsBar';
+
 
 class BuilderPage extends React.Component {
   static getInitialProps() {
@@ -26,7 +28,6 @@ class BuilderPage extends React.Component {
         key: 'AppBarSave',
         icon: 'SaveIcon',
         title: 'save',
-        // click: () => console.log('hello'),
       },
       {
         text: 'Copy',
@@ -67,12 +68,13 @@ class BuilderPage extends React.Component {
   render() {
     const {
       classes,
+      activeItem,
     } = this.props;
-
     return (
       <div className={classes.root}>
         <ToolBar />
         <Canvas />
+        <PropsBar activeItem={activeItem}/>
       </div>
     );
   }
@@ -80,6 +82,7 @@ class BuilderPage extends React.Component {
 
 BuilderPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  activeItem: PropTypes.object,
 };
 
 const styles = theme => ({

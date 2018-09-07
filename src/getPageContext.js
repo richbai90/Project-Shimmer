@@ -14,11 +14,39 @@ const jss = create(jssPreset());
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2D3E50',
+      lighter: '#b6ddff',
+      light: '#70bcff',
+      main: '#1e88e5',
+      dark: '#0a4980',
+      darker: '#073054',
+      darkest: '#18242f',
+      bgDark: '#0b283d',
+      bgLight: '#0f3b5a',
+      contrastText: '#fff',
     },
     secondary: {
-      main: '#1BBC93',
+      light: '#ffd57f',
+      main: '#ffab00',
+      dark: '#7d5400',
+      darker: '#452e00',
+      contrastText: '#fff',
     },
+    backgrounds: {
+      light: '#8dabc0',
+      dark: '#0f3b5a',
+      darker: '#0b283d',
+    },
+    other: {
+      greenBlue: '#1ed7e5',
+      darkGreenBlue: '#10777f',
+      violetBlue: '#9C74E5',
+      redOrange: '#ff7d7f',
+      yellowOrange: '#ffde45',
+      main: '#2D3E50',
+    },
+    // secondary: {
+    //   main: '#1BBC93',
+    // },
   },
   helpers,
 });
