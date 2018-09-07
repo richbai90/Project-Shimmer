@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import PersonIcon from '@material-ui/icons/Person';
 import propTypes from 'prop-types';
 
-// import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   RadioButtonBlue,
   UploadFileButton,

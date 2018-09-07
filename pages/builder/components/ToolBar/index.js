@@ -51,20 +51,15 @@ const styles = theme => ({
     height: theme.spacing.unit * 4,
   },
   inactiveTool: {
-    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    // height: theme.spacing.unit * 4,
     '&:hover': {
       background: theme.palette.secondary.main,
       color: theme.palette.common.black,
     },
     '& $icon': {
       color: theme.palette.backgrounds.light,
-      // margin: '0',
     },
   },
   highlightTool: {
-    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    // height: theme.spacing.unit * 4,
     color: theme.palette.common.white,
     background: theme.palette.backgrounds.dark,
     '&:hover': {
@@ -105,7 +100,6 @@ const styles = theme => ({
   },
   header: {
     fontSize: '1.5em',
-    width: '215px',
     margin: 0,
     textAlign: 'center',
     color: 'black',
@@ -117,15 +111,6 @@ const styles = theme => ({
     backgroundColor: 'rgba(28, 59, 87, 0.85)',
   },
   marginLeft: { marginLeft: theme.spacing.unit },
-  toolBarDrawer: {
-    width: '25px',
-  },
-  toolBar: {
-    zIndex: theme.zIndex.appBar + 1,
-    background: theme.palette.primary.main,
-    width: '3em',
-    padding: 0,
-  },
   textField: {
     margin: `0 ${theme.spacing.unit} 0 ${theme.spacing.unit}`,
     width: theme.spacing.unit * 50,
@@ -134,17 +119,9 @@ const styles = theme => ({
     margin: 'auto 4px auto auto',
   },
   portal: {
-    boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
-    backgroundColor: 'white',
-    zIndex: theme.zIndex.appBar + 100,
-    border: '2px solid #ffab00',
-    borderRadius: '5px',
-    display: 'flex',
-    flexDirection: 'column',
-    minWidth: '30em',
-    paddingLeft: '1em',
-    paddingRight: '1em',
-    paddingBottom: '1em',
+    backgroundColor: 'rgba(216, 224, 231, 0.7)',
+    height: '100%',
+    width: theme.spacing.unit * 32,
   },
   portalContainer: {
     zIndex: theme.zIndex.appBar + 100,
