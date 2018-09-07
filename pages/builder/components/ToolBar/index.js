@@ -71,12 +71,8 @@ const styles = theme => ({
     mararginBottom: theme.spacing.unit,
   },
   header: {
-<<<<<<< HEAD
     fontSize: '1.5em',
     width: '215px',
-=======
-    width: '100%',
->>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
     margin: 0,
     textAlign: 'center',
     background: theme.palette.secondary.main,
@@ -105,7 +101,6 @@ const styles = theme => ({
     width: '3em',
     padding: 0,
   },
-<<<<<<< HEAD
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -120,18 +115,11 @@ const styles = theme => ({
   buttonTypography: {
     margin: 'auto 4px auto auto',
   },
-=======
->>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
   portal: {
     boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
     backgroundColor: 'white',
     zIndex: theme.zIndex.appBar + 100,
-<<<<<<< HEAD
-    border: '2px solid #ffab00', // if there's no border on the right side, the top-right corner will not be rounded :(
-=======
-    borderLeft: `1.5em solid ${theme.palette.secondary.main}`,
-    // borderTop: `1.5em solid ${theme.palette.secondary.main}`,
->>>>>>> 18e97922825527e0e6be6fda631b867c8ed378b5
+    border: '2px solid #ffab00',
     borderRadius: '5px',
     display: 'flex',
     flexDirection: 'column',
@@ -169,9 +157,3 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
 )(ToolBar);
-
-//        <>
-        // </*<div>
-        //   <DropdownMenuDetails style={{ width: '75px', justify: 'right' }}/>
-        // </div>*/>
-        // </>
