@@ -10,6 +10,7 @@ import PropsBarComponent from './PropsBar';
    And to dispatch to change the state of the activeItem.
 */
 
+
 const mapStateToProps = ({ builder }) => {
   const {
     activeItem,
@@ -20,11 +21,15 @@ const mapStateToProps = ({ builder }) => {
 };
 
 class PropsBar extends Component {
+  state = {
+    objectProps: {},
+  }
+
   // componentDidUpdate( ){}
 
   render() {
     return (
-      <PropsBarComponent { ...this.props}/>
+      <PropsBarComponent { ...this.props} />
     );
   }
 }
@@ -46,6 +51,17 @@ const styles = theme => ({
     height: '30px',
     width: '100%',
     textAlign: 'center',
+    color: 'white',
+  },
+  label: {
+    fontFamily: 'Tahoma, Geneva, sans-serif',
+    height: '9px',
+  },
+  inputs: {
+    border: 0,
+    outline: 0,
+    background: 'transparent',
+    borderBottom: '1px solid white',
     color: 'white',
   },
 });

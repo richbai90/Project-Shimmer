@@ -1,11 +1,10 @@
 import { Fragment } from 'react';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuItem from '@material-ui/core/MenuItem';
-import Tooltip from '@material-ui/core/Tooltip';
+// import Tooltip from '@material-ui/core/Tooltip';
 import TocIcon from '@material-ui/icons/Toc';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import WidgetIcon from '@material-ui/icons/Widgets';
-
 
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
@@ -38,9 +37,9 @@ const ToolBarItems = ({
             onClick={handleMenuClick(loadComponentDetailsAction, value)}
             className={`${(value === filterValue ? classes.highlightTool : classes.inactiveTool)} ${classes.allMenuItems}`}
           >
-              <ListItemIcon className={classes.icon}>
-                {icon}
-              </ListItemIcon>
+            <ListItemIcon className={classes.icon}>
+              {icon}
+            </ListItemIcon>
           </MenuItem>
         );
       })}

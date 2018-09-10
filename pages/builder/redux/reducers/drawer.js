@@ -7,7 +7,7 @@ const items = [
 
   // Layout -- will tend to be background components, containers...
   {
-    name: 'Layout', value: 'heading', parent: 'layout', position: '0', id: 'drawer/header_layout',
+    name: 'Layout', value: 'heading', parent: 'layout', position: 0, id: 'drawer/header_layout',
   },
   {
     name: 'Line', value: 'line', parent: 'layout', id: 'drawer/line',
@@ -36,7 +36,7 @@ const items = [
 
   // Form ... small elements can only be placed inside form container.
   {
-    name: 'Forms', value: 'heading', parent: 'forms', position: '1', id: 'drawer/header_forms',
+    name: 'Forms', value: 'heading', parent: 'forms', position: 1, id: 'drawer/header_forms',
   },
   {
     name: 'Templates', value: 'formsTemplates', parent: 'forms', id: 'drawer/formsTemplates',
@@ -77,7 +77,7 @@ const items = [
 
   // Text and Labels
   {
-    name: 'Text and Labels', value: 'heading', parent: 'text', position: '2', id: 'drawer/header_text',
+    name: 'Text and Labels', value: 'heading', parent: 'text', position: 2, id: 'drawer/header_text',
   },
   {
     name: 'Label', value: 'label', parent: 'text', id: 'drawer/text_label',
@@ -100,7 +100,7 @@ const items = [
 
   // Tables and Charts
   {
-    name: 'Tables and Charts', value: 'heading', parent: 'charts', position: '3', id: 'drawer/header_charts',
+    name: 'Tables and Charts', value: 'heading', parent: 'charts', position: 3, id: 'drawer/header_charts',
   },
   {
     name: 'Subheading', value: 'subheading', parent: 'charts', id: 'drawer/sub_SB',
@@ -116,11 +116,11 @@ const items = [
   },
 
   // Insert Image
-  // { name: 'Image', value: 'image', parent: 'image', position: '4', id: 'drawer/header_image' },
+  // { name: 'Image', value: 'image', parent: 'image', position: 4, id: 'drawer/header_image' },
 
   // Buttons:
   {
-    name: 'Buttons', value: 'heading', parent: 'buttons', position: '4', id: 'drawer/header_buttons',
+    name: 'Buttons', value: 'heading', parent: 'buttons', position: 4, id: 'drawer/header_buttons',
   },
   {
     name: 'default', value: 'default', parent: 'buttons', id: 'drawer/btn_default',
