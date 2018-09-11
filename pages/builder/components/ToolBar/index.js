@@ -3,28 +3,45 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
-import ToolBarComponent from './ToolBar';
+import ToolbarComponent from './Toolbar';
 import { loadComponentDetailsAction, closeDrawerAction } from '../../redux/actions/drawer';
 import { selectActiveItem } from '../../redux/actions/draggable';
 
-class ToolBar extends Component {
+class Toolbar extends Component {
+  state = {
+    portalFilter: '',
+  };
+
+  setPortalFilter(portalFilter) {
+    this.setState({ portalFilter });
+    console.log('I got sent to index.js!!', this.state);
+  }
+
   render() {
     return (
-      <ToolBarComponent {...this.props}/>
+      <ToolbarComponent
+        {...this.props}
+        portalFilter={this.state.portalFilter}
+        setPortalFilter={this.setPortalFilter.bind(this)}
+      />
     );
   }
 }
 
 const mapStateToProps = ({ builder }) => {
   const {
-    isOpen,
-    filterValue,
+    portalFilter,
+
+    // isOpen,
+    // filterValue,
     activeItem,
     items,
   } = builder.drawer;
   return {
-    isOpen,
-    filterValue,
+    portalFilter,
+
+    // isOpen,
+    // filterValue,
     activeItem,
     items,
   };
@@ -159,4 +176,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles),
-)(ToolBar);
+)(Toolbar);
