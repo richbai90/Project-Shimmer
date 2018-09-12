@@ -13,13 +13,17 @@ import {
   DefaultButton,
   CheckboxCustIcon,
 } from '../custom_icons/CustomIcons';
+//
+// const handleItemClick = (clickHandler, itemID) => () => {
+//   clickHandler(itemID);
+// };
 
-const handleItemClick = (clickHandler, itemID) => () => {
-  clickHandler(itemID);
-};
-
-const PortalItem = ({
-  selectActiveItem, value, id, classes, name,
+const PortalItems = ({
+  // selectActiveItem,
+  value,
+  // id,
+  classes,
+  name,
 }) => {
   switch (value) {
     case 'card':
@@ -68,14 +72,14 @@ const PortalItem = ({
     case 'radioBtn':
       return (
         < >
-          <RadioButtonBlue style={{ width: '20px', height: '20px', margin: 'auto auto auto 0'}}/>
+          <RadioButtonBlue style={{ width: '20px', height: '20px', margin: 'auto auto auto 0' }}/>
           <Typography className={classes.darkFont} style={{ marginBottom: 'auto' }} >{name}</Typography>
         </>
       );
     case 'checkbox':
       return (
         <>
-          <CheckboxCustIcon style={{ fill: 'orange', width: '20px', margin: 'auto auto auto 0'}}/>
+          <CheckboxCustIcon style={{ fill: 'orange', width: '20px', margin: 'auto auto auto 0' }}/>
           <Typography className={classes.darkFont} style={{ marginBottom: 'auto' }} >{name}</Typography>
         </>
       );
@@ -171,10 +175,10 @@ const PortalItem = ({
   }
 };
 
-PortalItem.propTypes = {
+PortalItems.propTypes = {
   value: propTypes.string.isRequired,
   classes: propTypes.shape({
     marginLeft: propTypes.string,
   }),
 };
-export default PortalItem;
+export default PortalItems;

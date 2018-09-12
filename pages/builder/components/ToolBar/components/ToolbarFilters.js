@@ -6,15 +6,18 @@ import TocIcon from '@material-ui/icons/Toc';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import WidgetIcon from '@material-ui/icons/Widgets';
 
+/* TODO: need to set up toolBarfilter for this condidtional highligning to work
+   future: set this up so that these three buttons actually filter through the toolbar,
+   maybe have an expandable menu for their children?
+*/
+
 const handleMenuClick = (clickHandler, filterValue) => () => {
   clickHandler(filterValue);
 };
 
-const ToolBarItems = ({
+const ToolbarFilters = ({
   classes,
-  loadComponentDetailsAction,
   filterValue,
-  isOpen
 }) => {
   const listItems = [
     { title: 'Pages', value: 'pages', icon: <TocIcon/>, position: 0 },
@@ -34,7 +37,7 @@ const ToolBarItems = ({
         } = listItem;
         return (
           <MenuItem
-            onClick={handleMenuClick(loadComponentDetailsAction, value)}
+            // onClick={handleMenuClick(loadComponentDetailsAction, value)}
             className={`${(value === filterValue ? classes.highlightTool : classes.inactiveTool)} ${classes.allMenuItems}`}
           >
             <ListItemIcon className={classes.icon}>
@@ -47,4 +50,4 @@ const ToolBarItems = ({
   );
 };
 
-export default ToolBarItems;
+export default ToolbarFilters;

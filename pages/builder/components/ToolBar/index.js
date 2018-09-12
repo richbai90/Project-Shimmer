@@ -10,19 +10,32 @@ import { selectActiveItem } from '../../redux/actions/draggable';
 class Toolbar extends Component {
   state = {
     portalFilter: '',
+    portalOpen: false,
+    portalItems: [],
   };
 
   setPortalFilter(portalFilter) {
-    this.setState({ portalFilter });
-    console.log('I got sent to index.js!!', this.state);
+    this.setState({ portalFilter, portalOpen: true });
+  }
+
+  setPortalExistance(portalOpen) {
+    this.setState({ portalOpen });
+  }
+
+  updatePortalItems(items) {
+    this.setState({ portalItems: items });
   }
 
   render() {
     return (
       <ToolbarComponent
         {...this.props}
+        portalOpen={this.state.portalOpen}
+        portalItems={this.state.portalItems}
         portalFilter={this.state.portalFilter}
         setPortalFilter={this.setPortalFilter.bind(this)}
+        updatePortalItems={this.updatePortalItems.bind(this)}
+        setPortalExistance={this.setPortalExistance.bind(this)}
       />
     );
   }
@@ -31,19 +44,15 @@ class Toolbar extends Component {
 const mapStateToProps = ({ builder }) => {
   const {
     portalFilter,
-
-    // isOpen,
-    // filterValue,
     activeItem,
     items,
+    portalOpen,
   } = builder.drawer;
   return {
     portalFilter,
-
-    // isOpen,
-    // filterValue,
     activeItem,
     items,
+    portalOpen,
   };
 };
 

@@ -1,9 +1,7 @@
-import { clone } from 'lodash';
-import {
-  OPEN_DRAWER, CLOSE_DRAWER, SET_DRAWER_FILTER,
-} from '../types/drawer';
+/* eslint object-curly-newline: ["error", { "consistent": true }] */
+/* eslint-env es6 */
 
-const items = [
+const PortalItemList = [
   // Layout -- will tend to be background components, containers...
   { name: 'Layout', value: 'heading', parent: 'layout', position: 0, id: 'drawer/header_layout' },
   { name: 'Line', value: 'line', parent: 'layout', id: 'drawer/line' },
@@ -54,30 +52,4 @@ const items = [
   { name: 'Action', value: 'action', parent: 'buttons', id: 'drawer/btn_action' },
 ];
 
-const defaultState = {
-  isOpen: false,
-  items,
-};
-
-const setFilter = (initialState, filter) => {
-  const newState = clone(initialState);
-  const newArray = items.filter(item => item.parent === filter);
-  newState.filterValue = filter;
-  newState.items = newArray;
-  // newState.isOpen = newArray.length > 1 ? newState.isOpen = true : newState.isOpen = false;
-  return newState;
-};
-
-
-export default (state = defaultState, { payload, type }) => {
-  switch (type) {
-    case OPEN_DRAWER:
-      return Object.assign({}, state, { ...payload });
-    case CLOSE_DRAWER:
-      return Object.assign({}, state, { ...payload });
-    case SET_DRAWER_FILTER:
-      return setFilter(state, payload.filter);
-    default:
-      return state;
-  }
-};
+export default PortalItemList;
