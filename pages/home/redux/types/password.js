@@ -1,2 +1,0 @@
-export const PASSWORD_OPEN = 'PASSWORD/OPEN';
-export const PASSWORD_CLOSE = 'PASSWORD/CLOSE';
