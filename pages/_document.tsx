@@ -1,12 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Document, { Head, Main, NextScript } from 'next/document';
+import React, { ReactNode, ReactElement } from 'react';
+import Document, { Head, Main, NextScript, NextDocumentContext, AnyPageProps, WebclientDocumentProps } from 'next/document';
 import flush from 'styled-jsx/server';
 import Error from 'next/error';
+import { ApplicationDocumentContext } from 'next';
+import { Request, Response } from 'express';
+import getPageContext from 'src/mui/getPageContext';
+
+declare module 'next' {
+  interface ExpressContext {
+    req?: Request;
+    res?: Response;
+  }
+
+  export type ApplicationDocumentContext = ApplicationContext & NextDocumentContext
+
+  export type ApplicationContext = Omit<NextContext, 'req'|'res'> & ExpressContext
+  
+}
+
+declare module 'next/document' {
+  interface MuiDocumentProps {
+    styles?: ReactElement<any>[]|JSX.Element
+  }
+
+  export type WebclientDocumentProps = Omit<DocumentProps, 'styles'> & MuiDocumentProps
+}
 
 class MyDocument extends Document {
 
-  static getInitialProps = ctx => {
+  static getInitialProps(ctx : ApplicationDocumentContext ) : WebclientDocumentProps {
     // Resolution order
     //
     // On the server:
@@ -30,16 +52,20 @@ class MyDocument extends Document {
     // 4. page.render
   
     // Render app and page and get the context of the page with collected side effects.
-    let pageContext;
+    let pageContext = getPageContext(); // this is going to be passed from the app page, but to be certain we'll declare it here explicitely
     const page = ctx.renderPage(Component => {
-      const WrappedComponent = (props : {[index : string] : any, pageContext: {[index : string] : any}}) => {
+      const WrappedComponent = (props : (AnyPageProps & {children? : ReactNode}) ) => {
         pageContext = props.pageContext;
         return <Component {...props} />;
       };
       return WrappedComponent;
     });
-    const { nonce } = ctx.res.locals;
-    const { statusCode } = ctx.res;
+    let nonce = '';
+    let statusCode = 200;
+    if(ctx.res) {
+      nonce = ctx.res.locals.nonce!;
+      statusCode = ctx.res.statusCode;
+    }
   
     return {
       statusCode,
@@ -47,15 +73,15 @@ class MyDocument extends Document {
       pageContext,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: (
-        <React.Fragment>
+        <>
           <style
             nonce={nonce}
             id="jss-server-side"
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
+            dangerouslySetInnerHTML={{ __html: (pageContext!).sheetsRegistry.toString() }}
           />
           {flush() || null}
-        </React.Fragment>
+        </>
       ),
       nonce,
     };

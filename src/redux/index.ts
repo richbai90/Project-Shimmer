@@ -13,7 +13,7 @@ declare module 'redux' {
 
 const sagaMiddleware = createSagaMiddleware();
 
-function configureStore(initialState) {
+function configureStore(initialState : any) {
   const store = createStore(
     rootReducer,
     initialState,

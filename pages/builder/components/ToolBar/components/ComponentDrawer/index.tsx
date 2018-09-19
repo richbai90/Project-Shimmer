@@ -1,7 +1,8 @@
 import { Component } from "react";
 import componentDefinitions from '../../componentDefinitions'
-import ComponentDrawerComponent from './ComponentDrawer';
-import { ToolbarStyles } from "./styles";
+import ComponentDrawer from './ComponentDrawer';
+import styles, { ToolbarStyles } from "./styles";
+import { withStyles } from "@material-ui/core";
 
 interface ComponentDrawerState {
   portalFilter: string;
@@ -9,7 +10,7 @@ interface ComponentDrawerState {
   portalItems: typeof componentDefinitions;
 }
 
-class ComponentDrawer extends Component<{classes: ToolbarStyles}> {
+class ComponentDrawerContainer extends Component<{classes: ToolbarStyles}> {
   setPortalFilter(portalFilter : string) {
     this.setState({ portalFilter, portalOpen: true });
   }
@@ -29,10 +30,12 @@ class ComponentDrawer extends Component<{classes: ToolbarStyles}> {
   };
 
   render() {
-    return <ComponentDrawerComponent
+    return <ComponentDrawer
       portalFilter={this.state.portalFilter}
       classes={this.props.classes}
       componentsToRender={this.state.portalItems}
      />
   }
 }
+
+export default withStyles(styles)(ComponentDrawerContainer)

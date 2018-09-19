@@ -4,9 +4,10 @@ import compose from 'recompose/compose';
 import Toolbar from './Toolbar';
 import componentDefinitions from './componentDefinitions'
 import toolbarStyles, { ToolbarStyles } from './styles'
+import { CategoryValues } from './components/Categories';
 
 interface ToolbarState {
-  componentDrawerFilter: string;
+  componentDrawerFilter: CategoryValues;
   portalOpen: boolean;
   filteredComponents: typeof componentDefinitions;
   activeItem: string;
@@ -14,15 +15,15 @@ interface ToolbarState {
 
 interface ToolbarContainerProps {classes: ToolbarStyles}
 
-class ToolbarContainer extends Component<ToolbarContainerProps> {
-  state : ToolbarState = {
-    componentDrawerFilter: '',
+class ToolbarContainer extends Component<ToolbarContainerProps, ToolbarState> {
+  state = {
+    componentDrawerFilter: '' as CategoryValues,
     portalOpen: false,
     filteredComponents: [],
     activeItem: '',
   };
 
-  toggleComponentDrawer(componentDrawerFilter : string ) {
+  toggleComponentDrawer(componentDrawerFilter : CategoryValues ) {
     const filteredComponents = componentDefinitions.filter(
       definition => definition.value === componentDrawerFilter,
     );
@@ -37,7 +38,7 @@ class ToolbarContainer extends Component<ToolbarContainerProps> {
         portalOpen={this.state.portalOpen}
         filteredComponents={this.state.filteredComponents}
         componentDrawerFilter={this.state.componentDrawerFilter}
-        toggleComponentDrawer={ ( filter : string ) => () => this.toggleComponentDrawer(filter) }
+        toggleComponentDrawer={ ( filter : CategoryValues ) => () => this.toggleComponentDrawer(filter) }
       />
     );
   }

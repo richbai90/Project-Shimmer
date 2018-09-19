@@ -21,8 +21,10 @@ interface NewRouter extends Registry {
     routes: Array<Route>
 }
 
-export default (new Routes()
-  .add('about')
-  .add('/', 'home')
-  .add('/login', 'login')
-  .add('/builder', 'builder')) as NewRouter;
+export default (
+  new Routes()
+    .add('about')
+    .add('/', 'home')
+    .add('/login', 'login')
+    .add('/builder', 'builder')
+  ) as NewRouter;

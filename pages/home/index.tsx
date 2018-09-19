@@ -30,6 +30,6 @@ class Index extends React.Component<Props, {}> {
     );
   }
 }
-export default compose(
+export default compose<Props, {}>(
   withStyles(styles),
 )(Index);

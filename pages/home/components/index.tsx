@@ -1,6 +1,7 @@
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-export default ({ classes, linker: Link }) => (
+
+const Home : React.SFC<{classes : any; linker: any;}> =  ({ classes, linker: Link }) => (
   <div className={classes.root}>
     <Typography variant="display1" gutterBottom>
       Material-UI
@@ -28,3 +29,5 @@ export default ({ classes, linker: Link }) => (
     </Button>
   </div>
 );
+
+export default Home;

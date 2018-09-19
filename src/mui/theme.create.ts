@@ -1,5 +1,5 @@
 import { default as createMuiTheme, ThemeOptions, Theme } from '@material-ui/core/styles/createMuiTheme';
-import helpers, { Helpers } from './theme.helpers';
+import { Helpers } from './theme.helpers';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {

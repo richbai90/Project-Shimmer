@@ -8,14 +8,12 @@ import componentDefinitions from './componentDefinitions';
 import Categories, { CategoryValues } from './components/Categories';
 
 export interface ToolbarProps {
-  activeItem: string;
+  activeItem?: string;
   classes: ToolbarStyles;
   portalOpen: boolean;
   filteredComponents: typeof componentDefinitions;
-  selectActiveItem: ( item : string ) => void;
-  setPortalFilter: ( filter : string ) => void;
-  setPortalExistance: ( exists : boolean ) => void;
-  portalFilter: CategoryValues;
+  componentDrawerFilter?: CategoryValues;
+  toggleComponentDrawer: ( filter : CategoryValues ) => void;
 }
 
 let container : any; // TODO 09/17/2018 Rich Baird : File a bug report with MUI their prop definition doesn't match
@@ -25,16 +23,14 @@ const Toolbar : React.SFC<ToolbarProps> = ({
   classes,
   portalOpen = false,
   filteredComponents,
-  selectActiveItem,
-  portalFilter,
-  setPortalFilter,
+  componentDrawerFilter = "",
 }) => (
-    <ClickAwayListener onClickAway={setPortal(false)}>
+    <ClickAwayListener onClickAway={() => false}> // TODO 09/19/2018 Rich Baird : Fix this
       <MenuList className={classes.toolbar}>
         <Categories
-          portalFilter={portalFilter}
+          componentDrawerFilter={componentDrawerFilter}
           classes={classes}
-          setPortalFilter = {setPortalFilter}
+          setPortalFilter={ () => false} // TODO 09/19/2018 Rich Baird : Fix this
         />
       <div
         style={{ marginTop: `${filteredComponents.length && ( (filteredComponents[0].position || -3 ) + 3)  * 48 }px` }}
@@ -44,11 +40,10 @@ const Toolbar : React.SFC<ToolbarProps> = ({
         { portalOpen === true ? (
           <Portal container={container} >
             <ComponentDrawer
-              selectActiveItem = {selectActiveItem}
-              activeItem = {activeItem}
-              classes={classes}
-              portalFilter={portalFilter}
-              filteredComponents={filteredComponents}
+              // selectActiveItem = {selectActiveItem}
+              // activeItem = {activeItem}
+              // componentDrawerFilter={componentDrawerFilter}
+              // filteredComponents={filteredComponents}
             />
           </Portal>
         ) : null }
