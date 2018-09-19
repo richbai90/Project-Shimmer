@@ -1,5 +1,5 @@
 import { default as createMuiTheme, ThemeOptions, Theme } from '@material-ui/core/styles/createMuiTheme';
-import { Helpers } from './theme.helpers';
+import helpers, { Helpers } from './theme.helpers';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
@@ -25,5 +25,6 @@ export default createTheme({
     secondary: {
       main: '#1BBC93',
     },
-  }
+  },
+  helpers,
 });

@@ -72,3 +72,8 @@ declare module 'next-redux-saga' {
   function withReduxSaga<T>(arg: function | Partial<{[index : string] : any; async: boolean; }>) : T
   export default withReduxSaga;
 }
+
+// TODO 09/19/2018 Rich Baird : Define relevant types
+declare module 'jss-preset-default' {
+  export default () => any;
+}

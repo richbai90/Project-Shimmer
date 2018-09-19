@@ -1,6 +1,6 @@
 import ToolBar from "./ToolBar";
 import Canvas from "./Canvas";
-import PropsBar from "./propsBar";
+import PropsBar from "./PropsBar";
 
 type BuilderProps = {
   classes: {

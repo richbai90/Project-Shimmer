@@ -16,9 +16,10 @@ interface ToolbarFilterProps {
   filterValue: string;
 }
 
-const handleMenuClick = (clickHandler : (filterValue : string) => void, filterValue : string) => () => {
-  clickHandler(filterValue);
-};
+// TODO 09/19/2018 Rich Baird : Fix all of this
+// const handleMenuClick = (clickHandler : (filterValue : string) => void, filterValue : string) => () => {
+//   clickHandler(filterValue);
+// };
 
 const ToolbarFilters : React.SFC<ToolbarFilterProps> = ({ classes, filterValue }) => {
   const listItems = [

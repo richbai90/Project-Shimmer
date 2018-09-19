@@ -1,7 +1,7 @@
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuList from '@material-ui/core/MenuList';
 import Portal from '@material-ui/core/Portal';
-import ToolbarFilters from './components/ToolbarFilters';
+// import ToolbarFilters from './components/ToolbarFilters';
 import ComponentDrawer from './components/ComponentDrawer';
 import { ToolbarStyles } from './styles';
 import componentDefinitions from './componentDefinitions';
@@ -19,7 +19,7 @@ export interface ToolbarProps {
 let container : any; // TODO 09/17/2018 Rich Baird : File a bug report with MUI their prop definition doesn't match
 
 const Toolbar : React.SFC<ToolbarProps> = ({
-  activeItem = '',
+  // activeItem = '',
   classes,
   portalOpen = false,
   filteredComponents,
@@ -40,6 +40,7 @@ const Toolbar : React.SFC<ToolbarProps> = ({
         { portalOpen === true ? (
           <Portal container={container} >
             <ComponentDrawer
+            // TODO 09/19/2018 Rich Baird : Fix all of this
               // selectActiveItem = {selectActiveItem}
               // activeItem = {activeItem}
               // componentDrawerFilter={componentDrawerFilter}

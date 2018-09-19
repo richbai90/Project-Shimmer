@@ -3,8 +3,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 type PropsBarProps = {
   activeItem?: object,
-  classes?: {
-    root?: string;
+  classes: {
+    root: string;
     gridContainer: string;
     header: string;
   }
