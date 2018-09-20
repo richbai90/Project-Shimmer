@@ -8,10 +8,13 @@ import withReduxSaga from 'next-redux-saga';
 import { Fragment } from 'react';
 import { merge } from 'lodash';
 
+import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
 import Spacer from '../components/Spacer';
 import AppBar from '../components/AppBar';
 import getPageContext from '../src/getPageContext';
 import configureStore from '../redux';
+
+TouchRipple.prototype.render = () => null; // Disables TouchRipple throughout
 
 class Webclient extends App {
   constructor(props) {
