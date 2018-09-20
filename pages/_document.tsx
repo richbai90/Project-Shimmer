@@ -60,12 +60,16 @@ class MyDocument extends Document {
       };
       return WrappedComponent;
     });
+    
     let nonce = '';
     let statusCode = 200;
     if(ctx.res) {
+      debugger;
       nonce = ctx.res.locals.nonce!;
       statusCode = ctx.res.statusCode;
     }
+
+    console.log(nonce);
   
     return {
       statusCode,
@@ -88,6 +92,7 @@ class MyDocument extends Document {
   };
 
   render() {
+    console.log(this.props.nonce);
     const { pageContext, nonce, statusCode } = this.props;
     if (statusCode > 200) return <Error statusCode={this.props.statusCode} />;
     return (

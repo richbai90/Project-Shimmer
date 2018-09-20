@@ -12,23 +12,43 @@ const routes = require('./src/routes');
 
 const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handler = routes.getRequestHandler(app);
+const env = process.env.NODE_ENV || 'dev';
+
+console.log(env);
 
 const configureApp = (server) => {
-  const whiteList = [
-    /^\/_next\/webpack-hmr$/,
-    /^\/_next\/webpack\/(\d*\.)?[a-z0-9]{20}\.{1}hot-update\.{1}(json|js|js\.map)$/,
-    /^\/_next\/static\/commons\/(main|manifest)\.{1}js(\.map)?$/,
-    /^\/_next\/-\/page\/(_(app|document|error)|index)\.{1}js(\.map)?$/,
-  ];
+  let whiteList = [];
+  if (env === 'dev') {
+    whiteList = [
+      /^\/_next\/webpack-hmr$/,
+      /^\/_next\/webpack\/(\d*\.)?[a-z0-9]{20}\.{1}hot-update\.{1}(json|js|js\.map)$/,
+      /^\/_next\/static\/commons\/(main|manifest)\.{1}js(\.map)?$/,
+      /^\/_next\/-\/page\/(_(app|document|error)|index)\.{1}js(\.map)?$/,
+      /^\/_next\/static\/development\/pages\/_app\.js/,
+      /^\/_next\/static\/development\/pages\/_error\.js/,
+      /^\/_next\/static\/development\/dll\/dll_[a-z0-9]+\.js/,
+    ];
+  }
 
 
   for (let i = 0; i < routes.routes.length; i++) {
     const route = routes.routes[i];
-    whiteList.push(new RegExp(`^\\/_next\\/-\\/page\\${route.page}\\.{1}js(\\.map)?$`));
-    whiteList.push(new RegExp(`^\\/_next\\/on-demand-entries-ping\\?page=\\${route.page}$`));
-    whiteList.push(/_next\/webpack\/chunks\/[a-zA-Z\d-_]+\.js$/);
+    if (env === 'dev') whiteList.push(new RegExp(`^\\/_next\\/-\\/page\\${route.page}\\.{1}js(\\.map)?$`));
+    if (env === 'dev') whiteList.push(new RegExp(`^\\/_next\\/on-demand-entries-ping\\?page=\\${route.page}$`));
+    if (env === 'dev') whiteList.push(new RegExp(`^\\/_next\\/static\\/development\\/pages\\${route.page}\\.js`));
     whiteList.push(route.regex);
   }
+
+  whiteList.push(/_next\/webpack\/chunks\/[a-zA-Z\d-_]+\.js$/);
+
+  whiteList = [
+    ...whiteList,
+    /_next\/webpack\/chunks\/[a-zA-Z\d-_]+\.js$/,
+    /_next\/static\/runtime\/webpack\.js/,
+    /_next\/static\/runtime\/main\.js/,
+  ];
+
+  if (env === 'dev') console.log(whiteList);
 
   server.use(session({
     secret: 'Kuxo9R4E1W+fzC9a/aJohGnCCJcRlnXA1VXhUNxiYzLWtDt1xamoQh/2E68gFUycrNa674Q3gHhbaKilVz07VSA/DZcjJ6LoEUTpuWHNAbKgILA26o2YyuN1PafG/ZzsNdPCfmf9IRrUEBupUHGpZcOje5p6yy0GjLkVBg71XEQ=',
@@ -66,6 +86,7 @@ const configureApp = (server) => {
     if (match) {
       n();
     } else {
+      if (env === 'dev') console.log(req.url);
       res.status(404).send('Not Found');
     }
   });

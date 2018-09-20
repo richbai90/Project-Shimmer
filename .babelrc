@@ -3,13 +3,13 @@
     "development": {
       "presets": [
         "next/babel",
-        "@zeit/next-typescript/babel"
+        "@babel/preset-typescript"
       ]
     },
     "production": {
       "presets": [
         "next/babel",
-        "@zeit/next-typescript/babel"
+        "@babel/preset-typescript"
       ]
     }
   }
