@@ -14,7 +14,7 @@ const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handler = routes.getRequestHandler(app);
 const env = process.env.NODE_ENV || 'dev';
 
-console.log(env);
+// bypassing all the custom server configuration for the purposes of testing
 
 const configureApp = (server) => {
   let whiteList = [];
@@ -39,16 +39,14 @@ const configureApp = (server) => {
     whiteList.push(route.regex);
   }
 
-  whiteList.push(/_next\/webpack\/chunks\/[a-zA-Z\d-_]+\.js$/);
-
   whiteList = [
     ...whiteList,
     /_next\/webpack\/chunks\/[a-zA-Z\d-_]+\.js$/,
     /_next\/static\/runtime\/webpack\.js/,
     /_next\/static\/runtime\/main\.js/,
+    /_next\/static\/chunks\/[a-zA-Z\d-_]+\.js$/,
+    /favicon\.ico/,
   ];
-
-  if (env === 'dev') console.log(whiteList);
 
   server.use(session({
     secret: 'Kuxo9R4E1W+fzC9a/aJohGnCCJcRlnXA1VXhUNxiYzLWtDt1xamoQh/2E68gFUycrNa674Q3gHhbaKilVz07VSA/DZcjJ6LoEUTpuWHNAbKgILA26o2YyuN1PafG/ZzsNdPCfmf9IRrUEBupUHGpZcOje5p6yy0GjLkVBg71XEQ=',
@@ -99,5 +97,7 @@ const configureApp = (server) => {
 
 app.prepare().then(() => {
   const server = express();
-  configureApp(server).listen(3000);
+  // configureApp(server).listen(3000);
+  server.use(handler);
+  server.listen(3000);
 });
